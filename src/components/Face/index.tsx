@@ -1,6 +1,6 @@
 import { h, Fragment } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
-import { clamp } from "../../lib/calcuations";
+import { clamp, getDistanceAndDirection } from "../../lib/calcuations";
 import Eye from "../Eye";
 import EyeBrow from "../EyeBrow";
 
@@ -11,6 +11,7 @@ interface Props {
     size?: number
     followMouse?: boolean
     eyeColor?: string
+    ident: string
 }
 
 const dilationRange = 150
@@ -21,37 +22,33 @@ function calculateDilation(distance: number) {
     return Math.min(1 + ((dilationRange - distance) / dilationRange), 1.5)
 }
 
-function calculateEyebrowTilt(distance:number) {
-    return clamp((200-distance)/2, 30)
+function calculateEyebrowTilt(distance: number) {
+    return clamp((200 - distance) / 2, 30)
 }
 
-function calculateEyebrowRise(distance:number) {
-    return clamp((200-distance)/8, 20)
+function calculateEyebrowRise(distance: number) {
+    return clamp((200 - distance) / 8, 20)
 }
 
-export const Face = ({ x, y, followMouse, eyeColor, size = defaultFaceSize }: Props) => {
-
+export const Face = ({ x, y, followMouse, eyeColor, size = defaultFaceSize, ident }: Props) => {
     const [direction, setDirection] = useState<[number, number]>([0, 0])
     const [dilation, setDilation] = useState<number>(1)
     const [eybrowTilt, setEybrowTilt] = useState<number>(0)
     const [eybrowRise, setEybrowRise] = useState<number>(0)
     const noseRef = useRef<SVGCircleElement>(null);
     const noseRadius = size / 10
-    const noseX = size/2
-    const noseY = size/2
+    const noseX = size / 2
+    const noseY = size / 2
 
     const trackMouse = (event: MouseEvent) => {
         if (!followMouse) { return }
         const { current: nose } = noseRef
         if (!nose) { return }
-        const { left: noseLeft, top: noseTop } = nose.getBoundingClientRect();
+        const { left: noseLeft, top: noseTop, width,height } = nose.getBoundingClientRect();
         const { clientX, clientY } = event
-        const displacement = [clientX - noseLeft - (noseRadius / 2), clientY - noseTop - (noseRadius / 2)]
-        const magnitude = Math.max(...displacement.map(v => Math.abs(v)))
-        const relativeDisplacement = displacement.map(v => v / magnitude)
-        setDirection(relativeDisplacement as [number, number])
+        const {distance, relativeDisplacement} = getDistanceAndDirection(clientX, clientY, noseLeft + (width / 2), noseTop + (height / 2))
 
-        const distance = Math.sqrt(displacement[0] ** 2 + displacement[1] ** 2)
+        setDirection(relativeDisplacement)
         setDilation(calculateDilation(distance))
         setEybrowTilt(calculateEyebrowTilt(distance))
         setEybrowRise(calculateEyebrowRise(distance))
@@ -66,10 +63,10 @@ export const Face = ({ x, y, followMouse, eyeColor, size = defaultFaceSize }: Pr
 
     return <svg x={x} y={y} width={size} height={size}>
         <rect x={0} y={0} width={size} height={size} stroke={'white'} fill={'none'} />
-        <Eye x={size * (1 / 4)} y={size * (1 / 3)} color={eyeColor} width={size/5} dilation={dilation} direction={direction} />
-        <Eye x={size * (3 / 4)} y={size * (1 / 3)} color={eyeColor} width={size/5} dilation={dilation} direction={direction} />
-        <EyeBrow x={size * (1 / 4)} y={size * (1 / 6)} width={size/2.5} angle={eybrowTilt} raised={eybrowRise} />
-        <EyeBrow x={size * (3 / 4)} y={size * (1 / 6)} width={size/2.5} angle={0} right/>
+        <Eye ident={ident + '-eye-1'} x={size * (1 / 4)} y={size * (1 / 3)} color={eyeColor} size={size / 5} dilation={dilation} direction={direction} open={0.5} />
+        <Eye ident={ident + '-eye-2'} x={size * (3 / 4)} y={size * (1 / 3)} color={eyeColor} size={size / 5} dilation={dilation} direction={direction} open={0.5} />
+        <EyeBrow x={size * (1 / 4)} y={size * (1 / 6)} width={size / 2.5} angle={eybrowTilt} raised={eybrowRise} />
+        <EyeBrow x={size * (3 / 4)} y={size * (1 / 6)} width={size / 2.5} angle={eybrowTilt} right />
         <circle ref={noseRef} cx={noseX} cy={noseY} r={noseRadius} fill={'black'} />
     </svg>
 }

@@ -6,22 +6,33 @@ interface Props {
     x: number;
     y: number;
     color?: string;
-    width: number;
+    size: number;
     dilation?: number
     direction?: [number, number]
+    open?: number
+    ident:string
 }
 
 
-export const Eye = ({ x, y, width, dilation = 1, direction = [0, 0], color = 'blue' }: Props) => {
+export const Eye = ({ x, y, size, dilation = 1, direction = [0, 0], color = 'blue', open = .8, ident }: Props) => {
 
     const adjustedDilation = clamp(dilation, 2, 0)
-    const adjustedDirection = direction.map(v => clamp(v, 1, -1) * width / 4)
+    const adjustedDirection = direction.map(v => clamp(v, 1, -1) * 20)
+    const ry = 50 * open
+    const maskId = ident+'-mask'
+    const maskUrl = `url(#${maskId})`
 
-    return <g>
-        <circle fill="white" cx={x} cy={y} r={width*.5}></circle>
-        <circle fill={color} cx={x + adjustedDirection[0]} cy={y + adjustedDirection[1]} r={width * .3}></circle>
-        <circle fill="black" cx={x + adjustedDirection[0]} cy={y + adjustedDirection[1]} r={(width * .15) * adjustedDilation}></circle>
-    </g>
+    return <svg x={x - size / 2} y={y - size / 2} width={size} height={size} viewBox={'-50 -50 100 100'}>
+
+        <mask id={maskId}>
+            <rect fill="black" x={-50} y={-50} width={100} height={100} />
+            <ellipse fill="white" cx={0} cy={0} rx={50} ry={ry}></ellipse>
+        </mask>
+
+        <ellipse fill="white" cx={0} cy={0} rx={50} ry={ry}></ellipse>
+        <ellipse mask={maskUrl} fill={color} cx={adjustedDirection[0]} cy={adjustedDirection[1]} rx={30}></ellipse>
+        <ellipse mask={maskUrl} fill="black" stroke="white" stroke-width={2} cx={adjustedDirection[0]} cy={adjustedDirection[1]} rx={15 * adjustedDilation}></ellipse>
+    </svg>
 }
 export default Eye
 
