@@ -65,8 +65,8 @@ export const Face = ({ x, y, followMouse, eyeColor, size = defaultFaceSize, iden
         <rect x={0} y={0} width={size} height={size} stroke={'white'} fill={'none'} />
         <Eye ident={ident + '-eye-1'} x={size * (1 / 4)} y={size * (1 / 3)} color={eyeColor} size={size / 5} dilation={dilation} direction={direction} open={0.5} />
         <Eye ident={ident + '-eye-2'} x={size * (3 / 4)} y={size * (1 / 3)} color={eyeColor} size={size / 5} dilation={dilation} direction={direction} open={0.5} />
-        <EyeBrow x={size * (1 / 4)} y={size * (1 / 6)} width={size / 2.5} angle={eybrowTilt} raised={eybrowRise} />
-        <EyeBrow x={size * (3 / 4)} y={size * (1 / 6)} width={size / 2.5} angle={eybrowTilt} right />
+        <EyeBrow x={size * (1 / 4)} y={size * (1.25 / 6)} width={size / 2.5} angle={eybrowTilt} raised={eybrowRise} />
+        <EyeBrow x={size * (3 / 4)} y={size * (1.25 / 6)} width={size / 2.5} angle={eybrowTilt} right />
         <circle ref={noseRef} cx={noseX} cy={noseY} r={noseRadius} fill={'black'} />
     </svg>
 }
