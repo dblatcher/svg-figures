@@ -1,28 +1,44 @@
 import { h, Fragment } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
+import { clamp } from "../../lib/calcuations";
 import Eye from "../Eye";
+import EyeBrow from "../EyeBrow";
 
 
 interface Props {
     x: number;
     y: number;
+    size?: number
     followMouse?: boolean
     eyeColor?: string
 }
 
-const noseRadius = 4;
 const dilationRange = 150
+const defaultFaceSize = 60
 
 function calculateDilation(distance: number) {
     if (distance > dilationRange) { return 1 }
     return Math.min(1 + ((dilationRange - distance) / dilationRange), 1.5)
 }
 
-export const Face = ({ x, y, followMouse, eyeColor }: Props) => {
+function calculateEyebrowTilt(distance:number) {
+    return clamp((200-distance)/2, 30)
+}
+
+function calculateEyebrowRise(distance:number) {
+    return clamp((200-distance)/8, 20)
+}
+
+export const Face = ({ x, y, followMouse, eyeColor, size = defaultFaceSize }: Props) => {
 
     const [direction, setDirection] = useState<[number, number]>([0, 0])
     const [dilation, setDilation] = useState<number>(1)
+    const [eybrowTilt, setEybrowTilt] = useState<number>(0)
+    const [eybrowRise, setEybrowRise] = useState<number>(0)
     const noseRef = useRef<SVGCircleElement>(null);
+    const noseRadius = size / 10
+    const noseX = size/2
+    const noseY = size/2
 
     const trackMouse = (event: MouseEvent) => {
         if (!followMouse) { return }
@@ -37,6 +53,8 @@ export const Face = ({ x, y, followMouse, eyeColor }: Props) => {
 
         const distance = Math.sqrt(displacement[0] ** 2 + displacement[1] ** 2)
         setDilation(calculateDilation(distance))
+        setEybrowTilt(calculateEyebrowTilt(distance))
+        setEybrowRise(calculateEyebrowRise(distance))
     }
 
     useEffect(() => {
@@ -46,12 +64,14 @@ export const Face = ({ x, y, followMouse, eyeColor }: Props) => {
         }
     })
 
-    return <>
-        <Eye x={x - 6} y={y - 10} color={eyeColor} width={5} dilation={dilation} direction={direction} />
-        <Eye x={x + 6} y={y - 10} color={eyeColor} width={5} dilation={dilation} direction={direction} />
-
-        <circle ref={noseRef} cx={x} cy={y} r={noseRadius} fill={'black'} />
-    </>
+    return <svg x={x} y={y} width={size} height={size}>
+        <rect x={0} y={0} width={size} height={size} stroke={'white'} fill={'none'} />
+        <Eye x={size * (1 / 4)} y={size * (1 / 3)} color={eyeColor} width={size/5} dilation={dilation} direction={direction} />
+        <Eye x={size * (3 / 4)} y={size * (1 / 3)} color={eyeColor} width={size/5} dilation={dilation} direction={direction} />
+        <EyeBrow x={size * (1 / 4)} y={size * (1 / 6)} width={size/2.5} angle={eybrowTilt} raised={eybrowRise} />
+        <EyeBrow x={size * (3 / 4)} y={size * (1 / 6)} width={size/2.5} angle={0} right/>
+        <circle ref={noseRef} cx={noseX} cy={noseY} r={noseRadius} fill={'black'} />
+    </svg>
 }
 export default Face
 

@@ -18,9 +18,9 @@ export const Eye = ({ x, y, width, dilation = 1, direction = [0, 0], color = 'bl
     const adjustedDirection = direction.map(v => clamp(v, 1, -1) * width / 4)
 
     return <g>
-        <circle fill="white" cx={x} cy={y} r={width}></circle>
-        <circle fill={color} cx={x + adjustedDirection[0]} cy={y + adjustedDirection[1]} r={width * .6}></circle>
-        <circle fill="black" cx={x + adjustedDirection[0]} cy={y + adjustedDirection[1]} r={(width * .3) * adjustedDilation}></circle>
+        <circle fill="white" cx={x} cy={y} r={width*.5}></circle>
+        <circle fill={color} cx={x + adjustedDirection[0]} cy={y + adjustedDirection[1]} r={width * .3}></circle>
+        <circle fill="black" cx={x + adjustedDirection[0]} cy={y + adjustedDirection[1]} r={(width * .15) * adjustedDilation}></circle>
     </g>
 }
 export default Eye

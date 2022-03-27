@@ -11,9 +11,9 @@ const Home: FunctionalComponent = () => {
         <div class={style.home}>
             <h1>Home</h1>
             <p>This is the Home component.</p>
-            <SvgFrame style={frameStyle} viewBox='0 0 100 100'>
-                <Face x={20} y={60} />
+            <SvgFrame style={frameStyle} viewBox='0 0 200 200'>
                 <Face x={50} y={30} followMouse eyeColor='brown' />
+                <Face x={20} y={70} size={30} followMouse/>
             </SvgFrame>
         </div>
     );
