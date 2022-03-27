@@ -1,5 +1,6 @@
 import { h } from "preact";
 import { clamp } from "../../lib/calcuations";
+import { EyePosition } from "../../lib/expressions";
 
 
 interface Props {
@@ -7,14 +8,15 @@ interface Props {
     y: number;
     color?: string;
     size: number;
-    dilation?: number
-    direction?: [number, number]
-    open?: number
-    ident:string
+    direction?: [number, number];
+    ident:string;
+    pos?: EyePosition;
 }
 
 
-export const Eye = ({ x, y, size, dilation = 1, direction = [0, 0], color = 'blue', open = .8, ident }: Props) => {
+export const Eye = ({ x, y, size, direction = [0, 0], color = 'blue', ident, pos={} }: Props) => {
+
+    const { open = .8, dilation = 1} = pos
 
     const adjustedDilation = clamp(dilation, 2, 0)
     const adjustedDirection = direction.map(v => clamp(v, 1, -1) * 20)

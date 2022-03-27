@@ -1,4 +1,5 @@
 import { h } from "preact";
+import { EyePosition } from "../../lib/expressions";
 
 
 
@@ -7,8 +8,7 @@ interface Props {
     y: number;
     color?: string;
     width: number;
-    angle?: number
-    raised?: number
+    pos?: EyePosition;
     right?: boolean
 }
 
@@ -34,17 +34,17 @@ function createPath(s: number, right?: boolean) {
 }
 
 
-export const EyeBrow = ({ x, y, width, color = 'black', angle = 0, raised=0, right }: Props) => {
+export const EyeBrow = ({ x, y, width, color = 'black', right, pos = {} }: Props) => {
+    const { browTilt = 0, browRaise = 0 } = pos
+    const adjustedAngle = right ? -browTilt : browTilt
 
-    const adjustedAngle = right ? -angle : angle
-
-    return <svg x={x - width / 2} y={y - width / 2} width={width} height={width} viewBox={'-50 -50 100 100'}>
-
-        <path style={{
-            transform: `translateY(${-raised}%) rotateZ(${adjustedAngle}deg)`,
-
-        }} fill={color} d={createPath(75, right)} />
-    </svg>
+    return (
+        <svg x={x - width / 2} y={y - width / 2} width={width} height={width} viewBox={'-50 -50 100 100'}>
+            <path style={{
+                transform: `translateY(${-browRaise}%) rotateZ(${adjustedAngle}deg)`,
+            }} fill={color} d={createPath(75, right)} />
+        </svg>
+    )
 }
 export default EyeBrow
 

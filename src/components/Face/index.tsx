@@ -1,6 +1,7 @@
-import { h, Fragment } from "preact";
+import { h } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 import { clamp, getDistanceAndDirection } from "../../lib/calcuations";
+import { FacialExpression } from "../../lib/expressions";
 import Eye from "../Eye";
 import EyeBrow from "../EyeBrow";
 
@@ -12,6 +13,7 @@ interface Props {
     followMouse?: boolean
     eyeColor?: string
     ident: string
+    expression?: FacialExpression
 }
 
 const dilationRange = 150
@@ -30,11 +32,11 @@ function calculateEyebrowRise(distance: number) {
     return clamp((200 - distance) / 8, 20)
 }
 
-export const Face = ({ x, y, followMouse, eyeColor, size = defaultFaceSize, ident }: Props) => {
+export const Face = ({ x, y, followMouse, eyeColor, size = defaultFaceSize, ident, expression }: Props) => {
     const [direction, setDirection] = useState<[number, number]>([0, 0])
     const [dilation, setDilation] = useState<number>(1)
-    const [eybrowTilt, setEybrowTilt] = useState<number>(0)
-    const [eybrowRise, setEybrowRise] = useState<number>(0)
+    const [browTilt, setBrowTilt] = useState<number>(0)
+    const [browRaise, setBrowRaise] = useState<number>(0)
     const noseRef = useRef<SVGCircleElement>(null);
     const noseRadius = size / 10
     const noseX = size / 2
@@ -44,14 +46,14 @@ export const Face = ({ x, y, followMouse, eyeColor, size = defaultFaceSize, iden
         if (!followMouse) { return }
         const { current: nose } = noseRef
         if (!nose) { return }
-        const { left: noseLeft, top: noseTop, width,height } = nose.getBoundingClientRect();
+        const { left: noseLeft, top: noseTop, width, height } = nose.getBoundingClientRect();
         const { clientX, clientY } = event
-        const {distance, relativeDisplacement} = getDistanceAndDirection(clientX, clientY, noseLeft + (width / 2), noseTop + (height / 2))
+        const { distance, relativeDisplacement } = getDistanceAndDirection(clientX, clientY, noseLeft + (width / 2), noseTop + (height / 2))
 
         setDirection(relativeDisplacement)
         setDilation(calculateDilation(distance))
-        setEybrowTilt(calculateEyebrowTilt(distance))
-        setEybrowRise(calculateEyebrowRise(distance))
+        setBrowTilt(calculateEyebrowTilt(distance))
+        setBrowRaise(calculateEyebrowRise(distance))
     }
 
     useEffect(() => {
@@ -61,14 +63,31 @@ export const Face = ({ x, y, followMouse, eyeColor, size = defaultFaceSize, iden
         }
     })
 
-    return <svg x={x} y={y} width={size} height={size}>
-        <rect x={0} y={0} width={size} height={size} stroke={'white'} fill={'none'} />
-        <Eye ident={ident + '-eye-1'} x={size * (1 / 4)} y={size * (1 / 3)} color={eyeColor} size={size / 5} dilation={dilation} direction={direction} open={0.5} />
-        <Eye ident={ident + '-eye-2'} x={size * (3 / 4)} y={size * (1 / 3)} color={eyeColor} size={size / 5} dilation={dilation} direction={direction} open={0.5} />
-        <EyeBrow x={size * (1 / 4)} y={size * (1.25 / 6)} width={size / 2.5} angle={eybrowTilt} raised={eybrowRise} />
-        <EyeBrow x={size * (3 / 4)} y={size * (1.25 / 6)} width={size / 2.5} angle={eybrowTilt} right />
-        <circle ref={noseRef} cx={noseX} cy={noseY} r={noseRadius} fill={'black'} />
-    </svg>
+    const eyePosLeft = followMouse ? { dilation, browTilt, browRaise } : expression?.leftEye || {};
+    const eyePosRight = followMouse ? { dilation, browTilt, browRaise } : expression?.rightEye || {};
+
+    return (
+        <svg x={x} y={y} width={size} height={size}>
+            <rect x={0} y={0} width={size} height={size} stroke={'white'} fill={'none'} />
+            <Eye ident={ident + '-eye-1'}
+                x={size * (1 / 4)}
+                y={size * (1 / 3)}
+                color={eyeColor}
+                size={size / 5}
+                pos={eyePosLeft}
+                direction={direction} />
+            <Eye ident={ident + '-eye-2'}
+                x={size * (3 / 4)}
+                y={size * (1 / 3)}
+                color={eyeColor}
+                size={size / 5}
+                pos={eyePosRight}
+                direction={direction} />
+            <EyeBrow x={size * (1 / 4)} y={size * (1.25 / 6)} width={size / 2.5} pos={eyePosLeft} />
+            <EyeBrow x={size * (3 / 4)} y={size * (1.25 / 6)} width={size / 2.5} pos={eyePosRight} right />
+            <circle ref={noseRef} cx={noseX} cy={noseY} r={noseRadius} fill={'black'} />
+        </svg>
+    )
 }
 export default Face
 
