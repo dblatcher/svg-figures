@@ -1,4 +1,5 @@
 import { h } from "preact";
+import { clamp } from "../../lib/calcuations";
 
 
 interface Props {
@@ -10,9 +11,6 @@ interface Props {
     direction?: [number, number]
 }
 
-function clamp(value: number, max = 1, min = 0) {
-    return Math.max(Math.min(value, max), min)
-}
 
 export const Eye = ({ x, y, width, dilation = 1, direction = [0, 0], color = 'blue' }: Props) => {
 
