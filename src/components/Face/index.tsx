@@ -1,7 +1,8 @@
 import { h } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 import { clamp, getDistanceAndDirection } from "../../lib/calcuations";
-import { FacialExpression } from "../../lib/expressions";
+import type { FacialExpression } from "../../lib/expressions";
+import type { FaceProfile } from "../../lib/faceProfile";
 import Eye from "../Eye";
 import EyeBrow from "../EyeBrow";
 
@@ -11,9 +12,9 @@ interface Props {
     y: number;
     size?: number
     followMouse?: boolean
-    eyeColor?: string
     ident: string
     expression?: FacialExpression
+    profile?: FaceProfile
 }
 
 const dilationRange = 150
@@ -32,7 +33,7 @@ function calculateEyebrowRise(distance: number) {
     return clamp((200 - distance) / 8, 20)
 }
 
-export const Face = ({ x, y, followMouse, eyeColor, size = defaultFaceSize, ident, expression }: Props) => {
+export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, expression, profile = {} }: Props) => {
     const [direction, setDirection] = useState<[number, number]>([0, 0])
     const [dilation, setDilation] = useState<number>(1)
     const [browTilt, setBrowTilt] = useState<number>(0)
@@ -60,28 +61,37 @@ export const Face = ({ x, y, followMouse, eyeColor, size = defaultFaceSize, iden
         }
     })
 
-    const eyePosLeft = !expression ? { dilation, browTilt, browRaise } : {...expression?.leftEye, direction} ;
-    const eyePosRight = !expression ? { dilation, browTilt, browRaise } : {...expression?.rightEye, direction};
+    const { eyeDistance = 40 } = profile
+    const eyeX = clamp(eyeDistance,75,25) / 2
+    const eyePosLeft = !expression ? { dilation, browTilt, browRaise } : { ...expression?.leftEye, direction };
+    const eyePosRight = !expression ? { dilation, browTilt, browRaise } : { ...expression?.rightEye, direction };
 
     return (
         <svg x={x} y={y} width={size} height={size} viewBox={'-50 -50 100 100'}>
             <rect x={-50} y={-50} width={100} height={100} stroke={'white'} fill={'none'} />
             <Eye ident={ident + '-eye-left'}
-                x={-25}
+                x={-eyeX}
                 y={-10}
-                color={eyeColor}
+                color={profile.eyeColor}
                 size={25}
                 pos={eyePosLeft}
                 direction={direction} />
             <Eye ident={ident + '-eye-right'}
-                x={25}
+                x={eyeX}
                 y={-10}
-                color={eyeColor}
+                color={profile.eyeColor}
                 size={25}
                 pos={eyePosRight}
                 direction={direction} />
-            <EyeBrow x={-20} y={-25} width={30} pos={eyePosLeft} />
-            <EyeBrow x={20} y={-25} width={30} pos={eyePosRight} right />
+            <EyeBrow x={-eyeX} y={-25}
+                width={30}
+                pos={eyePosLeft}
+                browType={profile.browType} />
+            <EyeBrow x={eyeX} y={-25}
+                width={30}
+                pos={eyePosRight}
+                browType={profile.browType}
+                right />
             <circle ref={noseRef} cx={0} cy={0} r={5} fill={'black'} />
         </svg>
     )
