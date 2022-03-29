@@ -42,4 +42,9 @@ const ANGRY:FacialExpression = {
     }
 }
 
-export const expressions = { AFRAID, ANGRY }
+const NEUTRAL:FacialExpression = {
+    leftEye:{},
+    rightEye: {},
+}
+
+export const expressions = { AFRAID, ANGRY, NEUTRAL }

@@ -14,8 +14,9 @@ const Home: FunctionalComponent = () => {
             <h1>Home</h1>
             <p>This is the Home component.</p>
             <SvgFrame style={frameStyle} viewBox='0 0 200 200'>
-                <Face expression={expressions.ANGRY} ident={uniqueId.generate('face')} x={60} y={30} size={100} eyeColor='brown' />
+                <Face expression={expressions.ANGRY} ident={uniqueId.generate('face')} x={60} y={30} size={100} eyeColor='brown' followMouse />
                 <Face ident={uniqueId.generate('face')} x={10} y={70} size={40} followMouse/>
+                <Face ident={uniqueId.generate('face')} x={10} y={110} size={40} expression={expressions.NEUTRAL} followMouse/>
             </SvgFrame>
         </div>
     );

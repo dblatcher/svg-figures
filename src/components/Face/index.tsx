@@ -38,9 +38,6 @@ export const Face = ({ x, y, followMouse, eyeColor, size = defaultFaceSize, iden
     const [browTilt, setBrowTilt] = useState<number>(0)
     const [browRaise, setBrowRaise] = useState<number>(0)
     const noseRef = useRef<SVGCircleElement>(null);
-    const noseRadius = size / 10
-    const noseX = size / 2
-    const noseY = size / 2
 
     const trackMouse = (event: MouseEvent) => {
         if (!followMouse) { return }
@@ -63,29 +60,29 @@ export const Face = ({ x, y, followMouse, eyeColor, size = defaultFaceSize, iden
         }
     })
 
-    const eyePosLeft = followMouse ? { dilation, browTilt, browRaise } : expression?.leftEye || {};
-    const eyePosRight = followMouse ? { dilation, browTilt, browRaise } : expression?.rightEye || {};
+    const eyePosLeft = !expression ? { dilation, browTilt, browRaise } : {...expression?.leftEye, direction} ;
+    const eyePosRight = !expression ? { dilation, browTilt, browRaise } : {...expression?.rightEye, direction};
 
     return (
-        <svg x={x} y={y} width={size} height={size}>
-            <rect x={0} y={0} width={size} height={size} stroke={'white'} fill={'none'} />
-            <Eye ident={ident + '-eye-1'}
-                x={size * (1 / 4)}
-                y={size * (1 / 3)}
+        <svg x={x} y={y} width={size} height={size} viewBox={'-50 -50 100 100'}>
+            <rect x={-50} y={-50} width={100} height={100} stroke={'white'} fill={'none'} />
+            <Eye ident={ident + '-eye-left'}
+                x={-25}
+                y={-10}
                 color={eyeColor}
-                size={size / 5}
+                size={25}
                 pos={eyePosLeft}
                 direction={direction} />
-            <Eye ident={ident + '-eye-2'}
-                x={size * (3 / 4)}
-                y={size * (1 / 3)}
+            <Eye ident={ident + '-eye-right'}
+                x={25}
+                y={-10}
                 color={eyeColor}
-                size={size / 5}
+                size={25}
                 pos={eyePosRight}
                 direction={direction} />
-            <EyeBrow x={size * (1 / 4)} y={size * (1.25 / 6)} width={size / 2.5} pos={eyePosLeft} />
-            <EyeBrow x={size * (3 / 4)} y={size * (1.25 / 6)} width={size / 2.5} pos={eyePosRight} right />
-            <circle ref={noseRef} cx={noseX} cy={noseY} r={noseRadius} fill={'black'} />
+            <EyeBrow x={-20} y={-25} width={30} pos={eyePosLeft} />
+            <EyeBrow x={20} y={-25} width={30} pos={eyePosRight} right />
+            <circle ref={noseRef} cx={0} cy={0} r={5} fill={'black'} />
         </svg>
     )
 }
