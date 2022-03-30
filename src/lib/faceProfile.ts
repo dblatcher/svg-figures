@@ -2,6 +2,8 @@ interface FaceProfile {
     browType?: 'thin' | 'wide';
     eyeColor?: string;
     eyeDistance?: number;
+    mouthWidth?: number;
+    mouthHeight?: number;
 }
 
 type BrowShape = [number, number][]

@@ -5,6 +5,7 @@ import type { FacialExpression } from "../../lib/expressions";
 import type { FaceProfile } from "../../lib/faceProfile";
 import Eye from "../Eye";
 import EyeBrow from "../EyeBrow";
+import Mouth from "../Mouth";
 
 
 interface Props {
@@ -61,8 +62,8 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
         }
     })
 
-    const { eyeDistance = 40 } = profile
-    const eyeX = clamp(eyeDistance,75,25) / 2
+    const { eyeDistance = 40, mouthHeight = 20, mouthWidth = 20 } = profile
+    const eyeX = clamp(eyeDistance, 75, 25) / 2
     const eyePosLeft = !expression ? { dilation, browTilt, browRaise } : { ...expression?.leftEye, direction };
     const eyePosRight = !expression ? { dilation, browTilt, browRaise } : { ...expression?.rightEye, direction };
 
@@ -93,6 +94,12 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
                 browType={profile.browType}
                 right />
             <circle ref={noseRef} cx={0} cy={0} r={5} fill={'black'} />
+
+            <Mouth
+                x={0 - mouthWidth / 2}
+                y={(50-mouthHeight) -( mouthWidth / 2)}
+                width={mouthWidth}
+            />
         </svg>
     )
 }

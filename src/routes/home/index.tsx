@@ -20,6 +20,8 @@ const Home: FunctionalComponent = () => {
                         browType: 'wide',
                         eyeColor: 'brown',
                         eyeDistance: 30,
+                        mouthWidth: 40,
+                        mouthHeight:30,
                     }}
                     followMouse />
                 <Face ident={uniqueId.generate('face')}
