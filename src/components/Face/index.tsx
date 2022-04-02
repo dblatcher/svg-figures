@@ -3,9 +3,9 @@ import { useEffect, useRef, useState } from "preact/hooks";
 import { clamp, getDistanceAndDirection } from "../../lib/calcuations";
 import type { FacialExpression } from "../../lib/expressions";
 import type { FaceProfile } from "../../lib/faceProfile";
-import Eye from "../Eye";
-import EyeBrow from "../EyeBrow";
-import Mouth from "../Mouth";
+import Eye from "./Eye";
+import EyeBrow from "./Eyebrow";
+import Mouth from "./Mouth";
 
 
 interface Props {
