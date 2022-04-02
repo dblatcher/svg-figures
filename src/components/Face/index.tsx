@@ -4,7 +4,8 @@ import { clamp, getDistanceAndDirection } from "../../lib/calcuations";
 import type { FacialExpression } from "../../lib/expressions";
 import type { FaceProfile } from "../../lib/faceProfile";
 import Eye from "./Eye";
-import EyeBrow from "./Eyebrow";
+import EyeBrow from "./EyeBrow";
+import FeatureFrame from "./FeatureFrame";
 import Mouth from "./Mouth";
 
 
@@ -68,7 +69,7 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
     const eyePosRight = !expression ? { dilation, browTilt, browRaise } : { ...expression?.rightEye, direction };
 
     return (
-        <svg x={x} y={y} width={size} height={size} viewBox={'-50 -50 100 100'}>
+        <FeatureFrame x={x} y={y} size={size} placement='top left'>
             <rect x={-50} y={-50} width={100} height={100} stroke={'white'} fill={'none'} />
             <Eye ident={ident + '-eye-left'}
                 x={-eyeX}
@@ -100,7 +101,7 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
                 y={(50-mouthHeight)}
                 size={mouthWidth}
             />
-        </svg>
+        </FeatureFrame>
     )
 }
 export default Face

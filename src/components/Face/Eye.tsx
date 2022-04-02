@@ -1,13 +1,10 @@
 import { h } from "preact";
 import { clamp } from "../../lib/calcuations";
 import { EyePosition } from "../../lib/expressions";
+import FeatureFrame from "./FeatureFrame";
+import { FeatureProps } from "./FeatureProps";
 
-
-interface Props {
-    x: number;
-    y: number;
-    size: number;
-    transitionTime?: number;
+interface Props extends FeatureProps {
     color?: string;
     direction?: [number, number];
     ident: string;
@@ -51,7 +48,7 @@ export const Eye = ({ x, y, transitionTime = .5, size, direction = [0, 0], color
         transition: `rx ${transitionTime}s, cx ${transitionTime}s, cy${transitionTime}s`,
     }
 
-    return <svg x={x - size / 2} y={y - size / 2} width={size} height={size} viewBox={'-50 -50 100 100'}>
+    return <FeatureFrame x={x} y={y} size={size}>
 
         <mask id={maskId}>
             <rect fill="black" x={-50} y={-50} width={100} height={100} />
@@ -61,7 +58,7 @@ export const Eye = ({ x, y, transitionTime = .5, size, direction = [0, 0], color
         <ellipse fill="white" style={eyeballStyle}></ellipse>
         <ellipse mask={maskUrl} style={irisStyle} ></ellipse>
         <ellipse mask={maskUrl} style={pupilStyle}></ellipse>
-    </svg>
+    </FeatureFrame>
 }
 export default Eye
 

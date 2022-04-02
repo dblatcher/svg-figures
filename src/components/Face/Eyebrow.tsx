@@ -2,14 +2,10 @@ import { h } from "preact";
 import { EyePosition } from "../../lib/expressions";
 import { browShapes } from "../../lib/faceProfile";
 import type { BrowShape, } from "../../lib/faceProfile";
+import { FeatureProps } from "./FeatureProps";
+import FeatureFrame from "./FeatureFrame";
 
-
-
-interface Props {
-    x: number;
-    y: number;
-    size: number;
-    transitionTime?: number;
+interface Props extends FeatureProps {
     color?: string;
     pos?: EyePosition;
     right?: boolean;
@@ -44,9 +40,9 @@ export const EyeBrow = ({ x, y, transitionTime = .5, size, color = 'black', righ
     }
 
     return (
-        <svg x={x - size / 2} y={y - size / 2} width={size} height={size} viewBox={'-50 -50 100 100'}>
+        <FeatureFrame x={x} y={y} size={size}>
             <path style={browStyle} d={drawBrow(75, browShapes[browType], right)} />
-        </svg>
+        </FeatureFrame>
     )
 }
 export default EyeBrow

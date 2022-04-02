@@ -1,17 +1,15 @@
 import { h } from "preact";
+import FeatureFrame from "./FeatureFrame";
+import { FeatureProps } from "./FeatureProps";
 
-interface Props {
-    x: number;
-    y: number;
-    size: number;
-    transitionTime?: number;
+interface Props extends FeatureProps {
 }
 
 const Mouth = ({ x, y, size }: Props) => {
     return (
-        <svg x={x - size / 2} y={y - size / 2} width={size} height={size} viewBox={'-50 -50 100 100'}>
+        <FeatureFrame x={x} y={y} size={size}>
             <ellipse cx="0" cy="0" rx="50" ry="10" />
-        </svg>
+        </FeatureFrame>
     )
 }
 
