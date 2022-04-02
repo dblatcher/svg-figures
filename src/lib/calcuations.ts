@@ -13,3 +13,7 @@ export function getDistanceAndDirection(x1: number, y1: number, x2: number, y2: 
         distance, relativeDisplacement
     }
 }
+
+export function randomInt(m: number = 10) {
+    return Math.floor(Math.random() * m)
+}

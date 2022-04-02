@@ -14,11 +14,11 @@ interface Props extends FeatureProps {
 
 export const Eye = ({ x, y, transitionTime = .5, size, direction = [0, 0], color = 'blue', ident, pos = {} }: Props) => {
 
-    const { open = .8, dilation = 1 } = pos
+    const { open = .75, dilation = 1 } = pos
 
     const adjustedDilation = clamp(dilation, 2, 0)
     const adjustedDirection = direction.map(v => clamp(v, 1, -1) * 20)
-    const ry = 50 * open
+    const ry = 50 * clamp(open,1,0)
     const maskId = ident + '-mask'
     const maskUrl = `url(#${maskId})`
 
