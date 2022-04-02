@@ -62,7 +62,7 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
         }
     })
 
-    const { eyeDistance = 40, mouthHeight = 20, mouthWidth = 20 } = profile
+    const { eyeDistance = 40, mouthHeight = 20, mouthWidth = 20, eyeColor, browType } = profile
     const eyeX = clamp(eyeDistance, 75, 25) / 2
     const eyePosLeft = !expression ? { dilation, browTilt, browRaise } : { ...expression?.leftEye, direction };
     const eyePosRight = !expression ? { dilation, browTilt, browRaise } : { ...expression?.rightEye, direction };
@@ -73,32 +73,32 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
             <Eye ident={ident + '-eye-left'}
                 x={-eyeX}
                 y={-10}
-                color={profile.eyeColor}
+                color={eyeColor}
                 size={25}
                 pos={eyePosLeft}
                 direction={direction} />
             <Eye ident={ident + '-eye-right'}
                 x={eyeX}
                 y={-10}
-                color={profile.eyeColor}
+                color={eyeColor}
                 size={25}
                 pos={eyePosRight}
                 direction={direction} />
             <EyeBrow x={-eyeX} y={-25}
-                width={30}
+                size={30}
                 pos={eyePosLeft}
-                browType={profile.browType} />
+                browType={browType} />
             <EyeBrow x={eyeX} y={-25}
-                width={30}
+                size={30}
                 pos={eyePosRight}
-                browType={profile.browType}
+                browType={browType}
                 right />
             <circle ref={noseRef} cx={0} cy={0} r={5} fill={'black'} />
 
             <Mouth
-                x={0 - mouthWidth / 2}
-                y={(50-mouthHeight) -( mouthWidth / 2)}
-                width={mouthWidth}
+                x={0}
+                y={(50-mouthHeight)}
+                size={mouthWidth}
             />
         </svg>
     )

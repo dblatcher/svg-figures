@@ -8,19 +8,20 @@ import type { BrowShape, } from "../../lib/faceProfile";
 interface Props {
     x: number;
     y: number;
+    size: number;
+    transitionTime?: number;
     color?: string;
-    width: number;
     pos?: EyePosition;
-    right?: boolean
-    browType?: 'thin' | 'wide'
+    right?: boolean;
+    browType?: 'thin' | 'wide';
 }
 
 
 const flipCoords = (c: [number, number]) => { return [-c[0], c[1]] }
 
 function drawBrow(s: number, browShape: BrowShape, right?: boolean) {
-    const commands: string[] = browShape
-        .map(right ? flipCoords : v => v)
+    const shape = right ? browShape.map(flipCoords) : browShape;
+    const commands: string[] = shape
         .map((coord, index) => {
             const code = index > 0 ? 'L' : 'M'
             const [x, y] = coord
@@ -31,15 +32,20 @@ function drawBrow(s: number, browShape: BrowShape, right?: boolean) {
 }
 
 
-export const EyeBrow = ({ x, y, width, color = 'black', right, pos = {}, browType = 'thin' }: Props) => {
+
+export const EyeBrow = ({ x, y, transitionTime = .5, size, color = 'black', right, pos = {}, browType = 'thin' }: Props) => {
     const { browTilt = 0, browRaise = 0 } = pos
     const adjustedAngle = right ? -browTilt : browTilt
 
+    const browStyle = {
+        transform: `translateY(${-browRaise}%) rotateZ(${adjustedAngle}deg)`,
+        transition: `transform ${transitionTime}s`,
+        fill: color,
+    }
+
     return (
-        <svg x={x - width / 2} y={y - width / 2} width={width} height={width} viewBox={'-50 -50 100 100'}>
-            <path style={{
-                transform: `translateY(${-browRaise}%) rotateZ(${adjustedAngle}deg)`,
-            }} fill={color} d={drawBrow(75, browShapes[browType], right)} />
+        <svg x={x - size / 2} y={y - size / 2} width={size} height={size} viewBox={'-50 -50 100 100'}>
+            <path style={browStyle} d={drawBrow(75, browShapes[browType], right)} />
         </svg>
     )
 }

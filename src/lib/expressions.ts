@@ -17,13 +17,13 @@ const AFRAID: FacialExpression = {
         open: 1,
         browTilt: 0,
         browRaise: 20,
-        dilation: 1.8,
+        dilation: 1.5,
     },
     rightEye: {
         open: 1,
         browTilt: 0,
         browRaise: 20,
-        dilation: 1.8,
+        dilation: 1.5,
     }
 }
 
