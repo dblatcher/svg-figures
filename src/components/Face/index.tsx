@@ -71,36 +71,29 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
     return (
         <FeatureFrame x={x} y={y} size={size} placement='top left'>
             <rect x={-50} y={-50} width={100} height={100} stroke={'white'} fill={'none'} />
+            <circle ref={noseRef} cx={0} cy={0} r={5} fill={'black'} />
+
             <Eye ident={ident + '-eye-left'}
-                x={-eyeX}
-                y={-10}
+                x={-eyeX} y={-10} size={25}
                 color={eyeColor}
-                size={25}
                 pos={eyePosLeft}
                 direction={direction} />
             <Eye ident={ident + '-eye-right'}
-                x={eyeX}
-                y={-10}
+                x={eyeX} y={-10} size={25}
                 color={eyeColor}
-                size={25}
                 pos={eyePosRight}
                 direction={direction} />
-            <EyeBrow x={-eyeX} y={-25}
-                size={30}
+            <EyeBrow
+                x={-eyeX} y={-25} size={30}
                 pos={eyePosLeft}
                 browType={browType} />
-            <EyeBrow x={eyeX} y={-25}
-                size={30}
+            <EyeBrow
+                x={eyeX} y={-25} size={30}
                 pos={eyePosRight}
                 browType={browType}
                 right />
-            <circle ref={noseRef} cx={0} cy={0} r={5} fill={'black'} />
-
             <Mouth
-                x={0}
-                y={(50-mouthHeight)}
-                size={mouthWidth}
-            />
+                x={0} y={(50 - mouthHeight)} size={mouthWidth} />
         </FeatureFrame>
     )
 }

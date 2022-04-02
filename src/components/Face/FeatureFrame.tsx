@@ -16,7 +16,7 @@ const FeatureFrame = ({ x, y, size, children, placement = 'center' }: Props) => 
     }
 
     return (
-        <svg x={px} y={py} width={size} height={size} viewBox={'-50 -50 100 100'}>
+        <svg x={px} y={py} width={size} height={size} viewBox={'-50 -50 100 100'} style={{overflow:'visible'}}>
             {children}
         </svg>
     )
