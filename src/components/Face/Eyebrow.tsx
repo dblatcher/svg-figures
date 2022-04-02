@@ -1,5 +1,5 @@
 import { h } from "preact";
-import { EyePosition } from "../../lib/expressions";
+import { EyeArrangement } from "../../lib/expressions";
 import { browShapes } from "../../lib/faceProfile";
 import type { BrowShape, } from "../../lib/faceProfile";
 import { FeatureProps } from "./FeatureProps";
@@ -7,7 +7,7 @@ import FeatureFrame from "./FeatureFrame";
 
 interface Props extends FeatureProps {
     color?: string;
-    pos?: EyePosition;
+    pos?: EyeArrangement;
     right?: boolean;
     browType?: 'thin' | 'wide';
 }

@@ -22,7 +22,7 @@ const Home: FunctionalComponent = () => {
                         eyeColor: 'brown',
                         eyeDistance: 30,
                         mouthWidth: 40,
-                        mouthHeight:30,
+                        mouthVerticalPosition:30,
                     }}
                     followMouse />
                 <FaceWithExpressionControl ident={uniqueId.generate('face')}
@@ -30,7 +30,7 @@ const Home: FunctionalComponent = () => {
                     />
                 <Face ident={uniqueId.generate('face')}
                     x={10} y={110} size={40}
-                    expression={expressions.AFRAID}
+                    expression={expressions.HAPPY}
                     followMouse />
             </SvgFrame>
         </div>

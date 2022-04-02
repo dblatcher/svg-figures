@@ -3,7 +3,7 @@ interface FaceProfile {
     eyeColor?: string;
     eyeDistance?: number;
     mouthWidth?: number;
-    mouthHeight?: number;
+    mouthVerticalPosition?: number;
 }
 
 type BrowShape = [number, number][]

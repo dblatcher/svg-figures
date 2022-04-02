@@ -63,10 +63,12 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
         }
     })
 
-    const { eyeDistance = 40, mouthHeight = 20, mouthWidth = 20, eyeColor, browType } = profile
+    const { eyeDistance = 40, mouthVerticalPosition = 20, mouthWidth = 40, eyeColor, browType } = profile
     const eyeX = clamp(eyeDistance, 75, 25) / 2
     const eyePosLeft = !expression ? { dilation, browTilt, browRaise } : { ...expression?.leftEye, direction };
     const eyePosRight = !expression ? { dilation, browTilt, browRaise } : { ...expression?.rightEye, direction };
+
+    const mouthY = clamp(mouthVerticalPosition, 50, 5)
 
     return (
         <FeatureFrame x={x} y={y} size={size} placement='top left'>
@@ -93,7 +95,9 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
                 browType={browType}
                 right />
             <Mouth
-                x={0} y={(50 - mouthHeight)} size={mouthWidth} />
+                x={0} y={mouthY} size={mouthWidth}
+                arrangement={expression?.mouth}
+            />
         </FeatureFrame>
     )
 }

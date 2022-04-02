@@ -24,8 +24,8 @@ export class FaceWithExpressionControl extends Component<Props, {
     constructor(props: Props) {
         super(props)
         this.state = {
-            expresion: expressions.ANGRY,
-            expressionLabel:'angry'
+            expresion: expressions.ODD,
+            expressionLabel:'odd'
         }
         this.changeExpression = this.changeExpression.bind(this)
     }

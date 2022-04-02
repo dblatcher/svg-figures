@@ -1,6 +1,6 @@
 import { h } from "preact";
 import { clamp } from "../../lib/calcuations";
-import { EyePosition } from "../../lib/expressions";
+import { EyeArrangement } from "../../lib/expressions";
 import FeatureFrame from "./FeatureFrame";
 import { FeatureProps } from "./FeatureProps";
 
@@ -8,7 +8,7 @@ interface Props extends FeatureProps {
     color?: string;
     direction?: [number, number];
     ident: string;
-    pos?: EyePosition;
+    pos?: EyeArrangement;
 }
 
 
