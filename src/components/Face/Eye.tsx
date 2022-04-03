@@ -1,6 +1,7 @@
 import { h } from "preact";
 import { clamp } from "../../lib/calcuations";
 import { EyeArrangement } from "../../lib/expressions";
+import { getMaskId, getMaskUrl } from "../../lib/unique-id";
 import FeatureFrame from "./FeatureFrame";
 import { FeatureProps } from "./FeatureProps";
 
@@ -19,8 +20,8 @@ export const Eye = ({ x, y, transitionTime = .5, size, direction = [0, 0], color
     const adjustedDilation = clamp(dilation, 2, 0)
     const adjustedDirection = direction.map(v => clamp(v, 1, -1) * 20)
     const ry = 50 * clamp(open,1,0)
-    const maskId = ident + '-mask'
-    const maskUrl = `url(#${maskId})`
+    const maskId = getMaskId(ident)
+    const maskUrl = getMaskUrl(ident)
 
     const eyeballStyle = {
         cx: 0,

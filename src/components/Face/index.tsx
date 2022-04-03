@@ -3,10 +3,12 @@ import { useEffect, useRef, useState } from "preact/hooks";
 import { clamp, getDistanceAndDirection } from "../../lib/calcuations";
 import type { FacialExpression } from "../../lib/expressions";
 import type { FaceProfile } from "../../lib/faceProfile";
+import { getMaskUrl } from "../../lib/unique-id";
 import Eye from "./Eye";
 import EyeBrow from "./EyeBrow";
 import FeatureFrame from "./FeatureFrame";
 import Mouth from "./Mouth";
+import Teeth from "./Teeth";
 
 
 interface Props {
@@ -69,6 +71,7 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
     const eyePosRight = !expression ? { dilation, browTilt, browRaise } : { ...expression?.rightEye, direction };
 
     const mouthY = clamp(mouthVerticalPosition, 50, 5)
+    const mouthIdent = ident + '-mouth'
 
     return (
         <FeatureFrame x={x} y={y} size={size} placement='top left'>
@@ -94,12 +97,14 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
                 pos={eyePosRight}
                 browType={browType}
                 right />
-            <Mouth ident={ident + '-mouth'}
+            <Mouth ident={mouthIdent}
                 x={0} y={mouthY} size={mouthWidth}
                 arrangement={expression?.mouth}
                 lipColor={profile?.lipColor}
                 lipWidth={profile?.lipWidth}
-            />
+            >
+                <Teeth maskUrl={getMaskUrl(mouthIdent)} />
+            </Mouth>
         </FeatureFrame>
     )
 }

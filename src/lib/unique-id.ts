@@ -14,3 +14,5 @@ class IdGen{
 
 export const uniqueId = new IdGen();
 
+export const getMaskId = (ident:string) => `${ident}-mask`
+export const getMaskUrl = (ident:string) => `url(#${ident}-mask)`

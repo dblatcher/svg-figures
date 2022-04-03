@@ -1,14 +1,8 @@
-import { h, Fragment } from "preact";
+import { h } from "preact";
 import { MouthArrangement } from "../../lib/expressions";
+import { getMaskId } from "../../lib/unique-id";
 import FeatureFrame from "./FeatureFrame";
 import { FeatureProps } from "./FeatureProps";
-
-interface Props extends FeatureProps {
-    arrangement?: MouthArrangement
-    lipColor?: string
-    lipWidth?: number
-}
-
 
 const coor = (x: number, y: number) => `${x},${y}`
 
@@ -31,33 +25,22 @@ const getMouthPaths = (arrangment: MouthArrangement) => {
     }
 }
 
-interface TeethProps {
-    maskUrl: string
-}
 
-const Teeth = ({
-    maskUrl
-}: TeethProps) => {
-    const teethHeight =12;
-    const lineAt = (x:number) => <line x1={x} y1={-20} x2={x} y2={teethHeight} stroke="black" />
-    return <g mask={maskUrl}>
-        <rect fill="white" x={-50} y={-20} height={teethHeight} width={100}></rect>
-        {lineAt(-30)}
-        {lineAt(-15)}
-        {lineAt(0)}
-        {lineAt(15)}
-        {lineAt(30)}
-    </g>
+
+interface Props extends FeatureProps {
+    arrangement?: MouthArrangement
+    lipColor?: string
+    lipWidth?: number
 }
 
 const Mouth = ({
     x, y, size, arrangement = {}, transitionTime = .5,
     lipColor = 'pink', lipWidth = 3,
-    ident = ''
+    ident = '',
+    children,
 }: Props) => {
 
-    const maskId = ident + '-mask'
-    const maskUrl = `url(#${maskId})`
+    const maskId = getMaskId(ident)
 
     const paths = getMouthPaths(arrangement)
     const centerPathStyle = {
@@ -96,9 +79,8 @@ const Mouth = ({
             </mask>
 
             <path style={mouthStyle}></path>
-            <Teeth maskUrl={maskUrl} />
+            {children}
             <path style={lipStyle}></path>
-
             <path style={centerPathStyle}></path>
 
         </FeatureFrame>

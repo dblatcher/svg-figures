@@ -1,4 +1,4 @@
-import { VNode } from "preact";
+import { ComponentChildren } from "preact";
 
 type FeatureProps = {
     ident?: string;
@@ -6,7 +6,7 @@ type FeatureProps = {
     y: number;
     size: number;
     transitionTime?: number;
-    children?: VNode | VNode[]
+    children?: ComponentChildren
 }
 
-export type {FeatureProps}
+export type { FeatureProps }
