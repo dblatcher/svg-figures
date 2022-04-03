@@ -1,9 +1,10 @@
 import { h } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 import { clamp, getDistanceAndDirection } from "../../lib/calcuations";
-import type { FacialExpression } from "../../lib/expressions";
+import { FacialExpression, MouthArrangement } from "../../lib/expressions";
 import type { FaceProfile } from "../../lib/faceProfile";
 import { getMaskUrl } from "../../lib/unique-id";
+import { useInterval } from "../../lib/useInterval";
 import Eye from "./Eye";
 import EyeBrow from "./EyeBrow";
 import FeatureFrame from "./FeatureFrame";
@@ -19,6 +20,7 @@ interface Props {
     ident: string
     expression?: FacialExpression
     profile?: FaceProfile
+    talking?: boolean
 }
 
 const dilationRange = 150
@@ -37,11 +39,12 @@ function calculateEyebrowRise(distance: number) {
     return clamp((200 - distance) / 8, 20)
 }
 
-export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, expression, profile = {} }: Props) => {
+export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, expression, profile = {}, talking }: Props) => {
     const [direction, setDirection] = useState<[number, number]>([0, 0])
     const [dilation, setDilation] = useState<number>(1)
     const [browTilt, setBrowTilt] = useState<number>(0)
     const [browRaise, setBrowRaise] = useState<number>(0)
+    const [talkingMouth, setTalkingMouth] = useState<MouthArrangement>({})
     const noseRef = useRef<SVGCircleElement>(null);
 
     const trackMouse = (event: MouseEvent) => {
@@ -58,6 +61,16 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
         setBrowRaise(calculateEyebrowRise(distance))
     }
 
+    const talk = () => {
+        if (!talking) { return }
+        setTalkingMouth({
+            open: Math.random(),
+            pucker: Math.random(),
+            smile: Math.random() - .5,
+        })
+    }
+    useInterval(talk, 300)
+
     useEffect(() => {
         window.addEventListener('mousemove', trackMouse)
         return () => {
@@ -65,7 +78,7 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
         }
     })
 
-    const { eyeDistance = 40, mouthVerticalPosition = 20, mouthWidth = 40, eyeColor, browType, round = .5, width = 1, color='lightgray' } = profile
+    const { eyeDistance = 40, mouthVerticalPosition = 20, mouthWidth = 40, eyeColor, browType, round = .5, width = 1, color = 'lightgray' } = profile
     const eyeX = clamp(eyeDistance, 75, 25) / 2
     const eyePosLeft = !expression ? { dilation, browTilt, browRaise } : { ...expression?.leftEye, direction };
     const eyePosRight = !expression ? { dilation, browTilt, browRaise } : { ...expression?.rightEye, direction };
@@ -76,9 +89,6 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
     return (
         <FeatureFrame x={x} y={y} size={size} placement='top left'>
             <rect x={-50 * width} y={-50} width={100 * width} height={100} stroke={'black'} fill={color} rx={100 * (round / 2)} />
-
-            {/* <ellipse x={0} y={0} rx={50} ry={50} stroke={'white'} fill={'aqua'}/> */}
-
             <circle ref={noseRef} cx={0} cy={0} r={5} fill={'black'} />
 
             <Eye ident={ident + '-eye-left'}
@@ -102,7 +112,7 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
                 right />
             <Mouth ident={mouthIdent}
                 x={0} y={mouthY} size={mouthWidth}
-                arrangement={expression?.mouth}
+                arrangement={talking ? talkingMouth : expression?.mouth}
                 lipColor={profile?.lipColor}
                 lipWidth={profile?.lipWidth}
             >

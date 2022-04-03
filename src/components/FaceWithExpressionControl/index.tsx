@@ -14,6 +14,7 @@ interface Props {
     ident: string
     profile?: FaceProfile
     followMouse?: boolean
+    talking?: boolean
 }
 
 
@@ -34,18 +35,17 @@ export class FaceWithExpressionControl extends Component<Props, {
 
     changeExpression() {
         const list = Object.entries(expressions).filter(keyAndExpression => keyAndExpression[1] !== this.state.expresion)
-
         const [newKey, newExpression] = list[randomInt(list.length)]
         this.setState({ expresion: newExpression, expressionLabel: newKey })
     }
 
-    render({ x, y, size, ident, profile, followMouse }: Props) {
+    render({ x, y, size, ident, profile, followMouse, talking }: Props) {
 
         const { expresion, expressionLabel } = this.state
 
         return <>
             <g onClick={this.changeExpression}>
-                <Face x={x} y={y} size={size} ident={ident} expression={expresion} profile={profile} followMouse={followMouse} />
+                <Face x={x} y={y} size={size} ident={ident} expression={expresion} profile={profile} followMouse={followMouse} talking={talking} />
                 <text x={x} y={y} fill={'red'}>{expressionLabel}</text>
             </g>
         </>

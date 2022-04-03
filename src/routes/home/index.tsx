@@ -28,7 +28,7 @@ const Home: FunctionalComponent = () => {
                     }}
                     followMouse />
                 <FaceWithExpressionControl ident={uniqueId.generate('face')}
-                    x={70} y={120} size={80} followMouse
+                    x={70} y={120} size={80} followMouse talking
                     profile={{
                         color: 'peachpuff',
                         lipColor: 'red',
@@ -41,7 +41,7 @@ const Home: FunctionalComponent = () => {
                 />
                 <Face ident={uniqueId.generate('face')}
                     x={10} y={110} size={50}
-                    expression={expressions.HAPPY}
+                    expression={expressions.HAPPY} talking
                     profile={{
                         eyeColor: 'darkolivegreen',
                         teeth: [pointy, pointy, pointy, pointy, pointy, pointy]
