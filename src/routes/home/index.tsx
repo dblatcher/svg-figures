@@ -3,9 +3,11 @@ import Face from '../../components/Face';
 import { FaceWithExpressionControl } from '../../components/FaceWithExpressionControl';
 import { SvgFrame } from '../../components/SvgFrame';
 import { expressions } from '../../lib/expressions';
+import { toothShapes } from '../../lib/faceProfile';
 import { uniqueId } from '../../lib/unique-id';
 import style from './style.css';
 
+const { pointy, square, missing, long } = toothShapes
 
 const frameStyle = { width: '30rem', border: '5px double black', background: 'gray' };
 
@@ -30,12 +32,16 @@ const Home: FunctionalComponent = () => {
                     profile={{
                         lipColor: 'red',
                         lipWidth: 6,
-                        mouthVerticalPosition:30
+                        mouthVerticalPosition: 30,
+                        teeth: [square,square,square,long,long,square,square,square]
                     }}
                 />
                 <Face ident={uniqueId.generate('face')}
-                    x={10} y={110} size={40}
+                    x={10} y={110} size={50}
                     expression={expressions.HAPPY}
+                    profile={{
+                        teeth:[pointy,pointy,pointy,pointy,pointy,pointy]
+                    }}
                     followMouse />
             </SvgFrame>
         </div>

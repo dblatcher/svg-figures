@@ -1,21 +1,31 @@
 import { h } from "preact";
+import { ToothShape, toothShapes } from "../../lib/faceProfile";
 
 interface Props {
     maskUrl: string
+    toothList?: ToothShape[]
+}
+
+const { square } = toothShapes
+
+const defaultToothList = [square, square, square, square, square, square]
+
+const plotTooth = (shape: ToothShape, toothIndex: number, toothCount:number)  => {
+    const toothWidth = 100 / toothCount;
+    const commands: string[] = shape
+        .map((coord, index) => {
+            const code = index > 0 ? 'L' : 'M'
+            const [x, y] = coord.map(v => v * toothWidth)
+            return `${code} ${x + ((toothIndex * toothWidth) - 50)} ${y - 20}`
+        })
+    return commands.join(" ");
 }
 
 const Teeth = ({
-    maskUrl
+    maskUrl, toothList = defaultToothList
 }: Props) => {
-    const teethHeight =12;
-    const lineAt = (x:number) => <line x1={x} y1={-20} x2={x} y2={teethHeight} stroke="black" />
     return <g mask={maskUrl}>
-        <rect fill="white" x={-50} y={-20} height={teethHeight} width={100}></rect>
-        {lineAt(-30)}
-        {lineAt(-15)}
-        {lineAt(0)}
-        {lineAt(15)}
-        {lineAt(30)}
+        {toothList.map((tooth, index) => <path d={plotTooth(tooth, index, toothList.length)} stroke='black' fill="white" />)}
     </g>
 }
 

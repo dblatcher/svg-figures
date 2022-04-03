@@ -6,9 +6,15 @@ interface FaceProfile {
     mouthVerticalPosition?: number;
     lipColor?: string;
     lipWidth?: number;
+    teeth?: ToothShape[];
 }
 
 type BrowShape = [number, number][]
+type ToothShape = [number, number][]
+
+
+
+export type { FaceProfile, BrowShape, ToothShape }
 
 export const browShapes: { [index: string]: BrowShape } = {
     thin: [
@@ -26,4 +32,16 @@ export const browShapes: { [index: string]: BrowShape } = {
     ]
 }
 
-export type { FaceProfile, BrowShape }
+export const toothShapes: { [index: string]: ToothShape } = {
+    pointy: [
+        [0, 0], [.1, 1], [.5, 1.2], [.9, 1], [1, 0]
+    ],
+    square: [
+        [0, 0], [0, 1], [1, 1], [1, 0]
+    ],
+    long: [
+        [0, 0], [0, 1.3], [1, 1.3], [1, 0]
+    ],
+    missing: [],
+}
+

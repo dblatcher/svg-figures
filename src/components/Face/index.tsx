@@ -103,7 +103,8 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
                 lipColor={profile?.lipColor}
                 lipWidth={profile?.lipWidth}
             >
-                <Teeth maskUrl={getMaskUrl(mouthIdent)} />
+                <Teeth maskUrl={getMaskUrl(mouthIdent)} 
+                toothList={profile?.teeth}/>
             </Mouth>
         </FeatureFrame>
     )
