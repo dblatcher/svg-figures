@@ -52,7 +52,7 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
         const { clientX, clientY } = event
         const { distance, relativeDisplacement } = getDistanceAndDirection(clientX, clientY, noseLeft + (width / 2), noseTop + (height / 2))
 
-        setDirection(distance < size ? [0,0] : relativeDisplacement)
+        setDirection(distance < size ? [0, 0] : relativeDisplacement)
         setDilation(calculateDilation(distance))
         setBrowTilt(calculateEyebrowTilt(distance))
         setBrowRaise(calculateEyebrowRise(distance))
@@ -65,7 +65,7 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
         }
     })
 
-    const { eyeDistance = 40, mouthVerticalPosition = 20, mouthWidth = 40, eyeColor, browType } = profile
+    const { eyeDistance = 40, mouthVerticalPosition = 20, mouthWidth = 40, eyeColor, browType, round = .5, width = 1, color='lightgray' } = profile
     const eyeX = clamp(eyeDistance, 75, 25) / 2
     const eyePosLeft = !expression ? { dilation, browTilt, browRaise } : { ...expression?.leftEye, direction };
     const eyePosRight = !expression ? { dilation, browTilt, browRaise } : { ...expression?.rightEye, direction };
@@ -75,7 +75,10 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
 
     return (
         <FeatureFrame x={x} y={y} size={size} placement='top left'>
-            <rect x={-50} y={-50} width={100} height={100} stroke={'white'} fill={'none'} />
+            <rect x={-50 * width} y={-50} width={100 * width} height={100} stroke={'black'} fill={color} rx={100 * (round / 2)} />
+
+            {/* <ellipse x={0} y={0} rx={50} ry={50} stroke={'white'} fill={'aqua'}/> */}
+
             <circle ref={noseRef} cx={0} cy={0} r={5} fill={'black'} />
 
             <Eye ident={ident + '-eye-left'}
@@ -103,8 +106,8 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
                 lipColor={profile?.lipColor}
                 lipWidth={profile?.lipWidth}
             >
-                <Teeth maskUrl={getMaskUrl(mouthIdent)} 
-                toothList={profile?.teeth}/>
+                <Teeth maskUrl={getMaskUrl(mouthIdent)}
+                    toothList={profile?.teeth} />
             </Mouth>
         </FeatureFrame>
     )

@@ -30,7 +30,10 @@ const Home: FunctionalComponent = () => {
                 <FaceWithExpressionControl ident={uniqueId.generate('face')}
                     x={70} y={120} size={80} followMouse
                     profile={{
+                        color: 'peachpuff',
                         lipColor: 'red',
+                        width: .7,
+                        round: .1,
                         lipWidth: 6,
                         mouthVerticalPosition: 30,
                         teeth: [square, square, square, long, long, square, square, square]

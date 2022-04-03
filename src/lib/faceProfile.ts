@@ -1,4 +1,7 @@
 interface FaceProfile {
+    width?: number;
+    round?: number;
+    color?: string;
     browType?: 'thin' | 'wide';
     eyeColor?: string;
     eyeDistance?: number;
@@ -11,8 +14,6 @@ interface FaceProfile {
 
 type BrowShape = [number, number][]
 type ToothShape = [number, number][]
-
-
 
 export type { FaceProfile, BrowShape, ToothShape }
 
