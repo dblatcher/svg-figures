@@ -34,8 +34,8 @@ const AFRAID: FacialExpression = {
     },
     mouth: {
         smile: 0,
-        open: 1,
-        pucker: 1,
+        open: .8,
+        pucker: .8,
     },
 }
 
@@ -70,7 +70,7 @@ const ODD: FacialExpression = {
     mouth: {
         smile: 1,
         pucker:.5,
-        open:.1,
+        open:.3,
     },
 }
 
@@ -83,7 +83,7 @@ const HAPPY: FacialExpression = {
     },
     mouth: {
         smile: .75,
-        open: .5,
+        open: .7,
     },
 }
 

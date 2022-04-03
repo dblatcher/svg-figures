@@ -1,4 +1,4 @@
-import { h } from "preact";
+import { h, Fragment } from "preact";
 import { MouthArrangement } from "../../lib/expressions";
 import FeatureFrame from "./FeatureFrame";
 import { FeatureProps } from "./FeatureProps";
@@ -31,28 +31,76 @@ const getMouthPaths = (arrangment: MouthArrangement) => {
     }
 }
 
-const Mouth = ({ x, y, size, arrangement = {}, transitionTime = .5, lipColor = 'pink', lipWidth = 3 }: Props) => {
+interface TeethProps {
+    maskUrl: string
+}
+
+const Teeth = ({
+    maskUrl
+}: TeethProps) => {
+    const teethHeight =12;
+    const lineAt = (x:number) => <line x1={x} y1={-20} x2={x} y2={teethHeight} stroke="black" />
+    return <g mask={maskUrl}>
+        <rect fill="white" x={-50} y={-20} height={teethHeight} width={100}></rect>
+        {lineAt(-30)}
+        {lineAt(-15)}
+        {lineAt(0)}
+        {lineAt(15)}
+        {lineAt(30)}
+    </g>
+}
+
+const Mouth = ({
+    x, y, size, arrangement = {}, transitionTime = .5,
+    lipColor = 'pink', lipWidth = 3,
+    ident = ''
+}: Props) => {
+
+    const maskId = ident + '-mask'
+    const maskUrl = `url(#${maskId})`
 
     const paths = getMouthPaths(arrangement)
     const centerPathStyle = {
         d: paths.center,
-        transition: `d ${transitionTime}s`,
+        transition: `d ${transitionTime}s, opacity ${transitionTime}s`,
         stroke: 'black',
         fill: 'none',
-        strokeWidth: 2,
+        strokeWidth: 1,
+        opacity: arrangement.open ? 0 : 1,
     }
-    const outerPathStyle = {
+    const mouthStyle = {
+        d: paths.outer,
+        transition: `d ${transitionTime}s`,
+        stroke: 'none',
+        fill: 'black',
+    }
+    const lipStyle = {
         d: paths.outer,
         transition: `d ${transitionTime}s`,
         stroke: lipColor,
-        fill: 'black',
+        fill: 'none',
         strokeWidth: lipWidth,
+    }
+
+    const maskStyle = {
+        d: paths.outer,
+        transition: `d ${transitionTime}s`,
     }
 
     return (
         <FeatureFrame x={x} y={y} size={size}>
-            <path style={outerPathStyle}></path>
+
+            <mask id={maskId}>
+                <rect fill="black" x={-50} y={-50} width={100} height={100} />
+                <path fill="white" style={maskStyle}></path>
+            </mask>
+
+            <path style={mouthStyle}></path>
+            <Teeth maskUrl={maskUrl} />
+            <path style={lipStyle}></path>
+
             <path style={centerPathStyle}></path>
+
         </FeatureFrame>
     )
 }

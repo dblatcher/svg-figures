@@ -94,7 +94,7 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
                 pos={eyePosRight}
                 browType={browType}
                 right />
-            <Mouth
+            <Mouth ident={ident + '-mouth'}
                 x={0} y={mouthY} size={mouthWidth}
                 arrangement={expression?.mouth}
                 lipColor={profile?.lipColor}
