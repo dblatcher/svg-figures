@@ -26,7 +26,7 @@ const Home: FunctionalComponent = () => {
                     }}
                     followMouse />
                 <FaceWithExpressionControl ident={uniqueId.generate('face')}
-                    x={50} y={140} size={60}
+                    x={50} y={120} size={80}
                     />
                 <Face ident={uniqueId.generate('face')}
                     x={10} y={110} size={40}

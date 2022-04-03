@@ -9,6 +9,7 @@ interface EyeArrangement {
 interface MouthArrangement {
     smile?: number
     open?: number
+    pucker?: number
 }
 
 interface FacialExpression {
@@ -32,8 +33,9 @@ const AFRAID: FacialExpression = {
         dilation: 1.5,
     },
     mouth: {
-        smile: -.5,
-        open:1,
+        smile: 0,
+        open: 1,
+        pucker: 1,
     },
 }
 
@@ -66,7 +68,9 @@ const ODD: FacialExpression = {
         browRaise: -10,
     },
     mouth: {
-        smile: 1
+        smile: 1,
+        pucker:.5,
+        open:.1,
     },
 }
 

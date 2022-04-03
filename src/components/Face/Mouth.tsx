@@ -11,20 +11,21 @@ interface Props extends FeatureProps {
 const coor = (x: number, y: number) => `${x},${y}`
 
 const getMouthPaths = (arrangment: MouthArrangement) => {
+    const { smile = 0, open = 0, pucker = 0 } = arrangment
 
-    const { smile = 0, open = 0 } = arrangment
+    const endX = 50 * (1 - pucker / 2)
+    const leftEnd = coor(-endX, -smile * 20)
+    const rightEnd = coor(endX, -smile * 20)
 
-    const leftEnd = coor(-50, -smile * 20)
-    const rightEnd = coor(50, -smile * 20)
-    const centerPathControl = coor(0, smile * 15)
-    
-
-    const upperPathControl = coor(0, smile * (15 + (open*35)))
-    const lowerPathControl = coor(0, smile * (15 - (open*20)))
+    const outerShift = open * 40
+    const smileShift = smile * 15
+    const midLineCP = coor(0, smileShift)
+    const upperLipCP = coor(0, smileShift - outerShift)
+    const lowerLipCP = coor(0, smileShift + outerShift)
 
     return {
-        center: `path("M${leftEnd} Q${centerPathControl},${rightEnd}")`,
-        outer: `path("M${leftEnd} Q${upperPathControl},${rightEnd} Q${lowerPathControl},${leftEnd}")`,
+        center: `path("M${leftEnd} Q${midLineCP},${rightEnd}")`,
+        outer: `path("M${leftEnd} Q${upperLipCP},${rightEnd} Q${lowerLipCP},${leftEnd}")`,
     }
 }
 
@@ -41,8 +42,8 @@ const Mouth = ({ x, y, size, arrangement = {}, transitionTime = .5 }: Props) => 
     const outerPathStyle = {
         d: paths.outer,
         transition: `d ${transitionTime}s`,
-        stroke: 'black',
-        fill: 'red',
+        stroke: 'red',
+        fill: 'black',
         strokeWidth: 3,
     }
 
@@ -50,7 +51,6 @@ const Mouth = ({ x, y, size, arrangement = {}, transitionTime = .5 }: Props) => 
         <FeatureFrame x={x} y={y} size={size}>
             <path style={outerPathStyle}></path>
             <path style={centerPathStyle}></path>
-
         </FeatureFrame>
     )
 }
