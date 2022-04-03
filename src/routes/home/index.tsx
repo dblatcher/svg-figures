@@ -22,12 +22,17 @@ const Home: FunctionalComponent = () => {
                         eyeColor: 'brown',
                         eyeDistance: 30,
                         mouthWidth: 40,
-                        mouthVerticalPosition:30,
+                        mouthVerticalPosition: 30,
                     }}
                     followMouse />
                 <FaceWithExpressionControl ident={uniqueId.generate('face')}
                     x={50} y={120} size={80}
-                    />
+                    profile={{
+                        lipColor: 'red',
+                        lipWidth: 6,
+                        mouthVerticalPosition:30
+                    }}
+                />
                 <Face ident={uniqueId.generate('face')}
                     x={10} y={110} size={40}
                     expression={expressions.HAPPY}

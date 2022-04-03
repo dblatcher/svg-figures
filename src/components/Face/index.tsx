@@ -97,6 +97,8 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
             <Mouth
                 x={0} y={mouthY} size={mouthWidth}
                 arrangement={expression?.mouth}
+                lipColor={profile?.lipColor}
+                lipWidth={profile?.lipWidth}
             />
         </FeatureFrame>
     )

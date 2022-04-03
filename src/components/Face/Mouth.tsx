@@ -5,6 +5,8 @@ import { FeatureProps } from "./FeatureProps";
 
 interface Props extends FeatureProps {
     arrangement?: MouthArrangement
+    lipColor?: string
+    lipWidth?: number
 }
 
 
@@ -29,7 +31,7 @@ const getMouthPaths = (arrangment: MouthArrangement) => {
     }
 }
 
-const Mouth = ({ x, y, size, arrangement = {}, transitionTime = .5 }: Props) => {
+const Mouth = ({ x, y, size, arrangement = {}, transitionTime = .5, lipColor = 'pink', lipWidth = 3 }: Props) => {
 
     const paths = getMouthPaths(arrangement)
     const centerPathStyle = {
@@ -42,9 +44,9 @@ const Mouth = ({ x, y, size, arrangement = {}, transitionTime = .5 }: Props) => 
     const outerPathStyle = {
         d: paths.outer,
         transition: `d ${transitionTime}s`,
-        stroke: 'red',
+        stroke: lipColor,
         fill: 'black',
-        strokeWidth: 3,
+        strokeWidth: lipWidth,
     }
 
     return (

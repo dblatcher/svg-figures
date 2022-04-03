@@ -4,6 +4,8 @@ interface FaceProfile {
     eyeDistance?: number;
     mouthWidth?: number;
     mouthVerticalPosition?: number;
+    lipColor?: string;
+    lipWidth?: number;
 }
 
 type BrowShape = [number, number][]
