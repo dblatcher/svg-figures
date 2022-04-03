@@ -1,4 +1,3 @@
-
 import { h, Component, VNode, Fragment } from "preact";
 import { randomInt } from "../../lib/calcuations";
 import { expressions, FacialExpression } from "../../lib/expressions";
@@ -14,6 +13,7 @@ interface Props {
     size?: number
     ident: string
     profile?: FaceProfile
+    followMouse?: boolean
 }
 
 
@@ -27,25 +27,25 @@ export class FaceWithExpressionControl extends Component<Props, {
         super(props)
         this.state = {
             expresion: expressions.ODD,
-            expressionLabel:'odd'
+            expressionLabel: 'odd'
         }
         this.changeExpression = this.changeExpression.bind(this)
     }
 
     changeExpression() {
-        const list = Object.entries(expressions).filter(keyAndExpression =>  keyAndExpression[1] !== this.state.expresion )
+        const list = Object.entries(expressions).filter(keyAndExpression => keyAndExpression[1] !== this.state.expresion)
 
         const [newKey, newExpression] = list[randomInt(list.length)]
-        this.setState({ expresion: newExpression, expressionLabel:newKey })
+        this.setState({ expresion: newExpression, expressionLabel: newKey })
     }
 
-    render({ x, y, size, ident,profile }: Props) {
+    render({ x, y, size, ident, profile, followMouse }: Props) {
 
         const { expresion, expressionLabel } = this.state
 
         return <>
             <g onClick={this.changeExpression}>
-                <Face x={x} y={y} size={size} ident={ident} expression={expresion} profile={profile} />
+                <Face x={x} y={y} size={size} ident={ident} expression={expresion} profile={profile} followMouse={followMouse} />
                 <text x={x} y={y} fill={'red'}>{expressionLabel}</text>
             </g>
         </>

@@ -28,21 +28,22 @@ const Home: FunctionalComponent = () => {
                     }}
                     followMouse />
                 <FaceWithExpressionControl ident={uniqueId.generate('face')}
-                    x={50} y={120} size={80}
+                    x={70} y={120} size={80} followMouse
                     profile={{
                         lipColor: 'red',
                         lipWidth: 6,
                         mouthVerticalPosition: 30,
-                        teeth: [square,square,square,long,long,square,square,square]
+                        teeth: [square, square, square, long, long, square, square, square]
                     }}
                 />
                 <Face ident={uniqueId.generate('face')}
                     x={10} y={110} size={50}
                     expression={expressions.HAPPY}
                     profile={{
-                        teeth:[pointy,pointy,pointy,pointy,pointy,pointy]
+                        eyeColor: 'darkolivegreen',
+                        teeth: [pointy, pointy, pointy, pointy, pointy, pointy]
                     }}
-                    followMouse />
+                />
             </SvgFrame>
         </div>
     );

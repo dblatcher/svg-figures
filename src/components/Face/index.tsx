@@ -52,7 +52,7 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
         const { clientX, clientY } = event
         const { distance, relativeDisplacement } = getDistanceAndDirection(clientX, clientY, noseLeft + (width / 2), noseTop + (height / 2))
 
-        setDirection(relativeDisplacement)
+        setDirection(distance < size ? [0,0] : relativeDisplacement)
         setDilation(calculateDilation(distance))
         setBrowTilt(calculateEyebrowTilt(distance))
         setBrowRaise(calculateEyebrowRise(distance))
