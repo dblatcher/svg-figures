@@ -62,14 +62,13 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
     }
 
     const talk = () => {
-        if (!talking) { return }
         setTalkingMouth({
             open: Math.random(),
             pucker: Math.random(),
             smile: Math.random() - .5,
         })
     }
-    useInterval(talk, 300)
+    useInterval(talk, talking ? 300 : 0)
 
     useEffect(() => {
         window.addEventListener('mousemove', trackMouse)
@@ -90,7 +89,6 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
         <FeatureFrame x={x} y={y} size={size} placement='top left'>
             <rect x={-50 * width} y={-50} width={100 * width} height={100} stroke={'black'} fill={color} rx={100 * (round / 2)} />
             <circle ref={noseRef} cx={0} cy={0} r={5} fill={'black'} />
-
             <Eye ident={ident + '-eye-left'}
                 x={-eyeX} y={-10} size={25}
                 color={eyeColor}
