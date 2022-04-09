@@ -1,7 +1,6 @@
 import { ComponentChildren, h } from "preact";
 import { FacialExpression } from "../../lib/expressions";
 import { uniqueId } from "../../lib/unique-id";
-import { CenteredImage } from "../CenteredImage";
 import Face from "../Face";
 import FeatureFrame from "../Face/FeatureFrame";
 

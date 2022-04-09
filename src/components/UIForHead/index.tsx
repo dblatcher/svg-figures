@@ -1,22 +1,22 @@
-import { Component, Fragment } from "preact";
+import { Component, ComponentChildren} from "preact";
 import { h } from "preact";
 import { Head } from "../Head";
 import { SvgFrame } from "../SvgFrame";
-
 import { expressions, FacialExpression } from "../../lib/expressions"
 import { EventHandler } from "react";
 import { CenteredImage } from "../CenteredImage";
+import { accessoryList } from "../../lib/accessories";
+
 
 interface Props {
     fig?: string
 }
 
-
-
 export default class UIForHead extends Component<Props, {
     expressionKey: string
     talking: boolean
     followMouse: boolean
+    accessoryKeys: string[]
 }> {
 
     constructor(props: Props) {
@@ -25,14 +25,30 @@ export default class UIForHead extends Component<Props, {
             expressionKey: 'NEUTRAL',
             talking: false,
             followMouse: false,
+            accessoryKeys: [
+                'HAT', 'BADGE'
+            ]
         }
         this.changeExpressionKey = this.changeExpressionKey.bind(this)
         this.toggleTalking = this.toggleTalking.bind(this)
         this.toggleFollowMouse = this.toggleFollowMouse.bind(this)
+        this.toggleAccessory = this.toggleAccessory.bind(this)
     }
 
     get expression(): FacialExpression {
         return expressions[this.state.expressionKey] || expressions.NEUTRAL
+    }
+
+    get accessoryChildren(): ComponentChildren {
+
+        const wornAccessories = this.state.accessoryKeys
+            .filter(key => accessoryList[key])
+            .map(key => accessoryList[key])
+            .sort((a, b) => (a.priority || 0) - (b.priority || 0))
+
+        return wornAccessories.map((accessory, index) => {
+            return <CenteredImage key={index} {...accessory} />
+        })
     }
 
     //https://github.com/preactjs/preact/issues/1930
@@ -47,6 +63,17 @@ export default class UIForHead extends Component<Props, {
         this.setState({ followMouse: !this.state.followMouse })
     }
 
+    toggleAccessory(key: string) {
+        const { accessoryKeys } = this.state
+        const index = accessoryKeys.indexOf(key)
+        if (index == -1) {
+            accessoryKeys.push(key)
+        } else {
+            accessoryKeys.splice(index, 1)
+        }
+        this.setState({ accessoryKeys })
+    }
+
     render() {
 
         return <div style={{ border: '1px dotted black', margin: '1em', display: 'flex' }}>
@@ -56,13 +83,11 @@ export default class UIForHead extends Component<Props, {
                     talking={this.state.talking}
                     followMouse={this.state.followMouse}
                 >
-                    <CenteredImage src="./assets/non-burning-hat.png" x={0} y={-60} width={80} />
-                    <CenteredImage src="./assets/favicon.ico" x={0} y={-60} width={20} />
-                    <CenteredImage src="./assets/monocle.png" x={0} y={8} width={64} />
+                    {this.accessoryChildren}
                 </Head>
             </SvgFrame>
             <div>
-                <h2>UI</h2>
+                <h3>Face</h3>
                 <div>
                     <label>expression</label>
                     <select
@@ -85,6 +110,15 @@ export default class UIForHead extends Component<Props, {
                     <label>followMouse ({this.state.followMouse ? 'yes' : 'no'})</label>
                 </div>
 
+                <h3>Accessories</h3>
+                <div>
+                    {Object.keys(accessoryList).map(key => (
+                        <div key={key}>
+                            <input readonly type="checkbox" checked={this.state.accessoryKeys.includes(key)} onChange={() => { this.toggleAccessory(key) }} />
+                            <label>{key}</label>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
 
