@@ -1,6 +1,7 @@
-import { h } from "preact";
+import { ComponentChildren, h } from "preact";
 import { FacialExpression } from "../../lib/expressions";
 import { uniqueId } from "../../lib/unique-id";
+import { CenteredImage } from "../CenteredImage";
 import Face from "../Face";
 import FeatureFrame from "../Face/FeatureFrame";
 
@@ -12,10 +13,11 @@ interface Props {
     expression?: FacialExpression;
     talking?: boolean,
     followMouse?: boolean,
+    children?: ComponentChildren,
 }
 
 
-export function Head({ x, y, size, expression, talking, followMouse }: Props) {
+export function Head({ x, y, size, expression, talking, followMouse, children }: Props) {
     return <FeatureFrame x={x} y={y} size={size} placement='top left'>
         <g>
             <Face x={-50} y={-50} size={100} ident={uniqueId.generate('head')}
@@ -23,8 +25,8 @@ export function Head({ x, y, size, expression, talking, followMouse }: Props) {
                 talking={talking}
                 followMouse={followMouse}
             />
-            <FeatureFrame x={-40} y={-100} size={80}>
-                <image href="./assets/non-burning-hat.png" x={0} y={0} width={100} height={100} />
+            <FeatureFrame x={-50} y={-50} size={100} placement='top left'>
+                {children}
             </FeatureFrame>
         </g>
     </FeatureFrame>

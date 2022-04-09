@@ -5,6 +5,7 @@ import { SvgFrame } from "../SvgFrame";
 
 import { expressions, FacialExpression } from "../../lib/expressions"
 import { EventHandler } from "react";
+import { CenteredImage } from "../CenteredImage";
 
 interface Props {
     fig?: string
@@ -54,7 +55,11 @@ export default class UIForHead extends Component<Props, {
                     expression={this.expression}
                     talking={this.state.talking}
                     followMouse={this.state.followMouse}
-                />
+                >
+                    <CenteredImage src="./assets/non-burning-hat.png" x={0} y={-60} width={80} />
+                    <CenteredImage src="./assets/favicon.ico" x={0} y={-60} width={20} />
+                    <CenteredImage src="./assets/monocle.png" x={0} y={8} width={64} />
+                </Head>
             </SvgFrame>
             <div>
                 <h2>UI</h2>
