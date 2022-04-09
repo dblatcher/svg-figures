@@ -77,6 +77,12 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
         }
     })
 
+    useEffect(() => {
+        if (!followMouse) {
+            setDirection([0, 0])
+        }
+    }, [followMouse])
+
     const { eyeDistance = 40, mouthVerticalPosition = 20, mouthWidth = 40, eyeColor, browType, round = .5, width = 1, color = 'lightgray' } = profile
     const eyeX = clamp(eyeDistance, 75, 25) / 2
     const eyePosLeft = !expression ? { dilation, browTilt, browRaise } : { ...expression?.leftEye, direction };

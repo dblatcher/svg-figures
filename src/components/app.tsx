@@ -7,6 +7,7 @@ import { expressions } from '../lib/expressions';
 import { toothShapes } from '../lib/faceProfile';
 import { uniqueId } from '../lib/unique-id';
 import style from '../style.css';
+import UIForHead from './UIForHead';
 
 const { pointy, square, missing, long } = toothShapes
 
@@ -15,9 +16,11 @@ const frameStyle = { width: '30rem', border: '5px double black', background: 'ye
 const App: FunctionalComponent = () => {
     return (
         <div>
-            <SvgFrame style={frameStyle} viewBox='0 0 200 200'>
 
-                <Head initialX={100} initialY={30} size={60} />
+
+            <UIForHead></UIForHead>
+
+            <SvgFrame style={frameStyle} viewBox='0 0 200 200'>
 
                 <Face ident={uniqueId.generate('face')}
                     x={0} y={0} size={100}

@@ -69,8 +69,8 @@ const ODD: FacialExpression = {
     },
     mouth: {
         smile: 1,
-        pucker:.5,
-        open:.3,
+        pucker: .5,
+        open: .3,
     },
 }
 
@@ -93,4 +93,4 @@ const NEUTRAL: FacialExpression = {
     mouth: {},
 }
 
-export const expressions = { AFRAID, ANGRY, NEUTRAL, ODD, HAPPY }
+export const expressions: { [index: string]: FacialExpression } = { AFRAID, ANGRY, NEUTRAL, ODD, HAPPY }
