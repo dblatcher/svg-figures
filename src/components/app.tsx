@@ -1,21 +1,58 @@
 import { FunctionalComponent, h } from 'preact';
-import { Route, Router } from 'preact-router';
+import Face from '../components/Face';
+import { FaceWithExpressionControl } from '../components/FaceWithExpressionControl';
+import { Head } from '../components/Head';
+import { SvgFrame } from '../components/SvgFrame';
+import { expressions } from '../lib/expressions';
+import { toothShapes } from '../lib/faceProfile';
+import { uniqueId } from '../lib/unique-id';
+import style from '../style.css';
 
-import Home from '../routes/home';
-import Profile from '../routes/profile';
-import NotFoundPage from '../routes/notfound';
-import Header from './header';
+const { pointy, square, missing, long } = toothShapes
+
+const frameStyle = { width: '30rem', border: '5px double black', background: 'yellow' };
 
 const App: FunctionalComponent = () => {
     return (
-        <div id="preact_root">
-            <Header />
-            <Router>
-                <Route path="/" component={Home} />
-                <Route path="/profile/" component={Profile} user="me" />
-                <Route path="/profile/:user" component={Profile} />
-                <NotFoundPage default />
-            </Router>
+        <div>
+            <SvgFrame style={frameStyle} viewBox='0 0 200 200'>
+
+                <Head initialX={100} initialY={30} size={60} />
+
+                <Face ident={uniqueId.generate('face')}
+                    x={0} y={0} size={100}
+                    profile={{
+                        browType: 'wide',
+                        eyeColor: 'brown',
+                        eyeDistance: 30,
+                        mouthWidth: 40,
+                        mouthVerticalPosition: 30,
+                        color: 'lightgreen'
+                    }}
+                    followMouse />
+
+
+                <FaceWithExpressionControl ident={uniqueId.generate('face')}
+                    x={70} y={120} size={80} followMouse talking
+                    profile={{
+                        color: 'peachpuff',
+                        lipColor: 'red',
+                        width: .7,
+                        round: .1,
+                        lipWidth: 6,
+                        mouthVerticalPosition: 30,
+                        teeth: [square, square, square, long, long, square, square, square]
+                    }}
+                />
+                <Face ident={uniqueId.generate('face')}
+                    x={10} y={110} size={50}
+                    expression={expressions.HAPPY} talking
+                    profile={{
+                        eyeColor: 'darkolivegreen',
+                        teeth: [pointy, pointy, pointy, pointy, pointy, pointy]
+                    }}
+                />
+            </SvgFrame>
         </div>
     );
 };
