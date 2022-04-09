@@ -18,8 +18,9 @@ export const Eye = ({ x, y, transitionTime = .5, size, direction = [0, 0], color
     const { open = .75, dilation = 1 } = pos
 
     const adjustedDilation = clamp(dilation, 2, 0)
-    const adjustedDirection = direction.map(v => clamp(v, 1, -1) * 20)
-    const ry = 50 * clamp(open,1,0)
+    const [cx, cy] = direction.map(v => clamp(v, 1, -1) * 20)
+
+    const ry = 50 * clamp(open, 1, 0)
     const maskId = getMaskId(ident)
     const maskUrl = getMaskUrl(ident)
 
@@ -33,20 +34,19 @@ export const Eye = ({ x, y, transitionTime = .5, size, direction = [0, 0], color
 
     const irisStyle = {
         fill: color,
-        cx: adjustedDirection[0],
-        cy: adjustedDirection[1],
+        cx: cx,
+        cy: cy,
         rx: 30,
-        transition: `rx ${transitionTime}s, cx ${transitionTime}s, cy${transitionTime}s`,
+        transition: `rx ${transitionTime}s, cy ${transitionTime}s, cx ${transitionTime}s`,
     }
 
     const pupilStyle = {
         fill: "black",
-        stroke: "white",
         strokeWidth: 2,
-        cx: adjustedDirection[0],
-        cy: adjustedDirection[1],
+        cx: cx,
+        cy: cy,
         rx: 15 * adjustedDilation,
-        transition: `rx ${transitionTime}s, cx ${transitionTime}s, cy${transitionTime}s`,
+        transition: `rx ${transitionTime}s, cy ${transitionTime}s, cx ${transitionTime}s`,
     }
 
     return <FeatureFrame x={x} y={y} size={size}>
