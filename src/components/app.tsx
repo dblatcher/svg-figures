@@ -3,6 +3,7 @@ import Face from '../components/Face';
 import { FaceWithExpressionControl } from '../components/FaceWithExpressionControl';
 import { Head } from '../components/Head';
 import { SvgFrame } from '../components/SvgFrame';
+import { accessoryMap } from '../lib/accessories';
 import { expressions } from '../lib/expressions';
 import { toothShapes } from '../lib/faceProfile';
 import { uniqueId } from '../lib/unique-id';
@@ -18,7 +19,9 @@ const App: FunctionalComponent = () => {
         <div>
 
 
-            <UIForHead></UIForHead>
+            <UIForHead accessoryMap={accessoryMap} />
+            <UIForHead accessoryMap={accessoryMap} />
+
 
             <SvgFrame style={frameStyle} viewBox='0 0 200 200'>
 

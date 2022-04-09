@@ -1,15 +1,15 @@
-import { Component, ComponentChildren} from "preact";
+import { Component, ComponentChildren } from "preact";
 import { h } from "preact";
 import { Head } from "../Head";
 import { SvgFrame } from "../SvgFrame";
 import { expressions, FacialExpression } from "../../lib/expressions"
 import { EventHandler } from "react";
 import { CenteredImage } from "../CenteredImage";
-import { accessoryList } from "../../lib/accessories";
+import { Accessory } from "../../lib/accessories";
 
 
 interface Props {
-    fig?: string
+    accessoryMap?: { [index: string]: Accessory }
 }
 
 export default class UIForHead extends Component<Props, {
@@ -25,9 +25,7 @@ export default class UIForHead extends Component<Props, {
             expressionKey: 'NEUTRAL',
             talking: false,
             followMouse: false,
-            accessoryKeys: [
-                'HAT', 'BADGE'
-            ]
+            accessoryKeys: []
         }
         this.changeExpressionKey = this.changeExpressionKey.bind(this)
         this.toggleTalking = this.toggleTalking.bind(this)
@@ -40,10 +38,11 @@ export default class UIForHead extends Component<Props, {
     }
 
     get accessoryChildren(): ComponentChildren {
+        const { accessoryMap: accessoryMap = {} } = this.props
 
         const wornAccessories = this.state.accessoryKeys
-            .filter(key => accessoryList[key])
-            .map(key => accessoryList[key])
+            .filter(key => accessoryMap[key])
+            .map(key => accessoryMap[key])
             .sort((a, b) => (a.priority || 0) - (b.priority || 0))
 
         return wornAccessories.map((accessory, index) => {
@@ -75,6 +74,8 @@ export default class UIForHead extends Component<Props, {
     }
 
     render() {
+
+        const { accessoryMap = {} } = this.props
 
         return <div style={{ border: '1px dotted black', margin: '1em', display: 'flex' }}>
             <SvgFrame style={{ width: '200px', border: '1px solid black' }} viewBox='0 0 100 150'>
@@ -112,7 +113,7 @@ export default class UIForHead extends Component<Props, {
 
                 <h3>Accessories</h3>
                 <div>
-                    {Object.keys(accessoryList).map(key => (
+                    {Object.keys(accessoryMap).map(key => (
                         <div key={key}>
                             <input readonly type="checkbox" checked={this.state.accessoryKeys.includes(key)} onChange={() => { this.toggleAccessory(key) }} />
                             <label>{key}</label>

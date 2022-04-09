@@ -8,7 +8,7 @@ interface Accessory {
 
 export type { Accessory }
 
-export const accessoryList: { [index: string]: Accessory } = {
+export const accessoryMap: { [index: string]: Accessory } = {
     HAT: {
         src: './assets/non-burning-hat.png',
         x: 0, y: -60, width: 80
