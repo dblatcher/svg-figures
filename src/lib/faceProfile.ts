@@ -14,8 +14,9 @@ interface FaceProfile {
 
 type BrowShape = [number, number][]
 type ToothShape = [number, number][]
+type ProfileNumberProperty = 'width' | 'round' | 'eyeDistance' | 'mouthWidth' | 'lipWidth' | 'mouthVerticalPosition'
 
-export type { FaceProfile, BrowShape, ToothShape }
+export type { FaceProfile, BrowShape, ToothShape, ProfileNumberProperty }
 
 export const browShapes: { [index: string]: BrowShape } = {
     thin: [
@@ -46,3 +47,11 @@ export const toothShapes: { [index: string]: ToothShape } = {
     missing: [],
 }
 
+export const profileNumberProperyData: { property: ProfileNumberProperty, min?: number, max: number, step?: number }[] = [
+    { property: "width", min: 0.5, max: 1.5, },
+    { property: "round", max: 1 },
+    { property: "eyeDistance", min: 25, max: 100, step: 1 },
+    { property: "lipWidth", min: 1, max: 10 },
+    { property: "mouthWidth", min: 10, max: 100, step: 1 },
+    { property: "mouthVerticalPosition", min: 5, max: 50, step: 1 }
+]

@@ -2,10 +2,11 @@ import { Component, ComponentChildren } from "preact";
 import { h } from "preact";
 import { Head } from "../Head";
 import { SvgFrame } from "../SvgFrame";
-import { expressions, FacialExpression } from "../../lib/expressions"
+import { expressions, FacialExpression,  } from "../../lib/expressions"
 import { EventHandler } from "react";
 import { CenteredImage } from "../CenteredImage";
 import { Accessory } from "../../lib/accessories";
+import { FaceProfile, ProfileNumberProperty, profileNumberProperyData } from "../../lib/faceProfile";
 
 
 interface Props {
@@ -17,6 +18,7 @@ export default class UIForHead extends Component<Props, {
     talking: boolean
     followMouse: boolean
     accessoryKeys: string[]
+    profile: FaceProfile
 }> {
 
     constructor(props: Props) {
@@ -25,12 +27,21 @@ export default class UIForHead extends Component<Props, {
             expressionKey: 'NEUTRAL',
             talking: false,
             followMouse: false,
-            accessoryKeys: []
+            accessoryKeys: [],
+            profile: {
+                width: 1,
+                round: .5,
+                eyeDistance: 40,
+                mouthWidth: 50,
+                lipWidth: 3,
+                mouthVerticalPosition: 30
+            },
         }
         this.changeExpressionKey = this.changeExpressionKey.bind(this)
         this.toggleTalking = this.toggleTalking.bind(this)
         this.toggleFollowMouse = this.toggleFollowMouse.bind(this)
         this.toggleAccessory = this.toggleAccessory.bind(this)
+        this.setExpression = this.setExpression.bind(this)
     }
 
     get expression(): FacialExpression {
@@ -55,10 +66,18 @@ export default class UIForHead extends Component<Props, {
         this.setState({ expressionKey: event.target?.value });
     }
 
-    toggleTalking: EventHandler<any> = (event) => {
+    //https://github.com/preactjs/preact/issues/1930
+    setExpression = (property: ProfileNumberProperty, event: any) => {
+        const value = Number(event.target.value as string)
+        const { profile } = this.state
+        profile[property] = value
+        this.setState({ profile })
+    }
+
+    toggleTalking: EventHandler<any> = () => {
         this.setState({ talking: !this.state.talking })
     }
-    toggleFollowMouse: EventHandler<any> = (event) => {
+    toggleFollowMouse: EventHandler<any> = () => {
         this.setState({ followMouse: !this.state.followMouse })
     }
 
@@ -76,25 +95,28 @@ export default class UIForHead extends Component<Props, {
     render() {
 
         const { accessoryMap = {} } = this.props
+        const { talking, followMouse, expressionKey, accessoryKeys, profile } = this.state
 
         return <div style={{ border: '1px dotted black', margin: '1em', display: 'flex' }}>
-            <SvgFrame style={{ width: '200px', border: '1px solid black' }} viewBox='0 0 100 150'>
-                <Head x={0} y={50} size={100}
+            <SvgFrame style={{ width: '200px', border: '1px solid black' }} viewBox='0 0 120 150'>
+                <Head x={20} y={50} size={80}
                     expression={this.expression}
-                    talking={this.state.talking}
-                    followMouse={this.state.followMouse}
+                    talking={talking}
+                    followMouse={followMouse}
+                    profile={profile}
                 >
                     {this.accessoryChildren}
                 </Head>
             </SvgFrame>
-            <div>
+
+            <section>
                 <h3>Face</h3>
                 <div>
                     <label>expression</label>
                     <select
                         readOnly
                         onChange={this.changeExpressionKey}
-                        value={this.state.expressionKey}>
+                        value={expressionKey}>
                         {Object.entries(expressions).map(entry => {
                             const [key] = entry
                             return <option key={key} value={key}>{key}</option>
@@ -103,24 +125,43 @@ export default class UIForHead extends Component<Props, {
                 </div>
 
                 <div>
-                    <input readonly readOnly type="checkbox" checked={this.state.talking} onChange={this.toggleTalking} />
-                    <label>talking ({this.state.talking ? 'yes' : 'no'})</label>
+                    <input readonly readOnly type="checkbox" checked={talking} onChange={this.toggleTalking} />
+                    <label>talking</label>
                 </div>
                 <div>
-                    <input readonly readOnly type="checkbox" checked={this.state.followMouse} onChange={this.toggleFollowMouse} />
-                    <label>followMouse ({this.state.followMouse ? 'yes' : 'no'})</label>
+                    <input readonly readOnly type="checkbox" checked={followMouse} onChange={this.toggleFollowMouse} />
+                    <label>followMouse</label>
                 </div>
+            </section>
 
+            <section>
                 <h3>Accessories</h3>
                 <div>
                     {Object.keys(accessoryMap).map(key => (
                         <div key={key}>
-                            <input readonly type="checkbox" checked={this.state.accessoryKeys.includes(key)} onChange={() => { this.toggleAccessory(key) }} />
+                            <input readonly type="checkbox" checked={accessoryKeys.includes(key)} onChange={() => { this.toggleAccessory(key) }} />
                             <label>{key}</label>
                         </div>
                     ))}
                 </div>
-            </div>
+            </section>
+
+            <section>
+                <h3>Profile</h3>
+
+                {profileNumberProperyData.map(data => {
+                    const { property, min = 0, max, step = .1 } = data
+                    return (
+                        <div key={property}>
+                            <label>{property}</label>
+                            <input value={profile[property]}
+                                type="range" min={min} max={max} step={step}
+                                onChange={(event) => this.setExpression(property, event)} />
+                            <span>{profile[property]}</span>
+                        </div>
+                    )
+                })}
+            </section>
         </div>
 
     }
