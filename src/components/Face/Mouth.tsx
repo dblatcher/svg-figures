@@ -22,6 +22,7 @@ const getMouthPaths = (arrangment: MouthArrangement) => {
     return {
         center: `path("M${leftEnd} Q${midLineCP},${rightEnd}")`,
         outer: `path("M${leftEnd} Q${upperLipCP},${rightEnd} Q${lowerLipCP},${leftEnd}")`,
+        outerMirror: `path("M${rightEnd} Q${upperLipCP},${leftEnd} Q${lowerLipCP},${rightEnd}")`,
     }
 }
 
@@ -63,6 +64,11 @@ const Mouth = ({
         stroke: lipColor,
         fill: 'none',
         strokeWidth: lipWidth,
+        strokeLinejoin: "round",
+    }
+    const mirrorLipsStyle = {
+        ...lipStyle,
+        d: paths.outerMirror
     }
 
     const maskStyle = {
@@ -81,6 +87,7 @@ const Mouth = ({
             <path style={mouthStyle}></path>
             {children}
             <path style={lipStyle}></path>
+            <path style={mirrorLipsStyle}></path>
             <path style={centerPathStyle}></path>
 
         </FeatureFrame>
