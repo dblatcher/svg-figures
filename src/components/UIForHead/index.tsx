@@ -2,11 +2,11 @@ import { Component, ComponentChildren } from "preact";
 import { h } from "preact";
 import { Head } from "../Head";
 import { SvgFrame } from "../SvgFrame";
-import { expressions, FacialExpression,  } from "../../lib/expressions"
+import { expressions, FacialExpression, } from "../../lib/expressions"
 import { EventHandler } from "react";
 import { CenteredImage } from "../CenteredImage";
 import { Accessory } from "../../lib/accessories";
-import { FaceProfile, ProfileNumberProperty, profileNumberProperyData } from "../../lib/faceProfile";
+import { FaceProfile, ProfileNumberProperty, profileNumberProperyData, profileColorProperyData, ProfileColorProperty } from "../../lib/faceProfile";
 
 
 interface Props {
@@ -34,14 +34,18 @@ export default class UIForHead extends Component<Props, {
                 eyeDistance: 40,
                 mouthWidth: 50,
                 lipWidth: 3,
-                mouthVerticalPosition: 30
+                mouthVerticalPosition: 30,
+                color: profileColorProperyData[0].default,
+                eyeColor: profileColorProperyData[1].default,
+                lipColor: profileColorProperyData[2].default,
             },
         }
         this.changeExpressionKey = this.changeExpressionKey.bind(this)
         this.toggleTalking = this.toggleTalking.bind(this)
         this.toggleFollowMouse = this.toggleFollowMouse.bind(this)
         this.toggleAccessory = this.toggleAccessory.bind(this)
-        this.setExpression = this.setExpression.bind(this)
+        this.setProfileNumber = this.setProfileNumber.bind(this)
+        this.setProfileString = this.setProfileString.bind(this)
     }
 
     get expression(): FacialExpression {
@@ -67,8 +71,16 @@ export default class UIForHead extends Component<Props, {
     }
 
     //https://github.com/preactjs/preact/issues/1930
-    setExpression = (property: ProfileNumberProperty, event: any) => {
+    setProfileNumber = (property: ProfileNumberProperty, event: any) => {
         const value = Number(event.target.value as string)
+        const { profile } = this.state
+        profile[property] = value
+        this.setState({ profile })
+    }
+
+    //https://github.com/preactjs/preact/issues/1930
+    setProfileString = (property: ProfileColorProperty, event: any) => {
+        const value = event.target.value as string
         const { profile } = this.state
         profile[property] = value
         this.setState({ profile })
@@ -153,11 +165,25 @@ export default class UIForHead extends Component<Props, {
                     const { property, min = 0, max, step = .1 } = data
                     return (
                         <div key={property}>
-                            <label>{property}</label>
                             <input value={profile[property]}
                                 type="range" min={min} max={max} step={step}
-                                onChange={(event) => this.setExpression(property, event)} />
-                            <span>{profile[property]}</span>
+                                onChange={(event) => this.setProfileNumber(property, event)} />
+                            <span>{profile[property]}&nbsp;</span>
+                            <label>{property}</label>
+                        </div>
+                    )
+                })}
+
+                {profileColorProperyData.map(data => {
+                    const { property } = data
+                    return (
+                        <div key={property}>
+                            <input value={profile[property]}
+                                type="color"
+                                onChange={(event) => this.setProfileString(property, event)}
+                            />
+                            <span>{profile[property]}&nbsp;</span>
+                            <label>{property}</label>
                         </div>
                     )
                 })}
