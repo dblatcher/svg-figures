@@ -52,13 +52,16 @@ export default class UIForHead extends Component<Props, {
         return expressions[this.state.expressionKey] || expressions.NEUTRAL
     }
 
-    get accessoryChildren(): ComponentChildren {
+    get wornAccessories(): Accessory[] {
         const { accessoryMap: accessoryMap = {} } = this.props
-
-        const wornAccessories = this.state.accessoryKeys
+        return this.state.accessoryKeys
             .filter(key => accessoryMap[key])
             .map(key => accessoryMap[key])
             .sort((a, b) => (a.priority || 0) - (b.priority || 0))
+    }
+
+    get accessoryChildren(): ComponentChildren {
+        const { wornAccessories } = this
 
         return wornAccessories.map((accessory, index) => {
             return <CenteredImage key={index} {...accessory} />
@@ -116,9 +119,8 @@ export default class UIForHead extends Component<Props, {
                     talking={talking}
                     followMouse={followMouse}
                     profile={profile}
-                >
-                    {this.accessoryChildren}
-                </Head>
+                    accessories={this.wornAccessories}
+                />
             </SvgFrame>
 
             <section>

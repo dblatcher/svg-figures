@@ -4,6 +4,7 @@ interface Accessory {
     y: number;
     width: number;
     priority?: number;
+    place?: 'left-eye' | 'right-eye';
 }
 
 export type { Accessory }
@@ -19,6 +20,12 @@ export const accessoryMap: { [index: string]: Accessory } = {
         priority: 2,
     },
     MONOCLE: {
-        src: "./assets/monocle.png", x: 0, y: 8, width: 64
+        src: "./assets/monocle2.png", x: -14, y: 20, width: 64, place: 'right-eye'
+    },
+    MONOCLE_BACKWARDS: {
+        src: "./assets/monocle2.png", x: -14, y: 20, width: 64, place: 'left-eye'
+    },
+    MOUSTACHE: {
+        src: "./assets/moustache.png", x: 0, y: 8, width: 64
     },
 }
