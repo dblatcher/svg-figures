@@ -6,7 +6,8 @@ import { expressions, FacialExpression, } from "../../lib/expressions"
 import { EventHandler } from "react";
 import { CenteredImage } from "../CenteredImage";
 import { Accessory } from "../../lib/accessories";
-import { FaceProfile, ProfileNumberProperty, profileNumberProperyData, profileColorProperyData, ProfileColorProperty } from "../../lib/faceProfile";
+import { FaceProfile, profileNumberProperyData, profileColorProperyData, browShapes, BrowType } from "../../lib/faceProfile";
+import { NumberInput, SelectInput, StringInput } from "../formControls";
 
 
 interface Props {
@@ -44,8 +45,7 @@ export default class UIForHead extends Component<Props, {
         this.toggleTalking = this.toggleTalking.bind(this)
         this.toggleFollowMouse = this.toggleFollowMouse.bind(this)
         this.toggleAccessory = this.toggleAccessory.bind(this)
-        this.setProfileNumber = this.setProfileNumber.bind(this)
-        this.setProfileString = this.setProfileString.bind(this)
+        this.editProfile = this.editProfile.bind(this)
     }
 
     get expression(): FacialExpression {
@@ -73,20 +73,37 @@ export default class UIForHead extends Component<Props, {
         this.setState({ expressionKey: event.target?.value });
     }
 
-    //https://github.com/preactjs/preact/issues/1930
-    setProfileNumber = (property: ProfileNumberProperty, event: any) => {
-        const value = Number(event.target.value as string)
-        const { profile } = this.state
-        profile[property] = value
-        this.setState({ profile })
-    }
+    editProfile = (property: keyof FaceProfile, value: unknown) => {
+        console.log(property, value)
+        this.setState(state => {
+            const { profile } = state
+            switch (property) {
+                case 'eyeColor':
+                case 'lipColor':
+                case 'color':
+                    if (typeof value === 'string') {
+                        profile[property] = value
+                    }
+                    break;
+                case 'width':
+                case 'round':
+                case 'eyeDistance':
+                case 'lipWidth':
+                case 'mouthWidth':
+                case 'mouthVerticalPosition':
+                    if (typeof value === 'number') {
+                        profile[property] = value
+                    }
+                    break;
+                case 'browType':
+                    if (Object.keys(browShapes).includes(value as BrowType)) {
+                        profile[property] = value as BrowType
+                    }
+                    break;
+            }
 
-    //https://github.com/preactjs/preact/issues/1930
-    setProfileString = (property: ProfileColorProperty, event: any) => {
-        const value = event.target.value as string
-        const { profile } = this.state
-        profile[property] = value
-        this.setState({ profile })
+            return { profile }
+        })
     }
 
     toggleTalking: EventHandler<any> = () => {
@@ -166,29 +183,42 @@ export default class UIForHead extends Component<Props, {
                 {profileNumberProperyData.map(data => {
                     const { property, min = 0, max, step = .1 } = data
                     return (
-                        <div key={property}>
-                            <input value={profile[property]}
+                        <div>
+                            <NumberInput key={property}
+                                label={`${profile[property]} ${property}`}
+                                value={profile[property] || min}
                                 type="range" min={min} max={max} step={step}
-                                onChange={(event) => this.setProfileNumber(property, event)} />
-                            <span>{profile[property]}&nbsp;</span>
-                            <label>{property}</label>
+                                inputHandler={value => { this.editProfile(property, value) }}
+                                labelAfter={true}
+                            />
                         </div>
                     )
                 })}
 
                 {profileColorProperyData.map(data => {
-                    const { property } = data
+                    const { property, default: defaultValue } = data
                     return (
-                        <div key={property}>
-                            <input value={profile[property]}
+                        <div>
+                            <StringInput key={property}
+                                label={`${profile[property]} ${property}`}
+                                value={profile[property] || defaultValue}
                                 type="color"
-                                onChange={(event) => this.setProfileString(property, event)}
+                                labelAfter={true}
+                                inputHandler={(value) => { this.editProfile(property, value) }}
                             />
-                            <span>{profile[property]}&nbsp;</span>
-                            <label>{property}</label>
                         </div>
                     )
                 })}
+
+                <div>
+                    <SelectInput
+                        label="Brow"
+                        value={profile.browType || "thin"}
+                        items={Object.keys(browShapes)}
+                        onSelect={(value) => { this.editProfile('browType', value) }}
+                        labelAfter={true}
+                    />
+                </div>
             </section>
         </div>
 

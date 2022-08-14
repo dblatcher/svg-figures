@@ -1,8 +1,8 @@
-interface FaceProfile {
+export interface FaceProfile {
     width?: number;
     round?: number;
     color?: string;
-    browType?: 'thin' | 'wide';
+    browType?: BrowType;
     eyeColor?: string;
     eyeDistance?: number;
     mouthWidth?: number;
@@ -12,14 +12,14 @@ interface FaceProfile {
     teeth?: ToothShape[];
 }
 
-type BrowShape = [number, number][]
-type ToothShape = [number, number][]
-type ProfileNumberProperty = 'width' | 'round' | 'eyeDistance' | 'mouthWidth' | 'lipWidth' | 'mouthVerticalPosition'
-type ProfileColorProperty = 'eyeColor' | 'color' | 'lipColor'
+export type BrowShape = [number, number][]
+export type ToothShape = [number, number][]
+export type ProfileNumberProperty = 'width' | 'round' | 'eyeDistance' | 'mouthWidth' | 'lipWidth' | 'mouthVerticalPosition'
+export type ProfileColorProperty = 'eyeColor' | 'color' | 'lipColor'
 
-export type { FaceProfile, BrowShape, ToothShape, ProfileNumberProperty, ProfileColorProperty }
+export type BrowType = 'thin' | 'wide';
 
-export const browShapes: { [index: string]: BrowShape } = {
+export const browShapes: Record<BrowType, BrowShape> = {
     thin: [
         [-0.5, 0.0],
         [0.4, 0.0],
@@ -57,8 +57,8 @@ export const profileNumberProperyData: { property: ProfileNumberProperty, min?: 
     { property: "mouthVerticalPosition", min: 5, max: 50, step: 1 }
 ]
 
-export const profileColorProperyData: {property: ProfileColorProperty, default:string}[] = [
-    {property: 'color', default:'#999999'},
-    {property: 'eyeColor', default:'#009999'},
-    {property: 'lipColor', default:'#900000'},
+export const profileColorProperyData: { property: ProfileColorProperty, default: string }[] = [
+    { property: 'color', default: '#999999' },
+    { property: 'eyeColor', default: '#009999' },
+    { property: 'lipColor', default: '#900000' },
 ]
