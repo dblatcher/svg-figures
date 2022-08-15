@@ -37,7 +37,7 @@ export default class UIForHead extends Component<Props, {
                 eyeDistance: 40,
                 mouthWidth: 50,
                 lipWidth: 3,
-                mouthNoseDistance: 30,
+                mouthNoseDistance: 15,
                 noseHeight: 20,
                 noseWidth: 20,
                 color: profileColorProperyData[0].default,

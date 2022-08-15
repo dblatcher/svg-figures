@@ -13,17 +13,20 @@ export const HeadAccessory = ({ accessory, faceProfile }: Props) => {
 
     let placeX = x, placeY = y;
 
-    const eyeDistance =  clamp(faceProfile.eyeDistance ||0, 75, 25)/2
+    const eyeDistance = clamp(faceProfile.eyeDistance || 0, 75, 25) / 2
 
     if (place == 'right-eye') {
         placeX += eyeDistance
         placeY += -10
     }
     if (place == 'left-eye') {
-        placeX +=  -eyeDistance
+        placeX += -eyeDistance
         placeY += -10
     }
+    if (place == 'nose') {
+        placeY += (faceProfile.noseHeight || 10)
+    }
 
-    
+
     return <CenteredImage src={src} x={placeX} y={placeY} width={width} />
 }

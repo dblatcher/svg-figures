@@ -20,7 +20,7 @@ const Nose = ({
                 y2={-50}
                 width={width}
                 height={height}
-                stroke={'black'}
+                stroke={'black'} fill={'none'}
                 ry={20} />
         </FeatureFrame >
     )
