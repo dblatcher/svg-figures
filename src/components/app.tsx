@@ -1,13 +1,11 @@
 import { FunctionalComponent, h } from 'preact';
 import Face from '../components/Face';
 import { FaceWithExpressionControl } from '../components/FaceWithExpressionControl';
-import { Head } from '../components/Head';
 import { SvgFrame } from '../components/SvgFrame';
 import { accessoryMap } from '../lib/accessories';
 import { expressions } from '../lib/expressions';
-import { toothShapes } from '../lib/faceProfile';
+import { browShapes, toothShapes } from '../lib/faceProfile';
 import { uniqueId } from '../lib/unique-id';
-import style from '../style.css';
 import UIForHead from './UIForHead';
 
 const { pointy, square, missing, long } = toothShapes
@@ -28,7 +26,7 @@ const App: FunctionalComponent = () => {
                 <Face ident={uniqueId.generate('face')}
                     x={0} y={0} size={100}
                     profile={{
-                        browType: 'wide',
+                        browShape: browShapes['wide'],
                         eyeColor: 'brown',
                         eyeDistance: 30,
                         mouthWidth: 40,
@@ -39,10 +37,11 @@ const App: FunctionalComponent = () => {
 
 
                 <FaceWithExpressionControl ident={uniqueId.generate('face')}
-                    x={70} y={120} size={80} followMouse talking
+                    x={70} y={120} size={80} followMouse
                     profile={{
                         color: 'peachpuff',
                         lipColor: 'red',
+                        browShape: browShapes.thin,
                         width: .7,
                         round: .1,
                         lipWidth: 6,
@@ -55,7 +54,7 @@ const App: FunctionalComponent = () => {
                     expression={expressions.HAPPY} talking
                     profile={{
                         eyeColor: 'darkolivegreen',
-                        teeth: [pointy, pointy, pointy, pointy, pointy, pointy]
+                        teeth: [pointy, pointy, missing, pointy, pointy, pointy]
                     }}
                 />
             </SvgFrame>

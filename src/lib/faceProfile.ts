@@ -2,7 +2,7 @@ export interface FaceProfile {
     width?: number;
     round?: number;
     color?: string;
-    browType?: BrowType;
+    browShape?: BrowShape;
     eyeColor?: string;
     eyeDistance?: number;
     mouthWidth?: number;
@@ -12,14 +12,15 @@ export interface FaceProfile {
     teeth?: ToothShape[];
 }
 
-export type BrowShape = [number, number][]
-export type ToothShape = [number, number][]
+export type BrowShape = Readonly<[number, number][]>
+export type ToothShape = Readonly<[number, number][]>
 export type ProfileNumberProperty = 'width' | 'round' | 'eyeDistance' | 'mouthWidth' | 'lipWidth' | 'mouthVerticalPosition'
 export type ProfileColorProperty = 'eyeColor' | 'color' | 'lipColor'
 
-export type BrowType = 'thin' | 'wide';
+export type BrowType = 'none' | 'thin' | 'wide';
 
 export const browShapes: Record<BrowType, BrowShape> = {
+    none: [],
     thin: [
         [-0.5, 0.0],
         [0.4, 0.0],

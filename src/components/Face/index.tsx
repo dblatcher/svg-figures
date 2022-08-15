@@ -2,7 +2,7 @@ import { h } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 import { clamp, getDistanceAndDirection } from "../../lib/calcuations";
 import { FacialExpression, MouthArrangement } from "../../lib/expressions";
-import type { FaceProfile } from "../../lib/faceProfile";
+import { FaceProfile } from "../../lib/faceProfile";
 import { getMaskUrl } from "../../lib/unique-id";
 import { useInterval } from "../../lib/useInterval";
 import Eye from "./Eye";
@@ -83,7 +83,7 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
         }
     }, [followMouse])
 
-    const { eyeDistance = 40, mouthVerticalPosition = 20, mouthWidth = 40, eyeColor, browType, round = .5, width = 1, color = 'lightgray' } = profile
+    const { eyeDistance = 40, mouthVerticalPosition = 20, mouthWidth = 40, eyeColor, browShape = [], round = .5, width = 1, color = 'lightgray' } = profile
     const eyeX = clamp(eyeDistance, 75, 25) / 2
     const eyePosLeft = !expression ? { dilation, browTilt, browRaise } : { ...expression?.leftEye, direction };
     const eyePosRight = !expression ? { dilation, browTilt, browRaise } : { ...expression?.rightEye, direction };
@@ -108,11 +108,11 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
             <EyeBrow
                 x={-eyeX} y={-25} size={30}
                 pos={eyePosLeft}
-                browType={browType} />
+                browShape={browShape} />
             <EyeBrow
                 x={eyeX} y={-25} size={30}
                 pos={eyePosRight}
-                browType={browType}
+                browShape={browShape}
                 right />
             <Mouth ident={mouthIdent}
                 x={0} y={mouthY} size={mouthWidth}

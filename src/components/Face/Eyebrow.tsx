@@ -1,7 +1,6 @@
 import { h } from "preact";
-import { EyeArrangement } from "../../lib/expressions";
-import { browShapes } from "../../lib/faceProfile";
-import type { BrowShape, } from "../../lib/faceProfile";
+import type { EyeArrangement } from "../../lib/expressions";
+import type { BrowShape } from "../../lib/faceProfile";
 import { FeatureProps } from "./FeatureProps";
 import FeatureFrame from "./FeatureFrame";
 
@@ -9,7 +8,7 @@ interface Props extends FeatureProps {
     color?: string;
     pos?: EyeArrangement;
     right?: boolean;
-    browType?: 'thin' | 'wide';
+    browShape: BrowShape;
 }
 
 
@@ -29,7 +28,7 @@ function drawBrow(s: number, browShape: BrowShape, right?: boolean) {
 
 
 
-export const EyeBrow = ({ x, y, transitionTime = .5, size, color = 'black', right, pos = {}, browType = 'thin' }: Props) => {
+export const EyeBrow = ({ x, y, transitionTime = .5, size, color = 'black', right, pos = {}, browShape }: Props) => {
     const { browTilt = 0, browRaise = 0 } = pos
     const adjustedAngle = right ? -browTilt : browTilt
 
@@ -41,7 +40,7 @@ export const EyeBrow = ({ x, y, transitionTime = .5, size, color = 'black', righ
 
     return (
         <FeatureFrame x={x} y={y} size={size}>
-            <path style={browStyle} d={drawBrow(75, browShapes[browType], right)} />
+            <path style={browStyle} d={drawBrow(75, browShape, right)} />
         </FeatureFrame>
     )
 }

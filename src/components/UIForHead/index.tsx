@@ -7,7 +7,7 @@ import { EventHandler } from "react";
 import { CenteredImage } from "../CenteredImage";
 import { Accessory } from "../../lib/accessories";
 import { FaceProfile, profileNumberProperyData, profileColorProperyData, browShapes, BrowType } from "../../lib/faceProfile";
-import { NumberInput, SelectInput, StringInput } from "../formControls";
+import { NumberInput, StringInput } from "../formControls";
 
 
 interface Props {
@@ -95,9 +95,9 @@ export default class UIForHead extends Component<Props, {
                         profile[property] = value
                     }
                     break;
-                case 'browType':
-                    if (Object.keys(browShapes).includes(value as BrowType)) {
-                        profile[property] = value as BrowType
+                case 'browShape':
+                    if (Array.isArray(value) && value.every(member => Array.isArray(member) && member.length === 2)) {
+                        profile[property] = value
                     }
                     break;
             }
@@ -211,14 +211,14 @@ export default class UIForHead extends Component<Props, {
                 })}
 
                 <div>
-                    <SelectInput
-                        label="Brow"
-                        value={profile.browType || "thin"}
-                        items={Object.keys(browShapes)}
-                        onSelect={(value) => { this.editProfile('browType', value) }}
-                        labelAfter={true}
-                    />
+                    <label>Eyebrows:</label>
+                    {Object.keys(browShapes).map((shapeKey) => (
+                        <button key={shapeKey} onClick={
+                            () => { this.editProfile('browShape', browShapes[shapeKey as BrowType]) }
+                        }>{shapeKey}</button>
+                    ))}
                 </div>
+
             </section>
         </div>
 
