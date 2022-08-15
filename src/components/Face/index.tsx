@@ -83,7 +83,7 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
         }
     }, [followMouse])
 
-    const { eyeDistance = 40, mouthVerticalPosition = 20, mouthWidth = 40, eyeColor, browShape = [], round = .5, width = 1, color = 'lightgray' } = profile
+    const { eyeDistance = 40, mouthVerticalPosition = 20, mouthWidth = 40, eyeColor, browColor, browShape = [], round = .5, width = 1, color = 'lightgray' } = profile
     const eyeX = clamp(eyeDistance, 75, 25) / 2
     const eyePosLeft = !expression ? { dilation, browTilt, browRaise } : { ...expression?.leftEye, direction };
     const eyePosRight = !expression ? { dilation, browTilt, browRaise } : { ...expression?.rightEye, direction };
@@ -108,10 +108,12 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
             <EyeBrow
                 x={-eyeX} y={-25} size={30}
                 pos={eyePosLeft}
+                color={browColor}
                 browShape={browShape} />
             <EyeBrow
                 x={eyeX} y={-25} size={30}
                 pos={eyePosRight}
+                color={browColor}
                 browShape={browShape}
                 right />
             <Mouth ident={mouthIdent}

@@ -41,6 +41,7 @@ export default class UIForHead extends Component<Props, {
                 color: profileColorProperyData[0].default,
                 eyeColor: profileColorProperyData[1].default,
                 lipColor: profileColorProperyData[2].default,
+                browColor: profileColorProperyData[3].default,
             },
         }
         this.changeExpressionKey = this.changeExpressionKey.bind(this)
@@ -83,6 +84,7 @@ export default class UIForHead extends Component<Props, {
                 case 'eyeColor':
                 case 'lipColor':
                 case 'color':
+                case 'browColor':
                     if (typeof value === 'string') {
                         profile[property] = value
                     }
