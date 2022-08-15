@@ -9,6 +9,7 @@ import Eye from "./Eye";
 import EyeBrow from "./EyeBrow";
 import FeatureFrame from "./FeatureFrame";
 import Mouth from "./Mouth";
+import Nose from "./Nose";
 import Teeth from "./Teeth";
 
 
@@ -45,7 +46,7 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
     const [browTilt, setBrowTilt] = useState<number>(0)
     const [browRaise, setBrowRaise] = useState<number>(0)
     const [talkingMouth, setTalkingMouth] = useState<MouthArrangement>({})
-    const noseRef = useRef<SVGCircleElement>(null);
+    const noseRef = useRef<SVGRectElement>(null);
 
     const trackMouse = (event: MouseEvent) => {
         if (!followMouse) { return }
@@ -94,7 +95,11 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
     return (
         <FeatureFrame x={x} y={y} size={size} placement='top left'>
             <rect x={-50 * width} y={-50} width={100 * width} height={100} stroke={'black'} fill={color} rx={100 * (round / 2)} />
-            <circle ref={noseRef} cx={0} cy={0} r={5} fill={'black'} />
+
+            <Nose noseRef={noseRef}
+                width={profile.noseWidth || 10}
+                height={profile.noseHeight || 10}
+                x={0} y={0} size={100} />
             <Eye ident={ident + '-eye-left'}
                 x={-eyeX} y={-10} size={25}
                 color={eyeColor}
