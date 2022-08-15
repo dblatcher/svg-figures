@@ -31,7 +31,7 @@ const App: FunctionalComponent = () => {
                         eyeColor: 'brown',
                         eyeDistance: 30,
                         mouthWidth: 40,
-                        mouthVerticalPosition: 30,
+                        mouthNoseDistance: 30,
                         color: 'lightgreen'
                     }}
                     followMouse />
@@ -46,7 +46,7 @@ const App: FunctionalComponent = () => {
                         width: .7,
                         round: .1,
                         lipWidth: 6,
-                        mouthVerticalPosition: 30,
+                        mouthNoseDistance: 30,
                         teeth: [square, square, square, long, long, square, square, square]
                     }}
                 />

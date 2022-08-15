@@ -37,7 +37,7 @@ export default class UIForHead extends Component<Props, {
                 eyeDistance: 40,
                 mouthWidth: 50,
                 lipWidth: 3,
-                mouthVerticalPosition: 30,
+                mouthNoseDistance: 30,
                 noseHeight: 20,
                 noseWidth: 20,
                 color: profileColorProperyData[0].default,
@@ -96,7 +96,7 @@ export default class UIForHead extends Component<Props, {
                 case 'eyeDistance':
                 case 'lipWidth':
                 case 'mouthWidth':
-                case 'mouthVerticalPosition':
+                case 'mouthNoseDistance':
                 case 'noseHeight':
                 case 'noseWidth':
                     if (typeof value === 'number') {

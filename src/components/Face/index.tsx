@@ -84,12 +84,18 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
         }
     }, [followMouse])
 
-    const { eyeDistance = 40, mouthVerticalPosition = 20, mouthWidth = 40, eyeColor, browColor, browShape = [], round = .5, width = 1, color = 'lightgray' } = profile
+    const {
+        eyeDistance = 40, eyeColor,
+        mouthNoseDistance = 20, mouthWidth = 40,
+        browColor, browShape = [],
+        round = .5, width = 1, color = 'lightgray',
+        noseHeight = 10, noseWidth = 10
+    } = profile
     const eyeX = clamp(eyeDistance, 75, 25) / 2
     const eyePosLeft = !expression ? { dilation, browTilt, browRaise } : { ...expression?.leftEye, direction };
     const eyePosRight = !expression ? { dilation, browTilt, browRaise } : { ...expression?.rightEye, direction };
 
-    const mouthY = clamp(mouthVerticalPosition, 50, 5)
+    const mouthY = clamp(mouthNoseDistance + noseHeight, 45, 5)
     const mouthIdent = ident + '-mouth'
 
     return (
@@ -97,8 +103,8 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
             <rect x={-50 * width} y={-50} width={100 * width} height={100} stroke={'black'} fill={color} rx={100 * (round / 2)} />
 
             <Nose noseRef={noseRef}
-                width={profile.noseWidth || 10}
-                height={profile.noseHeight || 10}
+                width={noseWidth}
+                height={noseHeight}
                 x={0} y={0} size={100} />
             <Eye ident={ident + '-eye-left'}
                 x={-eyeX} y={-10} size={25}

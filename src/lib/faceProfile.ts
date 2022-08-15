@@ -6,7 +6,7 @@ export interface FaceProfile {
     eyeColor?: string;
     eyeDistance?: number;
     mouthWidth?: number;
-    mouthVerticalPosition?: number;
+    mouthNoseDistance?: number;
     lipColor?: string;
     browColor?: string;
     lipWidth?: number;
@@ -17,7 +17,7 @@ export interface FaceProfile {
 
 export type BrowShape = Readonly<[number, number][]>
 export type ToothShape = Readonly<[number, number][]>
-export type ProfileNumberProperty = 'width' | 'round' | 'eyeDistance' | 'mouthWidth' | 'lipWidth' | 'mouthVerticalPosition' | 'noseHeight' | 'noseWidth'
+export type ProfileNumberProperty = 'width' | 'round' | 'eyeDistance' | 'mouthWidth' | 'lipWidth' | 'mouthNoseDistance' | 'noseHeight' | 'noseWidth'
 export type ProfileColorProperty = 'eyeColor' | 'color' | 'lipColor' | 'browColor'
 
 export const profileNumberProperyData: { property: ProfileNumberProperty, min?: number, max: number, step?: number }[] = [
@@ -26,7 +26,7 @@ export const profileNumberProperyData: { property: ProfileNumberProperty, min?: 
     { property: "eyeDistance", min: 25, max: 100, step: 1 },
     { property: "lipWidth", min: 1, max: 10 },
     { property: "mouthWidth", min: 10, max: 100, step: 1 },
-    { property: "mouthVerticalPosition", min: 5, max: 50, step: 1 },
+    { property: "mouthNoseDistance", min: 5, max: 40, step: 1 },
     { property: "noseHeight", min: 5, max: 30, step: 1 },
     { property: "noseWidth", min: 5, max: 30, step: 1 },
 ]
