@@ -17,38 +17,6 @@ export type ToothShape = Readonly<[number, number][]>
 export type ProfileNumberProperty = 'width' | 'round' | 'eyeDistance' | 'mouthWidth' | 'lipWidth' | 'mouthVerticalPosition'
 export type ProfileColorProperty = 'eyeColor' | 'color' | 'lipColor'
 
-export type BrowType = 'none' | 'thin' | 'wide';
-
-export const browShapes: Record<BrowType, BrowShape> = {
-    none: [],
-    thin: [
-        [-0.5, 0.0],
-        [0.4, 0.0],
-        [0.5, 0.2],
-        [-0.5, 0.0],
-    ],
-    wide: [
-        [-0.8, -0.2],
-        [0.4, 0.0],
-        [0.5, 0.2],
-        [-0.0, 0.05],
-        [-0.5, 0.1],
-    ]
-}
-
-export const toothShapes: { [index: string]: ToothShape } = {
-    pointy: [
-        [0, 0], [.1, 1], [.5, 1.2], [.9, 1], [1, 0]
-    ],
-    square: [
-        [0, 0], [0, 1], [1, 1], [1, 0]
-    ],
-    long: [
-        [0, 0], [0, 1.3], [1, 1.3], [1, 0]
-    ],
-    missing: [],
-}
-
 export const profileNumberProperyData: { property: ProfileNumberProperty, min?: number, max: number, step?: number }[] = [
     { property: "width", min: 0.5, max: 1.5, },
     { property: "round", max: 1 },

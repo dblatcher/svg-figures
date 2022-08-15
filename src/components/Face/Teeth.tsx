@@ -1,5 +1,6 @@
 import { h } from "preact";
-import { ToothShape, toothShapes } from "../../lib/faceProfile";
+import { ToothShape } from "../../lib/faceProfile";
+import { toothShapes } from "../../shapes/tooth";
 
 interface Props {
     maskUrl: string

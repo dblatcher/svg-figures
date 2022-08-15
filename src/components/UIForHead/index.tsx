@@ -6,8 +6,10 @@ import { expressions, FacialExpression, } from "../../lib/expressions"
 import { EventHandler } from "react";
 import { CenteredImage } from "../CenteredImage";
 import { Accessory } from "../../lib/accessories";
-import { FaceProfile, profileNumberProperyData, profileColorProperyData, browShapes, BrowType } from "../../lib/faceProfile";
+import { FaceProfile, profileNumberProperyData, profileColorProperyData } from "../../lib/faceProfile";
 import { NumberInput, StringInput } from "../formControls";
+import { browShapes } from "../../shapes/brow";
+
 
 
 interface Props {
@@ -212,9 +214,9 @@ export default class UIForHead extends Component<Props, {
 
                 <div>
                     <label>Eyebrows:</label>
-                    {Object.keys(browShapes).map((shapeKey) => (
+                    {Object.entries(browShapes).map(([shapeKey, shape]) => (
                         <button key={shapeKey} onClick={
-                            () => { this.editProfile('browShape', browShapes[shapeKey as BrowType]) }
+                            () => { this.editProfile('browShape', shape) }
                         }>{shapeKey}</button>
                     ))}
                 </div>

@@ -4,7 +4,8 @@ import { FaceWithExpressionControl } from '../components/FaceWithExpressionContr
 import { SvgFrame } from '../components/SvgFrame';
 import { accessoryMap } from '../lib/accessories';
 import { expressions } from '../lib/expressions';
-import { browShapes, toothShapes } from '../lib/faceProfile';
+import { toothShapes } from '../shapes/tooth';
+import { browShapes } from '../shapes/brow';
 import { uniqueId } from '../lib/unique-id';
 import UIForHead from './UIForHead';
 
