@@ -7,8 +7,9 @@ import { CenteredImage } from "../CenteredImage";
 interface Props {
     accessory: Accessory
     faceProfile: FaceProfile
+    chinLevel: number
 }
-export const HeadAccessory = ({ accessory, faceProfile }: Props) => {
+export const HeadAccessory = ({ accessory, faceProfile, chinLevel }: Props) => {
     const { src, x, y, width, place } = accessory
 
     let placeX = x, placeY = y;

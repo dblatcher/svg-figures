@@ -1,17 +1,14 @@
 import { h } from "preact";
-import { LipCoordinates, Position } from ".";
+import { LipCoordinates, Position } from "../../lib/LipCoordinates";
 import { MouthArrangement } from "../../lib/expressions";
 import { getMaskId } from "../../lib/unique-id";
 import FeatureFrame from "./FeatureFrame";
 import { FeatureProps } from "./FeatureProps";
 
 
-
 const posCoor = (pos: Position) => `${pos.x},${pos.y}`
 
-
 const getMouthPaths = (lips: LipCoordinates) => {
-
     const leftEnd = posCoor(lips.left)
     const rightEnd = posCoor(lips.right)
     const midLineCP = posCoor(lips.mid)
@@ -24,7 +21,6 @@ const getMouthPaths = (lips: LipCoordinates) => {
         outerMirror: `path("M${rightEnd} Q${upperLipCP},${leftEnd} Q${lowerLipCP},${rightEnd}")`,
     }
 }
-
 
 
 interface Props extends FeatureProps {

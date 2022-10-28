@@ -4,6 +4,7 @@ import { clamp, getDistanceAndDirection } from "../../lib/calcuations";
 import { FacialExpression, MouthArrangement } from "../../lib/expressions";
 import { FaceProfile } from "../../lib/faceProfile";
 import { getMaskUrl } from "../../lib/unique-id";
+import { getLipCoordinates } from "../../lib/LipCoordinates";
 import Chin from "./Chin";
 import Eye from "./Eye";
 import EyeBrow from "./EyeBrow";
@@ -23,38 +24,11 @@ interface Props {
     profile?: FaceProfile
     talking?: boolean
     mouthArrangement?: MouthArrangement
+    chinLevel: number
 }
 
 const dilationRange = 150
 const defaultFaceSize = 60
-
-export type Position = {
-    x: number; y: number;
-}
-export type LipCoordinates = {
-    left: Position;
-    right: Position;
-    mid: Position;
-    upper: Position;
-    lower: Position;
-}
-
-const getLipCoordinates = (arrangment: MouthArrangement = {}): LipCoordinates => {
-    const { smile = 0, open = 0, pucker = 0 } = arrangment
-
-    const endX = 50 * (1 - pucker / 2)
-    const outerShift = open * 40
-    const smileShift = smile * 15
-
-    return {
-        left: { x: -endX, y: -smile * 20 },
-        right: { x: endX, y: -smile * 20 },
-        mid: { x: 0, y: smileShift },
-        upper: { x: 0, y: smileShift - outerShift },
-        lower: { x: 0, y: smileShift + outerShift },
-    }
-
-}
 
 function calculateDilation(distance: number) {
     if (distance > dilationRange) { return 1 }
@@ -69,7 +43,9 @@ function calculateEyebrowRise(distance: number) {
     return clamp((200 - distance) / 8, 20)
 }
 
-export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, expression, profile = {}, talking, mouthArrangement }: Props) => {
+export const Face = ({
+    x, y, followMouse, size = defaultFaceSize, ident, expression, profile = {}, mouthArrangement, chinLevel
+}: Props) => {
     const [direction, setDirection] = useState<[number, number]>([0, 0])
     const [dilation, setDilation] = useState<number>(1)
     const [browTilt, setBrowTilt] = useState<number>(0)
@@ -121,7 +97,12 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
 
     return (
         <FeatureFrame x={x} y={y} size={size} placement='top left'>
-            <rect x={-50 * width} y={-50} width={100 * width} height={100} stroke={'black'} fill={color} rx={100 * (round / 2)} />
+            <rect x={-50 * width} y={-50} width={100 * width} height={100} stroke={'black'} fill={color} rx={100 * (round / 2)}
+                style={{
+                    height: 100 + chinLevel,
+                    transition: 'height 1s'
+                }}
+            />
 
             <Nose noseRef={noseRef}
                 width={noseWidth}
@@ -163,7 +144,7 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
                 width={25}
                 height={25}
                 x={0} y={45} size={100}
-                shift={(getLipCoordinates(mouthArrangement).lower.y / 200) * mouthWidth}
+                shift={chinLevel}
             />
         </FeatureFrame>
     )
