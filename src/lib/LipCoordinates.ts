@@ -1,4 +1,5 @@
 import { MouthArrangement } from "./expressions";
+import { FaceProfile } from "./faceProfile";
 
 export type Position = {
     x: number; y: number;
@@ -24,4 +25,8 @@ export const getLipCoordinates = (arrangment: MouthArrangement = {}): LipCoordin
         upper: { x: 0, y: smileShift - outerShift },
         lower: { x: 0, y: smileShift + outerShift },
     }
+}
+
+export const getChinLevel = (arrangement: MouthArrangement = {}, profile: FaceProfile = {}): number => {
+    return (getLipCoordinates(arrangement).lower.y / 200) * (profile?.mouthWidth || 40)
 }
