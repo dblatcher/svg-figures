@@ -1,23 +1,22 @@
 import { h } from "preact";
+import { LipCoordinates, Position } from ".";
 import { MouthArrangement } from "../../lib/expressions";
 import { getMaskId } from "../../lib/unique-id";
 import FeatureFrame from "./FeatureFrame";
 import { FeatureProps } from "./FeatureProps";
 
-const coor = (x: number, y: number) => `${x},${y}`
 
-const getMouthPaths = (arrangment: MouthArrangement) => {
-    const { smile = 0, open = 0, pucker = 0 } = arrangment
 
-    const endX = 50 * (1 - pucker / 2)
-    const leftEnd = coor(-endX, -smile * 20)
-    const rightEnd = coor(endX, -smile * 20)
+const posCoor = (pos: Position) => `${pos.x},${pos.y}`
 
-    const outerShift = open * 40
-    const smileShift = smile * 15
-    const midLineCP = coor(0, smileShift)
-    const upperLipCP = coor(0, smileShift - outerShift)
-    const lowerLipCP = coor(0, smileShift + outerShift)
+
+const getMouthPaths = (lips: LipCoordinates) => {
+
+    const leftEnd = posCoor(lips.left)
+    const rightEnd = posCoor(lips.right)
+    const midLineCP = posCoor(lips.mid)
+    const upperLipCP = posCoor(lips.upper)
+    const lowerLipCP = posCoor(lips.lower)
 
     return {
         center: `path("M${leftEnd} Q${midLineCP},${rightEnd}")`,
@@ -32,6 +31,7 @@ interface Props extends FeatureProps {
     arrangement?: MouthArrangement
     lipColor?: string
     lipWidth?: number
+    lips: LipCoordinates;
 }
 
 const Mouth = ({
@@ -39,11 +39,12 @@ const Mouth = ({
     lipColor = 'pink', lipWidth = 3,
     ident = '',
     children,
+    lips,
 }: Props) => {
 
     const maskId = getMaskId(ident)
 
-    const paths = getMouthPaths(arrangement)
+    const paths = getMouthPaths(lips)
     const centerPathStyle = {
         d: paths.center,
         transition: `d ${transitionTime}s, opacity ${transitionTime}s`,

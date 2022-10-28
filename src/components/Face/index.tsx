@@ -5,6 +5,7 @@ import { FacialExpression, MouthArrangement } from "../../lib/expressions";
 import { FaceProfile } from "../../lib/faceProfile";
 import { getMaskUrl } from "../../lib/unique-id";
 import { useInterval } from "../../lib/useInterval";
+import Chin from "./Chin";
 import Eye from "./Eye";
 import EyeBrow from "./EyeBrow";
 import FeatureFrame from "./FeatureFrame";
@@ -26,6 +27,34 @@ interface Props {
 
 const dilationRange = 150
 const defaultFaceSize = 60
+
+export type Position = {
+    x: number; y: number;
+}
+export type LipCoordinates = {
+    left: Position;
+    right: Position;
+    mid: Position;
+    upper: Position;
+    lower: Position;
+}
+
+const getLipCoordinates = (arrangment: MouthArrangement): LipCoordinates => {
+    const { smile = 0, open = 0, pucker = 0 } = arrangment
+
+    const endX = 50 * (1 - pucker / 2)
+    const outerShift = open * 40
+    const smileShift = smile * 15
+
+    return {
+        left: { x: -endX, y: -smile * 20 },
+        right: { x: endX, y: -smile * 20 },
+        mid: { x: 0, y: smileShift },
+        upper: { x: 0, y: smileShift - outerShift },
+        lower: { x: 0, y: smileShift + outerShift },
+    }
+
+}
 
 function calculateDilation(distance: number) {
     if (distance > dilationRange) { return 1 }
@@ -98,6 +127,8 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
     const mouthY = clamp(mouthNoseDistance + noseHeight, 45, 5)
     const mouthIdent = ident + '-mouth'
 
+    const arrangement: MouthArrangement = talking ? talkingMouth : expression?.mouth || {}
+
     return (
         <FeatureFrame x={x} y={y} size={size} placement='top left'>
             <rect x={-50 * width} y={-50} width={100 * width} height={100} stroke={'black'} fill={color} rx={100 * (round / 2)} />
@@ -129,13 +160,21 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
                 right />
             <Mouth ident={mouthIdent}
                 x={0} y={mouthY} size={mouthWidth}
-                arrangement={talking ? talkingMouth : expression?.mouth}
+                arrangement={arrangement}
                 lipColor={profile?.lipColor}
                 lipWidth={profile?.lipWidth}
+                lips={getLipCoordinates(arrangement)}
             >
                 <Teeth maskUrl={getMaskUrl(mouthIdent)}
                     toothList={profile?.teeth} />
             </Mouth>
+
+            <Chin
+                width={25}
+                height={25}
+                x={0} y={45} size={100}
+                shift={(getLipCoordinates(arrangement).lower.y / 200) * mouthWidth}
+            />
         </FeatureFrame>
     )
 }
