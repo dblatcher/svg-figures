@@ -2,7 +2,7 @@ import { h, Component, VNode, Fragment } from "preact";
 import { randomInt } from "../../lib/calcuations";
 import { expressions, FacialExpression } from "../../lib/expressions";
 import { FaceProfile } from "../../lib/faceProfile";
-import Face from "../Face";
+import { Head } from "../Head";
 
 
 
@@ -39,13 +39,13 @@ export class FaceWithExpressionControl extends Component<Props, {
         this.setState({ expresion: newExpression, expressionLabel: newKey })
     }
 
-    render({ x, y, size, ident, profile, followMouse, talking }: Props) {
+    render({ x, y, size = 40, profile, followMouse, talking }: Props) {
 
         const { expresion, expressionLabel } = this.state
 
         return <>
             <g onClick={this.changeExpression}>
-                <Face x={x} y={y} size={size} ident={ident} expression={expresion} profile={profile} followMouse={followMouse} talking={talking} />
+                <Head x={x-10} y={y} size={size} expression={expresion} profile={profile} followMouse={followMouse} talking={talking} />
                 <text x={x} y={y} fill={'red'}>{expressionLabel}</text>
             </g>
         </>

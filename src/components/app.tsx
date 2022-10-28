@@ -1,5 +1,4 @@
 import { FunctionalComponent, h } from 'preact';
-import Face from '../components/Face';
 import { FaceWithExpressionControl } from '../components/FaceWithExpressionControl';
 import { SvgFrame } from '../components/SvgFrame';
 import { accessoryMap } from '../lib/accessories';
@@ -8,6 +7,7 @@ import { toothShapes } from '../shapes/tooth';
 import { browShapes } from '../shapes/brow';
 import { uniqueId } from '../lib/unique-id';
 import UIForHead from './UIForHead';
+import { Head } from './Head';
 
 const { pointy, square, missing, long } = toothShapes
 
@@ -24,7 +24,7 @@ const App: FunctionalComponent = () => {
 
             <SvgFrame style={frameStyle} viewBox='0 0 200 200'>
 
-                <Face ident={uniqueId.generate('face')}
+                <Head
                     x={0} y={0} size={100}
                     profile={{
                         browShape: browShapes['wide'],
@@ -50,7 +50,7 @@ const App: FunctionalComponent = () => {
                         teeth: [square, square, square, long, long, square, square, square]
                     }}
                 />
-                <Face ident={uniqueId.generate('face')}
+                <Head
                     x={10} y={110} size={50}
                     expression={expressions.HAPPY} talking
                     profile={{
