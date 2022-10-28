@@ -28,6 +28,9 @@ export const HeadAccessory = ({ accessory, faceProfile, chinLevel }: Props) => {
         placeY += (faceProfile.noseHeight || 10)
     }
 
+    if (place === 'chin') {
+        placeY += 50 + chinLevel
+    }
 
     return <CenteredImage src={src} x={placeX} y={placeY} width={width} />
 }

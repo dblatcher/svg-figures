@@ -7,5 +7,14 @@ interface Props {
     width: number,
 }
 export const CenteredImage = ({ src, width, x, y, }: Props) => {
-    return <image href={src} x={x - width / 2} y={y - width / 2} width={width} />
+    return <image
+        href={src}
+        x={x - width / 2}
+        y={y - width / 2}
+        width={width}
+        style={{
+            y: y - width / 2,
+            transition: 'y 1s',
+        }}
+    />
 }
