@@ -4,7 +4,6 @@ import { clamp, getDistanceAndDirection } from "../../lib/calcuations";
 import { FacialExpression, MouthArrangement } from "../../lib/expressions";
 import { FaceProfile } from "../../lib/faceProfile";
 import { getMaskUrl } from "../../lib/unique-id";
-import { useInterval } from "../../lib/useInterval";
 import Chin from "./Chin";
 import Eye from "./Eye";
 import EyeBrow from "./EyeBrow";
@@ -23,6 +22,7 @@ interface Props {
     expression?: FacialExpression
     profile?: FaceProfile
     talking?: boolean
+    mouthArrangement?: MouthArrangement
 }
 
 const dilationRange = 150
@@ -39,7 +39,7 @@ export type LipCoordinates = {
     lower: Position;
 }
 
-const getLipCoordinates = (arrangment: MouthArrangement): LipCoordinates => {
+const getLipCoordinates = (arrangment: MouthArrangement = {}): LipCoordinates => {
     const { smile = 0, open = 0, pucker = 0 } = arrangment
 
     const endX = 50 * (1 - pucker / 2)
@@ -69,12 +69,12 @@ function calculateEyebrowRise(distance: number) {
     return clamp((200 - distance) / 8, 20)
 }
 
-export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, expression, profile = {}, talking }: Props) => {
+export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, expression, profile = {}, talking, mouthArrangement }: Props) => {
     const [direction, setDirection] = useState<[number, number]>([0, 0])
     const [dilation, setDilation] = useState<number>(1)
     const [browTilt, setBrowTilt] = useState<number>(0)
     const [browRaise, setBrowRaise] = useState<number>(0)
-    const [talkingMouth, setTalkingMouth] = useState<MouthArrangement>({})
+
     const noseRef = useRef<SVGRectElement>(null);
 
     const trackMouse = (event: MouseEvent) => {
@@ -90,15 +90,6 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
         setBrowTilt(calculateEyebrowTilt(distance))
         setBrowRaise(calculateEyebrowRise(distance))
     }
-
-    const talk = () => {
-        setTalkingMouth({
-            open: Math.random(),
-            pucker: Math.random(),
-            smile: Math.random() - .5,
-        })
-    }
-    useInterval(talk, talking ? 300 : 0)
 
     useEffect(() => {
         window.addEventListener('mousemove', trackMouse)
@@ -127,7 +118,6 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
     const mouthY = clamp(mouthNoseDistance + noseHeight, 45, 5)
     const mouthIdent = ident + '-mouth'
 
-    const arrangement: MouthArrangement = talking ? talkingMouth : expression?.mouth || {}
 
     return (
         <FeatureFrame x={x} y={y} size={size} placement='top left'>
@@ -160,10 +150,10 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
                 right />
             <Mouth ident={mouthIdent}
                 x={0} y={mouthY} size={mouthWidth}
-                arrangement={arrangement}
+                arrangement={mouthArrangement}
                 lipColor={profile?.lipColor}
                 lipWidth={profile?.lipWidth}
-                lips={getLipCoordinates(arrangement)}
+                lips={getLipCoordinates(mouthArrangement)}
             >
                 <Teeth maskUrl={getMaskUrl(mouthIdent)}
                     toothList={profile?.teeth} />
@@ -173,7 +163,7 @@ export const Face = ({ x, y, followMouse, size = defaultFaceSize, ident, express
                 width={25}
                 height={25}
                 x={0} y={45} size={100}
-                shift={(getLipCoordinates(arrangement).lower.y / 200) * mouthWidth}
+                shift={(getLipCoordinates(mouthArrangement).lower.y / 200) * mouthWidth}
             />
         </FeatureFrame>
     )
