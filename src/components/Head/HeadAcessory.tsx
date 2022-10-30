@@ -1,5 +1,5 @@
 import { h } from "preact";
-import { Accessory } from "../../lib/accessories";
+import { Accessory } from "../../lib/Accessory";
 import { clamp } from "../../lib/calcuations";
 import { FaceProfile } from "../../lib/faceProfile";
 import { CenteredImage } from "../CenteredImage";

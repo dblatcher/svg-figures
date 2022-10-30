@@ -1,13 +1,4 @@
-interface Accessory {
-    src: string;
-    x: number;
-    y: number;
-    width: number;
-    priority?: number;
-    place?: 'left-eye' | 'right-eye' | 'nose' | 'chin';
-}
-
-export type { Accessory }
+import { Accessory } from "../lib/Accessory";
 
 export const accessoryMap: { [index: string]: Accessory } = {
     HAT: {

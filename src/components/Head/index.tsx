@@ -1,6 +1,6 @@
 import { ComponentChildren, h } from "preact";
 import { useState } from "preact/hooks";
-import { Accessory } from "../../lib/accessories";
+import { Accessory } from "../../lib/Accessory";
 import { FacialExpression, MouthArrangement } from "../../lib/expressions";
 import { FaceProfile } from "../../lib/faceProfile";
 import { getChinLevel, getLipCoordinates } from "../../lib/LipCoordinates";

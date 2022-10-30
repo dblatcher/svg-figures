@@ -1,11 +1,11 @@
 import { FunctionalComponent, h } from 'preact';
 import { FaceWithExpressionControl } from '../components/FaceWithExpressionControl';
 import { SvgFrame } from '../components/SvgFrame';
-import { accessoryMap } from '../lib/accessories';
 import { expressions } from '../lib/expressions';
+import { uniqueId } from '../lib/unique-id';
+import { accessoryMap } from '../shapes/accessory';
 import { toothShapes } from '../shapes/tooth';
 import { browShapes } from '../shapes/brow';
-import { uniqueId } from '../lib/unique-id';
 import UIForHead from './UIForHead';
 import { Head } from './Head';
 
@@ -16,11 +16,8 @@ const frameStyle = { width: '30rem', border: '5px double black', background: 'ye
 const App: FunctionalComponent = () => {
     return (
         <div>
-
-
             <UIForHead accessoryMap={accessoryMap} />
             <UIForHead accessoryMap={accessoryMap} />
-
 
             <SvgFrame style={frameStyle} viewBox='0 0 200 200'>
 

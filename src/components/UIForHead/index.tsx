@@ -5,7 +5,7 @@ import { SvgFrame } from "../SvgFrame";
 import { expressions, FacialExpression, } from "../../lib/expressions"
 import { EventHandler } from "react";
 import { CenteredImage } from "../CenteredImage";
-import { Accessory } from "../../lib/accessories";
+import { Accessory } from "../../lib/Accessory";
 import { FaceProfile, profileNumberProperyData, profileColorProperyData } from "../../lib/faceProfile";
 import { NumberInput, StringInput } from "../formControls";
 import { browShapes } from "../../shapes/brow";
