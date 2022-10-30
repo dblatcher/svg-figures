@@ -1,5 +1,5 @@
 import { FunctionalComponent, h } from 'preact';
-import { FaceWithExpressionControl } from '../components/FaceWithExpressionControl';
+import { HeadWithExpressionControl } from './HeadWithExpressionControl';
 import { SvgFrame } from '../components/SvgFrame';
 import { expressions } from '../lib/expressions';
 import { uniqueId } from '../lib/unique-id';
@@ -34,7 +34,7 @@ const App: FunctionalComponent = () => {
                     followMouse />
 
 
-                <FaceWithExpressionControl
+                <HeadWithExpressionControl
                     x={70} y={120} size={80} followMouse
                     profile={{
                         color: 'peachpuff',

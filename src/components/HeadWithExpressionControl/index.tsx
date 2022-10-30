@@ -18,7 +18,7 @@ interface Props {
 
 
 
-export class FaceWithExpressionControl extends Component<Props, {
+export class HeadWithExpressionControl extends Component<Props, {
     expresion?: FacialExpression
     expressionLabel?: string
 }> {
