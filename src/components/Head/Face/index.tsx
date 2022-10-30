@@ -1,10 +1,10 @@
 import { h } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
-import { clamp, getDistanceAndDirection } from "../../lib/calcuations";
-import { FacialExpression, MouthArrangement } from "../../lib/expressions";
-import { FaceProfile } from "../../lib/faceProfile";
-import { getMaskUrl } from "../../lib/unique-id";
-import { getLipCoordinates } from "../../lib/LipCoordinates";
+import { clamp, getDistanceAndDirection } from "../../../lib/calcuations";
+import { FacialExpression, MouthArrangement } from "../../../lib/expressions";
+import { FaceProfile } from "../../../lib/faceProfile";
+import { getMaskUrl } from "../../../lib/unique-id";
+import { getLipCoordinates } from "../../../lib/LipCoordinates";
 import Chin from "./Chin";
 import Eye from "./Eye";
 import EyeBrow from "./EyeBrow";

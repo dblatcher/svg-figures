@@ -1,6 +1,6 @@
 import { h } from "preact";
-import type { EyeArrangement } from "../../lib/expressions";
-import type { BrowShape } from "../../lib/faceProfile";
+import type { EyeArrangement } from "../../../lib/expressions";
+import type { BrowShape } from "../../../lib/faceProfile";
 import { FeatureProps } from "./FeatureProps";
 import FeatureFrame from "./FeatureFrame";
 

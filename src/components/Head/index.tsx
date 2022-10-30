@@ -3,11 +3,11 @@ import { useState } from "preact/hooks";
 import { Accessory } from "../../lib/Accessory";
 import { FacialExpression, MouthArrangement } from "../../lib/expressions";
 import { FaceProfile } from "../../lib/faceProfile";
-import { getChinLevel, getLipCoordinates } from "../../lib/LipCoordinates";
+import { getChinLevel } from "../../lib/LipCoordinates";
 import { uniqueId } from "../../lib/unique-id";
 import { useInterval } from "../../lib/useInterval";
-import Face from "../Face";
-import FeatureFrame from "../Face/FeatureFrame";
+import Face from "./Face";
+import FeatureFrame from "./Face/FeatureFrame";
 import { HeadAccessory } from "./HeadAcessory";
 
 

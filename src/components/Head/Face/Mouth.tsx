@@ -1,7 +1,7 @@
 import { h } from "preact";
-import { LipCoordinates, Position } from "../../lib/LipCoordinates";
-import { MouthArrangement } from "../../lib/expressions";
-import { getMaskId } from "../../lib/unique-id";
+import { LipCoordinates, Position } from "../../../lib/LipCoordinates";
+import { MouthArrangement } from "../../../lib/expressions";
+import { getMaskId } from "../../../lib/unique-id";
 import FeatureFrame from "./FeatureFrame";
 import { FeatureProps } from "./FeatureProps";
 
