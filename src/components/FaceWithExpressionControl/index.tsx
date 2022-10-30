@@ -11,7 +11,6 @@ interface Props {
     x: number;
     y: number;
     size?: number
-    ident: string
     profile?: FaceProfile
     followMouse?: boolean
     talking?: boolean

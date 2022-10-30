@@ -34,7 +34,7 @@ const App: FunctionalComponent = () => {
                     followMouse />
 
 
-                <FaceWithExpressionControl ident={uniqueId.generate('face')}
+                <FaceWithExpressionControl
                     x={70} y={120} size={80} followMouse
                     profile={{
                         color: 'peachpuff',
