@@ -1,15 +1,13 @@
-import { Component, ComponentChildren } from "preact";
+import { Component } from "preact";
 import { h } from "preact";
 import { Head } from "../Head";
 import { SvgFrame } from "../SvgFrame";
 import { expressions, FacialExpression, } from "../../lib/expressions"
 import { EventHandler } from "react";
-import { CenteredImage } from "../CenteredImage";
 import { Accessory } from "../../lib/Accessory";
 import { FaceProfile, profileNumberProperyData, profileColorProperyData } from "../../lib/faceProfile";
 import { NumberInput, StringInput } from "../formControls";
 import { browShapes } from "../../shapes/brow";
-
 
 
 interface Props {
@@ -63,14 +61,6 @@ export default class UIForHead extends Component<Props, {
             .filter(key => accessoryMap[key])
             .map(key => accessoryMap[key])
             .sort((a, b) => (a.priority || 0) - (b.priority || 0))
-    }
-
-    get accessoryChildren(): ComponentChildren {
-        const { wornAccessories } = this
-
-        return wornAccessories.map((accessory, index) => {
-            return <CenteredImage key={index} {...accessory} />
-        })
     }
 
     //https://github.com/preactjs/preact/issues/1930
