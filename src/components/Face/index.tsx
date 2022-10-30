@@ -97,7 +97,11 @@ export const Face = ({
 
     return (
         <FeatureFrame x={x} y={y} size={size} placement='top left'>
-            <rect x={-50 * width} y={-50} width={100 * width} height={100} stroke={'black'} fill={color} rx={100 * (round / 2)}
+            <rect 
+                x={-50 * width} y={-50} 
+                width={100 * width} height={100} 
+                stroke={'black'} fill={color} 
+                rx={100 * (round / 2)} ry={100 * (round / 2)}
                 style={{
                     height: 100 + chinLevel,
                     transition: 'height 1s'
@@ -141,10 +145,11 @@ export const Face = ({
             </Mouth>
 
             <Chin
-                width={25}
-                height={25}
-                x={0} y={45} size={100}
+                width={30}
+                height={20}
+                x={0} y={40} size={100}
                 shift={chinLevel}
+                profile={profile}
             />
         </FeatureFrame>
     )
