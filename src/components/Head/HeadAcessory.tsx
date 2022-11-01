@@ -2,7 +2,6 @@ import { h } from "preact";
 import { Accessory } from "../../lib/Accessory";
 import { clamp } from "../../lib/calcuations";
 import { FaceProfile } from "../../lib/faceProfile";
-import { CenteredImage } from "../CenteredImage";
 
 interface Props {
     accessory: Accessory
@@ -10,28 +9,57 @@ interface Props {
     chinLevel: number
     transitionTime: number
 }
-export const HeadAccessory = ({ accessory, faceProfile, chinLevel, transitionTime }: Props) => {
-    const { src, x, y, width, place } = accessory
 
-    let placeX = x, placeY = y;
+interface CenteredImageProps {
+    src: string;
+    x: number,
+    y: number,
+    width: number,
+    transitionTime?: number
+}
+const CenteredImage = ({ src, width, x, y, transitionTime }: CenteredImageProps) => {
+    return <image
+        href={src}
+        x={x - width / 2}
+        y={y - width / 2}
+        width={width}
+        style={{
+            y: y - width / 2,
+            transition: transitionTime && `y ${transitionTime}s`,
+        }}
+    />
+}
 
+const getPosition = (accessory: Accessory, faceProfile: FaceProfile, chinLevel: number): { x: number, y: number } => {
+    const { x, y, place } = accessory
     const eyeDistance = clamp(faceProfile.eyeDistance || 0, 75, 25) / 2
 
-    if (place == 'right-eye') {
-        placeX += eyeDistance
-        placeY += -10
+    switch (place) {
+        case 'right-eye': return {
+            x: x + eyeDistance,
+            y: y - 10
+        }
+        case 'left-eye': return {
+            x: x - eyeDistance,
+            y: y - 10
+        }
+        case 'nose': return {
+            x,
+            y: y + (faceProfile.noseHeight || 10)
+        }
+        case 'chin': return {
+            x,
+            y: y + 50 + chinLevel
+        }
+        default: return { x, y }
     }
-    if (place == 'left-eye') {
-        placeX += -eyeDistance
-        placeY += -10
-    }
-    if (place == 'nose') {
-        placeY += (faceProfile.noseHeight || 10)
-    }
+}
 
-    if (place === 'chin') {
-        placeY += 50 + chinLevel
-    }
+export const HeadAccessory = ({ accessory, faceProfile, chinLevel, transitionTime }: Props) => {
+    const { src, width, place } = accessory
+    const position = getPosition(accessory, faceProfile, chinLevel)
 
-    return <CenteredImage src={src} x={placeX} y={placeY} width={width} transitionTime={transitionTime}/>
+    return <CenteredImage src={src} x={position.x} y={position.y}
+        width={width}
+        transitionTime={place === 'chin' ? transitionTime : undefined} />
 }
