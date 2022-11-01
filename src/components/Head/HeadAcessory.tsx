@@ -8,8 +8,9 @@ interface Props {
     accessory: Accessory
     faceProfile: FaceProfile
     chinLevel: number
+    transitionTime: number
 }
-export const HeadAccessory = ({ accessory, faceProfile, chinLevel }: Props) => {
+export const HeadAccessory = ({ accessory, faceProfile, chinLevel, transitionTime }: Props) => {
     const { src, x, y, width, place } = accessory
 
     let placeX = x, placeY = y;
@@ -32,5 +33,5 @@ export const HeadAccessory = ({ accessory, faceProfile, chinLevel }: Props) => {
         placeY += 50 + chinLevel
     }
 
-    return <CenteredImage src={src} x={placeX} y={placeY} width={width} />
+    return <CenteredImage src={src} x={placeX} y={placeY} width={width} transitionTime={transitionTime}/>
 }

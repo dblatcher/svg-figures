@@ -25,6 +25,7 @@ interface Props {
     talking?: boolean
     mouthArrangement?: MouthArrangement
     chinLevel: number
+    transitionTime?: number;
 }
 
 const dilationRange = 150
@@ -44,7 +45,8 @@ function calculateEyebrowRise(distance: number) {
 }
 
 export const Face = ({
-    x, y, followMouse, size = defaultFaceSize, ident, expression, profile = {}, mouthArrangement, chinLevel
+    x, y, followMouse, size = defaultFaceSize, ident, expression, profile = {}, mouthArrangement, chinLevel,
+    transitionTime = .5
 }: Props) => {
     const [direction, setDirection] = useState<[number, number]>([0, 0])
     const [dilation, setDilation] = useState<number>(1)
@@ -96,15 +98,15 @@ export const Face = ({
 
 
     return (
-        <FeatureFrame x={x} y={y} size={size} placement='top left'>
-            <rect 
-                x={-50 * width} y={-50} 
-                width={100 * width} height={100} 
-                stroke={'black'} fill={color} 
+        <FeatureFrame x={x} y={y} size={size} placement='top left' transitionTime={transitionTime}>
+            <rect
+                x={-50 * width} y={-50}
+                width={100 * width} height={100}
+                stroke={'black'} fill={color}
                 rx={100 * (round / 2)} ry={100 * (round / 2)}
                 style={{
                     height: 100 + chinLevel,
-                    transition: 'height 1s'
+                    transition: `height ${transitionTime}s`
                 }}
             />
 
@@ -116,29 +118,34 @@ export const Face = ({
                 x={-eyeX} y={-10} size={25}
                 color={eyeColor}
                 pos={eyePosLeft}
-                direction={direction} />
+                direction={direction}
+                transitionTime={transitionTime} />
             <Eye ident={ident + '-eye-right'}
                 x={eyeX} y={-10} size={25}
                 color={eyeColor}
                 pos={eyePosRight}
-                direction={direction} />
+                direction={direction}
+                transitionTime={transitionTime} />
             <EyeBrow
                 x={-eyeX} y={-25} size={30}
                 pos={eyePosLeft}
                 color={browColor}
-                browShape={browShape} />
+                browShape={browShape}
+                transitionTime={transitionTime} />
             <EyeBrow
                 x={eyeX} y={-25} size={30}
                 pos={eyePosRight}
                 color={browColor}
                 browShape={browShape}
-                right />
+                right
+                transitionTime={transitionTime} />
             <Mouth ident={mouthIdent}
                 x={0} y={mouthY} size={mouthWidth}
                 arrangement={mouthArrangement}
                 lipColor={profile?.lipColor}
                 lipWidth={profile?.lipWidth}
                 lips={getLipCoordinates(mouthArrangement)}
+                transitionTime={transitionTime}
             >
                 <Teeth maskUrl={getMaskUrl(mouthIdent)}
                     toothList={profile?.teeth} />
@@ -150,6 +157,7 @@ export const Face = ({
                 x={0} y={40} size={100}
                 shift={chinLevel}
                 profile={profile}
+                transitionTime={transitionTime}
             />
         </FeatureFrame>
     )

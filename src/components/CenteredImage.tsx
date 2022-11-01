@@ -5,8 +5,9 @@ interface Props {
     x: number,
     y: number,
     width: number,
+    transitionTime:number
 }
-export const CenteredImage = ({ src, width, x, y, }: Props) => {
+export const CenteredImage = ({ src, width, x, y, transitionTime}: Props) => {
     return <image
         href={src}
         x={x - width / 2}
@@ -14,7 +15,7 @@ export const CenteredImage = ({ src, width, x, y, }: Props) => {
         width={width}
         style={{
             y: y - width / 2,
-            transition: 'y 1s',
+            transition: `y ${transitionTime}s`,
         }}
     />
 }
