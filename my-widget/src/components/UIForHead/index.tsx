@@ -154,11 +154,11 @@ export default class UIForHead extends Component<Props, {
                 </div>
 
                 <div>
-                    <input readonly readOnly type="checkbox" checked={talking} onChange={this.toggleTalking} />
+                    <input readOnly type="checkbox" checked={talking} onChange={this.toggleTalking} />
                     <label>talking</label>
                 </div>
                 <div>
-                    <input readonly readOnly type="checkbox" checked={followMouse} onChange={this.toggleFollowMouse} />
+                    <input readOnly type="checkbox" checked={followMouse} onChange={this.toggleFollowMouse} />
                     <label>followMouse</label>
                 </div>
             </section>
@@ -168,7 +168,7 @@ export default class UIForHead extends Component<Props, {
                 <div>
                     {Object.keys(accessoryMap).map(key => (
                         <div key={key}>
-                            <input readonly type="checkbox" checked={accessoryKeys.includes(key)} onChange={() => { this.toggleAccessory(key) }} />
+                            <input readOnly type="checkbox" checked={accessoryKeys.includes(key)} onChange={() => { this.toggleAccessory(key) }} />
                             <label>{key}</label>
                         </div>
                     ))}

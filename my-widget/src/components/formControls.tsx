@@ -221,7 +221,7 @@ export const SelectInput: FunctionalComponent<{
 
     return <>
         {(label && !labelAfter) && <label>{label}:</label>}
-        <select value={props.value} readonly={true}
+        <select value={props.value} readOnly={true}
             onChange={(event): void => { props.onSelect(eventToString(event)) }}>
             {haveEmptyOption && <option value=''>{emptyOptionLabel || "(select)"}</option>}
             {items.map((item, index) =>
