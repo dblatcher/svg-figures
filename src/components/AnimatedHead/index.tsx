@@ -26,7 +26,7 @@ interface Props {
 
 
 
-export function Head({
+export function AnimatedHead({
     x, y, size, expression, talking, followMouse,
     transitionTime = .5,
     profile = {}, accessories = [],

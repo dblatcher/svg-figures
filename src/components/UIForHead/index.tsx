@@ -1,6 +1,6 @@
 import { Component } from "preact";
 import { h } from "preact";
-import { Head } from "../Head";
+import { AnimatedHead } from "../AnimatedHead";
 import { SvgFrame } from "../SvgFrame";
 import { expressions, FacialExpression, } from "../../lib/expressions"
 import { EventHandler } from "react";
@@ -129,7 +129,7 @@ export default class UIForHead extends Component<Props, {
 
         return <div style={{ border: '1px dotted black', margin: '1em', display: 'flex' }}>
             <SvgFrame style={{ width: '200px', border: '1px solid black' }} viewBox='0 0 120 150'>
-                <Head x={20} y={50} size={80}
+                <AnimatedHead x={20} y={50} size={80}
                     expression={this.expression}
                     talking={talking}
                     followMouse={followMouse}

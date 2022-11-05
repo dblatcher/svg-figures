@@ -7,7 +7,7 @@ import { accessoryMap } from '../shapes/accessory';
 import { toothShapes } from '../shapes/tooth';
 import { browShapes } from '../shapes/brow';
 import UIForHead from './UIForHead';
-import { Head } from './Head';
+import { AnimatedHead } from './AnimatedHead';
 
 const { pointy, square, missing, long } = toothShapes
 
@@ -21,7 +21,7 @@ const App: FunctionalComponent = () => {
 
             <SvgFrame style={frameStyle} viewBox='0 0 200 200'>
 
-                <Head
+                <AnimatedHead
                     x={0} y={0} size={100}
                     profile={{
                         browShape: browShapes['wide'],
@@ -47,7 +47,7 @@ const App: FunctionalComponent = () => {
                         teeth: [square, square, square, long, long, square, square, square]
                     }}
                 />
-                <Head
+                <AnimatedHead
                     x={10} y={110} size={50}
                     expression={expressions.HAPPY} talking
                     profile={{

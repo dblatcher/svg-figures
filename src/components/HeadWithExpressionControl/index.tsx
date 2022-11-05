@@ -2,7 +2,7 @@ import { h, Component, VNode, Fragment } from "preact";
 import { randomInt } from "../../lib/calcuations";
 import { expressions, FacialExpression } from "../../lib/expressions";
 import { FaceProfile } from "../../lib/faceProfile";
-import { Head } from "../Head";
+import { AnimatedHead } from "../AnimatedHead";
 
 
 
@@ -44,7 +44,7 @@ export class HeadWithExpressionControl extends Component<Props, {
 
         return <>
             <g onClick={this.changeExpression}>
-                <Head x={x-10} y={y} size={size} expression={expresion} profile={profile} followMouse={followMouse} talking={talking} />
+                <AnimatedHead x={x-10} y={y} size={size} expression={expresion} profile={profile} followMouse={followMouse} talking={talking} />
                 <text x={x} y={y} fill={'red'}>{expressionLabel}</text>
             </g>
         </>
