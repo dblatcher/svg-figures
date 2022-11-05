@@ -26,7 +26,7 @@ const CenteredImage = ({ src, width, x, y, transitionTime }: CenteredImageProps)
         style={{
             y: y - width / 2,
             transition: transitionTime && `y ${transitionTime}s`,
-        }}
+        } as h.JSX.CSSProperties}
     />
 }
 

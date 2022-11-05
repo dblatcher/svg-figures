@@ -55,7 +55,7 @@ const Mouth = ({
         stroke: 'none',
         fill: 'black',
     }
-    const lipStyle = {
+    const lipStyle: h.JSX.SVGAttributes<SVGPathElement> & h.JSX.CSSProperties = {
         d: paths.outer,
         transition: `d ${transitionTime}s`,
         stroke: lipColor,
