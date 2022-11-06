@@ -1,3 +1,6 @@
 import App from "./component";
+import UIForHead from "./components/UIForHead";
+import { AnimatedHead } from "./components/AnimatedHead";
 
-export default App
+
+export {App, UIForHead, AnimatedHead}
