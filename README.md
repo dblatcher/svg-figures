@@ -1,19 +1,25 @@
-# svg-figures
+# my-widget
 
 ## CLI Commands
-*   `npm install`: Installs dependencies
 
-*   `npm run dev`: Run a development, HMR server
+``` bash
+# install dependencies
+npm install
 
-*   `npm run serve`: Run a production-like server
+# serve demo with hot reload at localhost:8080
+npm run dev
 
-*   `npm run build`: Production-ready build
+# build npm ready bundles to be consumed by other Preact web apps
+npm run build:widget
 
-*   `npm run lint`: Pass TypeScript files using ESLint
+# build npm ready bundles to be used as a component library
+npm run build:lib
 
-*   `npm run test`: Run Jest and Enzyme with
-    [`enzyme-adapter-preact-pure`](https://github.com/preactjs/enzyme-adapter-preact-pure) for
-    your tests
+# lint the project with eslint to find code style issues
+npm run lint
 
+# run tests with jest and enzyme
+npm run test
+```
 
-For detailed explanation on how things work, checkout the [CLI Readme](https://github.com/developit/preact-cli/blob/master/README.md).
+For detailed explanation on how things work, checkout the [CLI Readme](https://github.com/preactjs/preact-cli/blob/master/README.md).
