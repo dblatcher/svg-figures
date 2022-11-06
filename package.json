@@ -9,7 +9,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "dev": "preact watch",
-    "build:widget": "microbundle build",
+    "build": "microbundle build -i src/index.ts",
     "build:lib": "microbundle build -i src/component.tsx",
     "lint": "eslint '{src,tests}/**/*.{ts,tsx}'",
     "test": "jest"
