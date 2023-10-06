@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 export interface FunnyFaceLibProps {}
 
 const StyledFunnyFaceLib = styled.div`
-  color: pink;
+  color: blue;
 `;
 
 export function FunnyFaceLib(props: FunnyFaceLibProps) {
