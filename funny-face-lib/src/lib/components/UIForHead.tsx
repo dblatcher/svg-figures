@@ -1,18 +1,18 @@
 import { ChangeEventHandler, Component } from "react";
-import { Head } from "../Head";
-import { SvgFrame } from "../SvgFrame";
-import { expressions, FacialExpression, } from "../../lib/expressions"
-import { Accessory } from "../../lib/Accessory";
-import { FaceProfile, profileNumberProperyData, profileColorProperyData } from "../../lib/faceProfile";
-import { NumberInput, StringInput } from "../formControls";
-import { browShapes } from "../../shapes/brow";
+import { Head } from "./Head";
+import { SvgFrame } from "./SvgFrame";
+import { expressions, FacialExpression, } from "../lib/expressions"
+import { Accessory } from "../lib/Accessory";
+import { FaceProfile, profileNumberProperyData, profileColorProperyData } from "../lib/faceProfile";
+import { NumberInput, StringInput } from "./formControls";
+import { browShapes } from "../shapes/brow";
 
 
 interface Props {
     accessoryMap?: { [index: string]: Accessory }
 }
 
-export default class UIForHead extends Component<Props, {
+export class UIForHead extends Component<Props, {
     expressionKey: string
     talking: boolean
     followMouse: boolean

@@ -1,8 +1,8 @@
 import { Component, ReactNode, } from "react";
-import { randomInt } from "../../lib/calcuations";
-import { expressions, FacialExpression } from "../../lib/expressions";
-import { FaceProfile } from "../../lib/faceProfile";
-import { Head } from "../Head";
+import { randomInt } from "../lib/calcuations";
+import { expressions, FacialExpression } from "../lib/expressions";
+import { FaceProfile } from "../lib/faceProfile";
+import { Head } from "./Head";
 
 
 
