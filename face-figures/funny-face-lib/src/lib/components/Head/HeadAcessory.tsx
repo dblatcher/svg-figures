@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import { Accessory } from "../../lib/Accessory";
 import { clamp } from "../../lib/calcuations";
 import { FaceProfile } from "../../lib/faceProfile";
@@ -25,7 +26,7 @@ const CenteredImage = ({ src, width, x, y, transitionTime }: CenteredImageProps)
         style={{
             y: y - width / 2,
             transition: transitionTime && `y ${transitionTime}s`,
-        }}
+        } as CSSProperties}
     />
 }
 
