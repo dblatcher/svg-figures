@@ -1,4 +1,3 @@
-import { h } from "preact";
 import { FaceProfile } from "../../../lib/faceProfile";
 import FeatureFrame from "./FeatureFrame";
 import { FeatureProps } from "./FeatureProps";

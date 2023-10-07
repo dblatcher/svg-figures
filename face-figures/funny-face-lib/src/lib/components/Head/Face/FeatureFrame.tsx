@@ -1,4 +1,3 @@
-import { h } from "preact";
 import { FeatureProps } from "./FeatureProps";
 
 interface Props extends FeatureProps {

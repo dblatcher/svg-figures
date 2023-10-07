@@ -1,9 +1,7 @@
-import { Component } from "preact";
-import { h } from "preact";
+import { ChangeEventHandler, Component } from "react";
 import { Head } from "../Head";
 import { SvgFrame } from "../SvgFrame";
 import { expressions, FacialExpression, } from "../../lib/expressions"
-import { EventHandler } from "react";
 import { Accessory } from "../../lib/Accessory";
 import { FaceProfile, profileNumberProperyData, profileColorProperyData } from "../../lib/faceProfile";
 import { NumberInput, StringInput } from "../formControls";
@@ -56,15 +54,15 @@ export default class UIForHead extends Component<Props, {
     }
 
     get wornAccessories(): Accessory[] {
-        const { accessoryMap: accessoryMap = {} } = this.props
+        const { accessoryMap = {} } = this.props
         return this.state.accessoryKeys
             .filter(key => accessoryMap[key])
             .map(key => accessoryMap[key])
             .sort((a, b) => (a.priority || 0) - (b.priority || 0))
     }
 
-    //https://github.com/preactjs/preact/issues/1930
-    changeExpressionKey: EventHandler<any> = (event) => {
+
+    changeExpressionKey: ChangeEventHandler<HTMLSelectElement> = (event) => {
         this.setState({ expressionKey: event.target?.value });
     }
 
@@ -104,17 +102,17 @@ export default class UIForHead extends Component<Props, {
         })
     }
 
-    toggleTalking: EventHandler<any> = () => {
+    toggleTalking: ChangeEventHandler = () => {
         this.setState({ talking: !this.state.talking })
     }
-    toggleFollowMouse: EventHandler<any> = () => {
+    toggleFollowMouse: ChangeEventHandler = () => {
         this.setState({ followMouse: !this.state.followMouse })
     }
 
     toggleAccessory(key: string) {
         const { accessoryKeys } = this.state
         const index = accessoryKeys.indexOf(key)
-        if (index == -1) {
+        if (index === -1) {
             accessoryKeys.push(key)
         } else {
             accessoryKeys.splice(index, 1)
@@ -143,7 +141,6 @@ export default class UIForHead extends Component<Props, {
                 <div>
                     <label>expression</label>
                     <select
-                        readOnly
                         onChange={this.changeExpressionKey}
                         value={expressionKey}>
                         {Object.entries(expressions).map(entry => {
@@ -154,11 +151,11 @@ export default class UIForHead extends Component<Props, {
                 </div>
 
                 <div>
-                    <input readonly readOnly type="checkbox" checked={talking} onChange={this.toggleTalking} />
+                    <input type="checkbox" checked={talking} onChange={this.toggleTalking} />
                     <label>talking</label>
                 </div>
                 <div>
-                    <input readonly readOnly type="checkbox" checked={followMouse} onChange={this.toggleFollowMouse} />
+                    <input type="checkbox" checked={followMouse} onChange={this.toggleFollowMouse} />
                     <label>followMouse</label>
                 </div>
             </section>
@@ -168,7 +165,7 @@ export default class UIForHead extends Component<Props, {
                 <div>
                     {Object.keys(accessoryMap).map(key => (
                         <div key={key}>
-                            <input readonly type="checkbox" checked={accessoryKeys.includes(key)} onChange={() => { this.toggleAccessory(key) }} />
+                            <input type="checkbox" checked={accessoryKeys.includes(key)} onChange={() => { this.toggleAccessory(key) }} />
                             <label>{key}</label>
                         </div>
                     ))}
@@ -181,8 +178,8 @@ export default class UIForHead extends Component<Props, {
                 {profileNumberProperyData.map(data => {
                     const { property, min = 0, max, step = .1 } = data
                     return (
-                        <div>
-                            <NumberInput key={property}
+                        <div key={property}>
+                            <NumberInput
                                 label={`${profile[property]} ${property}`}
                                 value={profile[property] || min}
                                 type="range" min={min} max={max} step={step}
@@ -196,8 +193,8 @@ export default class UIForHead extends Component<Props, {
                 {profileColorProperyData.map(data => {
                     const { property, default: defaultValue } = data
                     return (
-                        <div>
-                            <StringInput key={property}
+                        <div key={property}>
+                            <StringInput
                                 label={`${profile[property]} ${property}`}
                                 value={profile[property] || defaultValue}
                                 type="color"

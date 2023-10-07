@@ -1,4 +1,4 @@
-import { h, Component, VNode, Fragment } from "preact";
+import { Component, ReactNode, } from "react";
 import { randomInt } from "../../lib/calcuations";
 import { expressions, FacialExpression } from "../../lib/expressions";
 import { FaceProfile } from "../../lib/faceProfile";
@@ -7,7 +7,7 @@ import { Head } from "../Head";
 
 
 interface Props {
-    children?: VNode | VNode[]
+    children?: ReactNode
     x: number;
     y: number;
     size?: number
@@ -38,15 +38,14 @@ export class HeadWithExpressionControl extends Component<Props, {
         this.setState({ expresion: newExpression, expressionLabel: newKey })
     }
 
-    render({ x, y, size = 40, profile, followMouse, talking }: Props) {
+    render() {
 
+        const { x, y, size = 40, profile, followMouse, talking } = this.props
         const { expresion, expressionLabel } = this.state
 
-        return <>
-            <g onClick={this.changeExpression}>
-                <Head x={x-10} y={y} size={size} expression={expresion} profile={profile} followMouse={followMouse} talking={talking} />
-                <text x={x} y={y} fill={'red'}>{expressionLabel}</text>
-            </g>
-        </>
+        return <g onClick={this.changeExpression}>
+            <Head x={x - 10} y={y} size={size} expression={expresion} profile={profile} followMouse={followMouse} talking={talking} />
+            <text x={x} y={y} fill={'red'}>{expressionLabel}</text>
+        </g>
     }
 }

@@ -1,4 +1,3 @@
-import { h } from "preact";
 import { clamp } from "../../../lib/calcuations";
 import { EyeArrangement } from "../../../lib/expressions";
 import { getMaskId, getMaskUrl } from "../../../lib/unique-id";

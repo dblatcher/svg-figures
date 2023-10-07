@@ -1,4 +1,3 @@
-import { h } from "preact";
 import { ToothShape } from "../../../lib/faceProfile";
 import { toothShapes } from "../../../shapes/tooth";
 
@@ -26,7 +25,7 @@ const Teeth = ({
     maskUrl, toothList = defaultToothList
 }: Props) => {
     return <g mask={maskUrl}>
-        {toothList.map((tooth, index) => <path d={plotTooth(tooth, index, toothList.length)} stroke='black' fill="white" />)}
+        {toothList.map((tooth, index) => <path key={index} d={plotTooth(tooth, index, toothList.length)} stroke='black' fill="white" />)}
     </g>
 }
 

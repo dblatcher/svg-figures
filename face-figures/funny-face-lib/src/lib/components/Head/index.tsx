@@ -1,9 +1,9 @@
-import { ComponentChildren, h } from "preact";
-import { useState } from "preact/hooks";
+
+import { ReactNode, useState } from "react";
 import { Accessory } from "../../lib/Accessory";
+import { getChinLevel } from "../../lib/LipCoordinates";
 import { FacialExpression, MouthArrangement } from "../../lib/expressions";
 import { FaceProfile } from "../../lib/faceProfile";
-import { getChinLevel } from "../../lib/LipCoordinates";
 import { uniqueId } from "../../lib/unique-id";
 import { useInterval } from "../../lib/useInterval";
 import Face from "./Face";
@@ -18,7 +18,7 @@ interface Props {
     expression?: FacialExpression;
     talking?: boolean;
     followMouse?: boolean;
-    children?: ComponentChildren;
+    children?: ReactNode;
     profile?: FaceProfile;
     accessories?: Accessory[];
     transitionTime?: number;

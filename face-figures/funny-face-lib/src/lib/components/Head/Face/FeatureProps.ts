@@ -1,4 +1,4 @@
-import { ComponentChildren } from "preact";
+import { ReactNode } from "react";
 
 type FeatureProps = {
     ident?: string;
@@ -6,7 +6,7 @@ type FeatureProps = {
     y: number;
     size: number;
     transitionTime?: number;
-    children?: ComponentChildren
+    children?: ReactNode
 }
 
 export type { FeatureProps }

@@ -1,4 +1,4 @@
-import { h, Ref } from "preact";
+import { Ref } from "react";
 import FeatureFrame from "./FeatureFrame";
 import { FeatureProps } from "./FeatureProps";
 

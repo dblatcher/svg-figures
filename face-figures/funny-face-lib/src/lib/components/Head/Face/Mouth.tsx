@@ -1,4 +1,4 @@
-import { h } from "preact";
+import { CSSProperties } from "react";
 import { LipCoordinates, Position } from "../../../lib/LipCoordinates";
 import { MouthArrangement } from "../../../lib/expressions";
 import { getMaskId } from "../../../lib/unique-id";
@@ -62,7 +62,7 @@ const Mouth = ({
         fill: 'none',
         strokeWidth: lipWidth,
         strokeLinejoin: "round",
-    }
+    } as CSSProperties;
     const mirrorLipsStyle = {
         ...lipStyle,
         d: paths.outerMirror
