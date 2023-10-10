@@ -1,8 +1,21 @@
-
-
 import { FunctionComponent } from "react";
-import { eventToNumber, eventToString } from "../lib/util";
 
+
+function eventToNumber(event: Event, defaultValue = 0): number {
+    if (!event.target) { return defaultValue }
+    const numericalValue = Number((event.target as HTMLInputElement).value);
+    return isNaN(numericalValue) ? defaultValue : numericalValue;
+}
+
+// function eventToBoolean(event: Event, defaultValue = false): boolean {
+//     if (!event.target) { return defaultValue }
+//     return (event.target as HTMLInputElement).checked;
+// }
+
+function eventToString(event: Event, defaultValue = ''): string {
+    if (!event.target) { return defaultValue }
+    return (event.target as HTMLInputElement).value;
+}
 
 export const NumberInput: FunctionComponent<{
     label?: string;
