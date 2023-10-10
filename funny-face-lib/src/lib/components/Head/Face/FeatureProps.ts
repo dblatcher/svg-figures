@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-type FeatureProps = {
+export type FeatureProps = {
     ident?: string;
     x: number;
     y: number;
@@ -9,4 +9,3 @@ type FeatureProps = {
     children?: ReactNode
 }
 
-export type { FeatureProps }

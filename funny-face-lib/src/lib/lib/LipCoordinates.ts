@@ -1,16 +1,4 @@
-import { MouthArrangement } from "./expressions";
-import { FaceProfile } from "../types";
-
-export type Position = {
-    x: number; y: number;
-}
-export type LipCoordinates = {
-    left: Position;
-    right: Position;
-    mid: Position;
-    upper: Position;
-    lower: Position;
-}
+import { MouthArrangement, FaceProfile, LipCoordinates } from "../types";
 
 export const getLipCoordinates = (arrangment: MouthArrangement = {}): LipCoordinates => {
     const { smile = 0, open = 0, pucker = 0 } = arrangment

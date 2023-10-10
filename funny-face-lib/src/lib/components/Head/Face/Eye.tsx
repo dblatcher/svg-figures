@@ -1,5 +1,5 @@
 import { clamp } from "../../../lib/calcuations";
-import { EyeArrangement } from "../../../lib/expressions";
+import { EyeArrangement } from "../../../types";
 import { getMaskId, getMaskUrl } from "../../../lib/unique-id";
 import FeatureFrame from "./FeatureFrame";
 import { FeatureProps } from "./FeatureProps";

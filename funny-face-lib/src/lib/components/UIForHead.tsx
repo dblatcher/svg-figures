@@ -1,12 +1,11 @@
 import { ChangeEventHandler, Component } from "react";
+import { expressions } from "../lib/expressions";
+import { profileColorProperyData, profileNumberProperyData } from "../lib/faceProfile";
+import { browShapes } from "../shapes/brow";
+import { Accessory, FaceProfile, FacialExpression } from "../types";
 import { Head } from "./Head";
 import { SvgFrame } from "./SvgFrame";
-import { expressions, FacialExpression, } from "../lib/expressions"
-import { Accessory } from "../lib/Accessory";
-import { FaceProfile } from "../types";
-import { profileNumberProperyData, profileColorProperyData } from "../lib/faceProfile";
 import { NumberInput, StringInput } from "./formControls";
-import { browShapes } from "../shapes/brow";
 
 
 interface Props {

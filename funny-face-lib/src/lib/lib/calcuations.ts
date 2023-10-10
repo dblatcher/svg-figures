@@ -14,6 +14,6 @@ export function getDistanceAndDirection(x1: number, y1: number, x2: number, y2: 
     }
 }
 
-export function randomInt(m: number = 10) {
+export function randomInt(m = 10) {
     return Math.floor(Math.random() * m)
 }

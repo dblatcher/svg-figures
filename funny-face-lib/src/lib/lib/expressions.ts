@@ -1,23 +1,5 @@
+import { FacialExpression } from "../types"
 
-interface EyeArrangement {
-    open?: number
-    browTilt?: number
-    browRaise?: number
-    dilation?: number
-}
-
-interface MouthArrangement {
-    smile?: number
-    open?: number
-    pucker?: number
-}
-
-interface FacialExpression {
-    leftEye: EyeArrangement
-    rightEye: EyeArrangement
-    mouth: MouthArrangement
-}
-export type { FacialExpression, EyeArrangement, MouthArrangement }
 
 const AFRAID: FacialExpression = {
     leftEye: {

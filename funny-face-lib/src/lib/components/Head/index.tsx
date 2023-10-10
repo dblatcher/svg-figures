@@ -1,11 +1,9 @@
 
 import { ReactNode, useState } from "react";
-import { Accessory } from "../../lib/Accessory";
 import { getChinLevel } from "../../lib/LipCoordinates";
-import { FacialExpression, MouthArrangement } from "../../lib/expressions";
-import { FaceProfile } from "../../types";
 import { uniqueId } from "../../lib/unique-id";
 import { useInterval } from "../../lib/useInterval";
+import { Accessory, FaceProfile, FacialExpression, MouthArrangement } from "../../types";
 import Face from "./Face";
 import FeatureFrame from "./Face/FeatureFrame";
 import { HeadAccessory } from "./HeadAcessory";

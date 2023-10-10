@@ -1,4 +1,4 @@
-import { Accessory } from "../lib/Accessory";
+import { Accessory } from "../types";
 
 export const accessoryMap: { [index: string]: Accessory } = {
     HAT: {
