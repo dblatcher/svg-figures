@@ -1,5 +1,5 @@
 import { ToothShape } from "../../../types";
-import { toothShapes } from "../../../shapes/tooth";
+import { toothShapes } from "../../../defaults/tooth";
 
 interface Props {
     maskUrl: string

@@ -1,6 +1,6 @@
 import { Component, ReactNode, } from "react";
 import { randomInt } from "../lib/calcuations";
-import { expressions } from "../lib/expressions";
+import { expressions } from "../defaults/expressions";
 import { FaceProfile, FacialExpression } from "../types";
 import { Head } from "./Head";
 
