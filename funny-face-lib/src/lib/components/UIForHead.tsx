@@ -1,7 +1,7 @@
 import { ChangeEventHandler, Component } from "react";
 import { expressions } from "../defaults/expressions";
 import { profileColorProperyData, profileNumberProperyData } from "../lib/faceProfile";
-import { browShapes } from "../defaults/brow";
+import { browShapes } from "../defaults/browShapes";
 import { Accessory, FaceProfile, FacialExpression } from "../types";
 import { Head } from "./Head";
 import { SvgFrame } from "./SvgFrame";

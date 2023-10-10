@@ -1,16 +1,16 @@
 import { ToothShape } from "../../../types";
-import { toothShapes } from "../../../defaults/tooth";
+import { toothShapes as defaultToothShapes } from "../../../defaults/toothShapes";
 
 interface Props {
     maskUrl: string
     toothList?: ToothShape[]
 }
 
-const { square } = toothShapes
+const { SQUARE, POINTY, LONG } = defaultToothShapes
 
-const defaultToothList = [square, square, square, square, square, square]
+const defaultToothList = [SQUARE, POINTY, LONG, LONG, POINTY, SQUARE]
 
-const plotTooth = (shape: ToothShape, toothIndex: number, toothCount:number)  => {
+const plotTooth = (shape: ToothShape, toothIndex: number, toothCount: number) => {
     const toothWidth = 100 / toothCount;
     const commands: string[] = shape
         .map((coord, index) => {

@@ -1,16 +1,14 @@
 import { BrowShape } from "../types";
 
-type BrowType = 'none' | 'thin' | 'wide';
-
-export const browShapes: Record<BrowType, BrowShape> = {
-    none: [],
-    thin: [
+export const browShapes: Record<string, BrowShape> = {
+    NONE: [],
+    THIN: [
         [-0.5, 0.0],
         [0.4, 0.0],
         [0.5, 0.2],
         [-0.5, 0.0],
     ],
-    wide: [
+    WIDE: [
         [-0.8, -0.2],
         [0.4, 0.0],
         [0.5, 0.2],

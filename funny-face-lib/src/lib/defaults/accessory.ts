@@ -1,6 +1,6 @@
 import { Accessory } from "../types";
 
-export const accessoryMap: { [index: string]: Accessory } = {
+export const accessoryMap: Record<string, Accessory> = {
     HAT: {
         src: './assets/non-burning-hat.png',
         x: 0, y: -60, width: 80

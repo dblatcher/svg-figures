@@ -71,15 +71,15 @@ const HAPPY: FacialExpression = {
 
 const ASLEEP: FacialExpression = {
     leftEye: {
-        open:0.025,
-        browRaise:-10
+        open: 0.025,
+        browRaise: -10
     },
     rightEye: {
-        open:0.025,
-        browRaise:-10
+        open: 0.025,
+        browRaise: -10
     },
     mouth: {
-        open:.5
+        open: .5
     },
 }
 
@@ -89,4 +89,4 @@ const NEUTRAL: FacialExpression = {
     mouth: {},
 }
 
-export const expressions: { [index: string]: FacialExpression } = { AFRAID, ANGRY, NEUTRAL, ODD, HAPPY, ASLEEP }
+export const expressions: Record<string, FacialExpression> = { AFRAID, ANGRY, NEUTRAL, ODD, HAPPY, ASLEEP }
