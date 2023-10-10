@@ -1,7 +1,7 @@
 import { Component, ReactNode, } from "react";
 import { randomInt } from "../lib/calcuations";
 import { expressions, FacialExpression } from "../lib/expressions";
-import { FaceProfile } from "../lib/faceProfile";
+import { FaceProfile } from "../types";
 import { Head } from "./Head";
 
 

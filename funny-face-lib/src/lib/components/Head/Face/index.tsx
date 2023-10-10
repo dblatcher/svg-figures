@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { clamp, getDistanceAndDirection } from "../../../lib/calcuations";
 import { FacialExpression, MouthArrangement } from "../../../lib/expressions";
-import { FaceProfile } from "../../../lib/faceProfile";
+import { FaceProfile } from "../../../types";
 import { getMaskUrl } from "../../../lib/unique-id";
 import { getLipCoordinates } from "../../../lib/LipCoordinates";
 import Chin from "./Chin";

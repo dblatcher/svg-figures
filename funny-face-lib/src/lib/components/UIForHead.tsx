@@ -3,7 +3,8 @@ import { Head } from "./Head";
 import { SvgFrame } from "./SvgFrame";
 import { expressions, FacialExpression, } from "../lib/expressions"
 import { Accessory } from "../lib/Accessory";
-import { FaceProfile, profileNumberProperyData, profileColorProperyData } from "../lib/faceProfile";
+import { FaceProfile } from "../types";
+import { profileNumberProperyData, profileColorProperyData } from "../lib/faceProfile";
 import { NumberInput, StringInput } from "./formControls";
 import { browShapes } from "../shapes/brow";
 

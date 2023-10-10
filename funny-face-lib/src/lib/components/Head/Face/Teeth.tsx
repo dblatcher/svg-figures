@@ -1,4 +1,4 @@
-import { ToothShape } from "../../../lib/faceProfile";
+import { ToothShape } from "../../../types";
 import { toothShapes } from "../../../shapes/tooth";
 
 interface Props {

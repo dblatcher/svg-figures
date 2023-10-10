@@ -1,5 +1,5 @@
 import { MouthArrangement } from "./expressions";
-import { FaceProfile } from "./faceProfile";
+import { FaceProfile } from "../types";
 
 export type Position = {
     x: number; y: number;

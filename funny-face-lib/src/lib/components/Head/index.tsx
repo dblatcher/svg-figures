@@ -3,7 +3,7 @@ import { ReactNode, useState } from "react";
 import { Accessory } from "../../lib/Accessory";
 import { getChinLevel } from "../../lib/LipCoordinates";
 import { FacialExpression, MouthArrangement } from "../../lib/expressions";
-import { FaceProfile } from "../../lib/faceProfile";
+import { FaceProfile } from "../../types";
 import { uniqueId } from "../../lib/unique-id";
 import { useInterval } from "../../lib/useInterval";
 import Face from "./Face";

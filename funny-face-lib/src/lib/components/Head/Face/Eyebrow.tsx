@@ -1,5 +1,5 @@
 import type { EyeArrangement } from "../../../lib/expressions";
-import type { BrowShape } from "../../../lib/faceProfile";
+import type { BrowShape } from "../../../types";
 import { FeatureProps } from "./FeatureProps";
 import FeatureFrame from "./FeatureFrame";
 

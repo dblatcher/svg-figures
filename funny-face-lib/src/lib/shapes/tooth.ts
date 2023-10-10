@@ -1,4 +1,4 @@
-import { ToothShape } from "../lib/faceProfile";
+import { ToothShape } from "../types";
 
 export const toothShapes: { [index: string]: ToothShape } = {
     pointy: [

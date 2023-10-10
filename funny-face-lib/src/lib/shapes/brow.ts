@@ -1,4 +1,4 @@
-import { BrowShape } from "../lib/faceProfile";
+import { BrowShape } from "../types";
 
 export type BrowType = 'none' | 'thin' | 'wide';
 

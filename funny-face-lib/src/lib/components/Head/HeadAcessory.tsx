@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 import { Accessory } from "../../lib/Accessory";
 import { clamp } from "../../lib/calcuations";
-import { FaceProfile } from "../../lib/faceProfile";
+import { FaceProfile } from "../../types";
 
 interface Props {
     accessory: Accessory
