@@ -24,7 +24,7 @@ interface Props {
 
 
 
-export function Head({
+export function FunnyFace({
     x, y, size, expression, talking, followMouse,
     transitionTime = .5,
     profile = {}, accessories = [],

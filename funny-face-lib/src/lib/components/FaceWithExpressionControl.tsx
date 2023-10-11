@@ -2,7 +2,7 @@ import { Component, ReactNode, } from "react";
 import { randomInt } from "../lib/calcuations";
 import { expressions } from "../defaults/expressions";
 import { FaceProfile, FacialExpression } from "../types";
-import { Head } from "./Head";
+import { FunnyFace } from "./FunnyFace";
 
 
 
@@ -18,7 +18,7 @@ interface Props {
 
 
 
-export class HeadWithExpressionControl extends Component<Props, {
+export class FaceWithExpressionControl extends Component<Props, {
     expresion?: FacialExpression
     expressionLabel?: string
 }> {
@@ -44,7 +44,7 @@ export class HeadWithExpressionControl extends Component<Props, {
         const { expresion, expressionLabel } = this.state
 
         return <g onClick={this.changeExpression}>
-            <Head x={x - 10} y={y} size={size} expression={expresion} profile={profile} followMouse={followMouse} talking={talking} />
+            <FunnyFace x={x - 10} y={y} size={size} expression={expresion} profile={profile} followMouse={followMouse} talking={talking} />
             <text x={x} y={y} fill={'red'}>{expressionLabel}</text>
         </g>
     }

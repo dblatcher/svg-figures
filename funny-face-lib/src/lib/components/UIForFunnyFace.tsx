@@ -3,7 +3,7 @@ import { expressions } from "../defaults/expressions";
 import { profileColorProperyData, profileNumberProperyData } from "../lib/faceProfile";
 import { browShapes } from "../defaults/browShapes";
 import { Accessory, FaceProfile, FacialExpression } from "../types";
-import { Head } from "./Head";
+import { FunnyFace } from "./FunnyFace";
 import { SvgFrame } from "./SvgFrame";
 import { NumberInput, StringInput } from "./formControls";
 
@@ -12,7 +12,7 @@ interface Props {
     accessoryMap?: { [index: string]: Accessory }
 }
 
-export class UIForHead extends Component<Props, {
+export class UIForFunnyFace extends Component<Props, {
     expressionKey: string
     talking: boolean
     followMouse: boolean
@@ -127,7 +127,7 @@ export class UIForHead extends Component<Props, {
 
         return <div style={{ border: '1px dotted black', margin: '1em', display: 'flex' }}>
             <SvgFrame style={{ width: '200px', border: '1px solid black' }} viewBox='0 0 120 150'>
-                <Head x={20} y={50} size={80}
+                <FunnyFace x={20} y={50} size={80}
                     expression={this.expression}
                     talking={talking}
                     followMouse={followMouse}

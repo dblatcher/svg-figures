@@ -1,11 +1,11 @@
 import { render } from '@testing-library/react';
-import { UIForHead } from './UIForHead';
+import { UIForFunnyFace } from './UIForFunnyFace';
 
 
 
-describe('UIForHead', () => {
+describe('UIForFunnyFace', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<UIForHead />);
+    const { baseElement } = render(<UIForFunnyFace />);
     expect(baseElement).toBeTruthy();
   });
 });

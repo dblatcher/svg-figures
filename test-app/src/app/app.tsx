@@ -1,15 +1,15 @@
-import { UIForHead, HeadWithExpressionControl, accessoryMap } from '../../../funny-face-lib/src/index';
+import { UIForFunnyFace, FaceWithExpressionControl, accessoryMap } from '@dblatcher/funny-face';
 
 
 export const App = () => {
   return (
     <div>
       <p>test app runs</p>
-      <UIForHead accessoryMap={accessoryMap} />
+      <UIForFunnyFace accessoryMap={accessoryMap} />
 
       <svg>
-        <HeadWithExpressionControl x={10} y={10} profile={{ color: 'blue' }} />
-        <HeadWithExpressionControl x={100} y={10} profile={{ color: 'green' }} />
+        <FaceWithExpressionControl x={10} y={10} profile={{ color: 'blue' }} />
+        <FaceWithExpressionControl x={100} y={10} profile={{ color: 'green' }} />
       </svg>
 
 
