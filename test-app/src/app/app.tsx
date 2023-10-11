@@ -1,11 +1,11 @@
-import { UIForHead, HeadWithExpressionControl } from '../../../funny-face-lib/src/index';
+import { UIForHead, HeadWithExpressionControl, accessoryMap } from '../../../funny-face-lib/src/index';
 
 
 export const App = () => {
   return (
     <div>
       <p>test app runs</p>
-      <UIForHead accessoryMap={{}} />
+      <UIForHead accessoryMap={accessoryMap} />
 
       <svg>
         <HeadWithExpressionControl x={10} y={10} profile={{ color: 'blue' }} />
