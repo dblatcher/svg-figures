@@ -1,7 +1,6 @@
 import { CSSProperties, ReactNode, SVGAttributes } from "react"
 
 
-
 interface Props {
     children?: ReactNode
     style?: CSSProperties
@@ -11,9 +10,6 @@ interface Props {
 export const SvgFrame = ({
     style = {}, viewBox = "0 0 100 100", children
 }: Props) => {
-
-
-
     return <figure style={style}>
         <svg
             viewBox={viewBox}
