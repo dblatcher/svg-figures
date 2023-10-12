@@ -1,6 +1,6 @@
-import { clamp } from "../../../lib/calcuations";
+import { clamp } from "../../../util/calcuations";
 import { EyeArrangement } from "../../../types";
-import { getMaskId, getMaskUrl } from "../../../lib/unique-id";
+import { getMaskId, getMaskUrl } from "../../../util/unique-id";
 import FeatureFrame from "./FeatureFrame";
 import { FeatureProps } from "./FeatureProps";
 

@@ -1,6 +1,6 @@
 import { ChangeEventHandler, Component } from "react";
 import { expressions } from "../defaults/expressions";
-import { profileColorProperyData, profileNumberProperyData } from "../lib/faceProfile";
+import { profileColorProperyData, profileNumberProperyData } from "../util/faceProfile";
 import { browShapes } from "../defaults/browShapes";
 import { Accessory, FaceProfile, FacialExpression } from "../types";
 import { FunnyFace } from "./FunnyFace";

@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import { clamp } from "../../lib/calcuations";
+import { clamp } from "../../util/calcuations";
 import { Accessory, FaceProfile } from "../../types";
 
 interface Props {

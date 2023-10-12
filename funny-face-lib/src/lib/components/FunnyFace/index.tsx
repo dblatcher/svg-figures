@@ -1,8 +1,8 @@
 
 import { ReactNode, useState } from "react";
-import { getChinLevel } from "../../lib/face-calculations";
-import { uniqueId } from "../../lib/unique-id";
-import { useInterval } from "../../lib/useInterval";
+import { getChinLevel } from "../../util/face-calculations";
+import { uniqueId } from "../../util/unique-id";
+import { useInterval } from "../../util/useInterval";
 import { Accessory, FaceProfile, FacialExpression, MouthArrangement } from "../../types";
 import Face from "./Face";
 import FeatureFrame from "./Face/FeatureFrame";

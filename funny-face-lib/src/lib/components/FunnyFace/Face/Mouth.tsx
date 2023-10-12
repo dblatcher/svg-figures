@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 import { LipCoordinates, Position, MouthArrangement } from "../../../types";
-import { getMaskId } from "../../../lib/unique-id";
+import { getMaskId } from "../../../util/unique-id";
 import FeatureFrame from "./FeatureFrame";
 import { FeatureProps } from "./FeatureProps";
 
