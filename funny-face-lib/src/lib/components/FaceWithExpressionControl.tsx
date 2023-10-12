@@ -4,8 +4,6 @@ import { expressions } from "../defaults/expressions";
 import { FaceProfile, FacialExpression } from "../types";
 import { FunnyFace } from "./FunnyFace";
 
-
-
 interface Props {
     children?: ReactNode
     x: number;
@@ -15,7 +13,6 @@ interface Props {
     followMouse?: boolean
     talking?: boolean
 }
-
 
 
 export class FaceWithExpressionControl extends Component<Props, {

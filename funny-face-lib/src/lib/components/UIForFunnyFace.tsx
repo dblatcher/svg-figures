@@ -1,8 +1,8 @@
 import { ChangeEventHandler, Component } from "react";
-import { expressions } from "../defaults/expressions";
-import { profileColorProperyData, profileNumberProperyData } from "../util/faceProfile";
 import { browShapes } from "../defaults/browShapes";
+import { expressions } from "../defaults/expressions";
 import { Accessory, FaceProfile, FacialExpression } from "../types";
+import { profileColorProperyData, profileNumberProperyData } from "../util/faceProfile";
 import { FunnyFace } from "./FunnyFace";
 import { SvgFrame } from "./SvgFrame";
 import { NumberInput, StringInput } from "./formControls";
@@ -50,7 +50,9 @@ export class UIForFunnyFace extends Component<Props, {
     }
 
     get expression(): FacialExpression {
-        return expressions[this.state.expressionKey] || expressions.NEUTRAL
+        const entries = Object.entries(expressions)
+        const expression = entries.find(([key]) => key === this.state.expressionKey)?.[1]
+        return expression || expressions.NEUTRAL
     }
 
     get wornAccessories(): Accessory[] {
@@ -216,6 +218,5 @@ export class UIForFunnyFace extends Component<Props, {
 
             </section>
         </div>
-
     }
 }

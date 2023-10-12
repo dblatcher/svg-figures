@@ -89,4 +89,4 @@ const NEUTRAL: FacialExpression = {
     mouth: {},
 }
 
-export const expressions: Record<string, FacialExpression> = { AFRAID, ANGRY, NEUTRAL, ODD, HAPPY, ASLEEP }
+export const expressions = { AFRAID, ANGRY, NEUTRAL, ODD, HAPPY, ASLEEP }
