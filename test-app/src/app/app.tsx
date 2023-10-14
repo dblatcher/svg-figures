@@ -1,4 +1,4 @@
-import { UIForFunnyFace, FaceWithExpressionControl, accessoryMap, FunnyFace, browShapes, expressions } from '@dblatcher/funny-face';
+import { UIForFunnyFace, FaceWithExpressionControl, accessoryMap, FunnyFace, browShapes, expressions } from '@dblatcher/funny-face-2';
 
 
 export const App = () => {
