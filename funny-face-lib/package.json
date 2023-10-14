@@ -1,18 +1,4 @@
 {
   "name": "@dblatcher/funny-face",
-  "version": "0.1.5",
-  "main": "./index.js",
-  "types": "./index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./index.mjs",
-      "require": "./index.js"
-    }
-  },
-  "peerDependencies": {
-    "@emotion/react": "11.11.1",
-    "@emotion/styled": "11.11.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  }
+  "version": "0.1.6"
 }

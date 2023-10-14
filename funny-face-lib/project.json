@@ -9,27 +9,27 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "funny-face-lib/**/*.{ts,tsx,js,jsx}",
-          "funny-face-lib/package.json"
-        ]
+        "lintFilePatterns": ["funny-face-lib/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "build": {
-      "executor": "@nx/vite:build",
+      "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/funny-face-lib",
-        "includeDevDependenciesInPackageJson": true
-      },
-      "configurations": {
-        "development": {
-          "mode": "development"
-        },
-        "production": {
-          "mode": "production"
-        }
+        "tsConfig": "funny-face-lib/tsconfig.lib.json",
+        "project": "funny-face-lib/package.json",
+        "entryFile": "funny-face-lib/src/index.ts",
+        "external": ["react", "react-dom", "react/jsx-runtime"],
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "funny-face-lib/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
       }
     },
     "test": {
