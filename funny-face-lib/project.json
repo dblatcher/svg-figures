@@ -9,7 +9,10 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["funny-face-lib/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "funny-face-lib/**/*.{ts,tsx,js,jsx}",
+          "funny-face-lib/package.json"
+        ]
       }
     },
     "build": {
@@ -17,7 +20,8 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/funny-face-lib"
+        "outputPath": "dist/funny-face-lib",
+        "includeDevDependenciesInPackageJson": true
       },
       "configurations": {
         "development": {
