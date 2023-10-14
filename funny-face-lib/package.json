@@ -1,6 +1,6 @@
 {
   "name": "@dblatcher/funny-face",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {
@@ -9,12 +9,10 @@
       "require": "./index.js"
     }
   },
-  "dependencies": {
+  "peerDependencies": {
     "@emotion/react": "11.11.1",
     "@emotion/styled": "11.11.0",
-    "@swc/helpers": "~0.5.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "tslib": "^2.3.0"
+    "react-dom": "18.2.0"
   }
 }
