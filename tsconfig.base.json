@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@dblatcher/funny-face": ["funny-face-lib/src/index.ts"]
+      "@dblatcher/funny-face": ["funny-face-lib/src/index.ts"],
+      "@dblatcher/funny-face-2": ["funny-face-lib-2/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
