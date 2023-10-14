@@ -1,8 +1,7 @@
 
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { getChinLevel } from "../../util/face-calculations";
 import { uniqueId } from "../../util/unique-id";
-import { useInterval } from "../../util/useInterval";
 import { Accessory, FaceProfile, FacialExpression, MouthArrangement } from "../../types";
 import Face from "./Face";
 import FeatureFrame from "./Face/FeatureFrame";
@@ -40,7 +39,21 @@ export function FunnyFace({
             smile: Math.random() - .5,
         })
     }
-    useInterval(talk, talking ? 300 : 0)
+    const savedTalk = useRef(talk)
+    const delay = talking ? 300 : 0
+    // Set up the interval.
+    useEffect(() => {
+        // Don't schedule if no delay is specified.
+        // Note: 0 is a valid value for delay.
+        if (!delay && delay !== 0) {
+            return
+        }
+        const id = setInterval(() => savedTalk.current(), delay)
+        return () => clearInterval(id)
+    }, [delay])
+
+
+
     const arrangement: MouthArrangement = talking ? talkingMouth : expression?.mouth || {}
     const chinLevel = getChinLevel(arrangement, profile)
 
