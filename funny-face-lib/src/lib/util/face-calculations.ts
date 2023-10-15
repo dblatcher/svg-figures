@@ -1,4 +1,4 @@
-import { MouthArrangement, FaceProfile, LipCoordinates } from '../types';
+import { MouthArrangement, FaceProfile, LipCoordinates, FacialExpression } from '../types';
 
 export const getLipCoordinates = (
   arrangment: MouthArrangement = {}
@@ -25,3 +25,30 @@ export const getChinLevel = (
     (getLipCoordinates(arrangement).lower.y / 200) * (profile?.mouthWidth || 40)
   );
 };
+
+
+const getBlankExpression = (): FacialExpression => ({
+  mouth: {},
+  rightEye: {},
+  leftEye: {},
+})
+
+const cloneExpression = (expression: FacialExpression | undefined): FacialExpression => {
+  if (!expression) { return getBlankExpression() }
+  return {
+    mouth: { ...expression.mouth },
+    rightEye: { ...expression.rightEye },
+    leftEye: { ...expression.leftEye },
+  }
+}
+
+export const expressionWithBlink = (blinking: boolean, expression: FacialExpression | undefined): FacialExpression => {
+
+  const modifiedExpression = cloneExpression(expression)
+
+  if (blinking) {
+    modifiedExpression.leftEye.open = 0
+    modifiedExpression.rightEye.open = 0
+  }
+  return modifiedExpression
+}

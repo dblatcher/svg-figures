@@ -170,7 +170,7 @@ export const Face = ({
         color={eyeColor}
         pos={eyePosLeft}
         direction={direction}
-        transitionTime={transitionTime}
+        transitionTime={transitionTime/2}
       />
       <Eye
         ident={ident + '-eye-right'}
@@ -180,7 +180,7 @@ export const Face = ({
         color={eyeColor}
         pos={eyePosRight}
         direction={direction}
-        transitionTime={transitionTime}
+        transitionTime={transitionTime/2}
       />
       <EyeBrow
         x={-eyeX}
