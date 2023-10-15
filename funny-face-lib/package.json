@@ -1,6 +1,6 @@
 {
   "name": "@dblatcher/funny-face",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "peerDependencies": {
     "core-js": "3.33.0"
   }
