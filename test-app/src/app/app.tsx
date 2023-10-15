@@ -26,6 +26,7 @@ export const App = () => {
         <FunnyFace
           x={0}
           y={0}
+          blinkPeriod={5}
           size={100}
           profile={{
             browShape: browShapes.THIN,

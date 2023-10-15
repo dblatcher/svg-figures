@@ -14,16 +14,16 @@ interface Props {
   accessoryMap?: { [index: string]: Accessory };
 }
 
-export class UIForFunnyFace extends Component<
-  Props,
-  {
-    expressionKey: string;
-    talking: boolean;
-    followMouse: boolean;
-    accessoryKeys: string[];
-    profile: FaceProfile;
-  }
-> {
+interface State {
+  expressionKey: string;
+  talking: boolean;
+  followMouse: boolean;
+  accessoryKeys: string[];
+  blinkPeriod: number;
+  profile: FaceProfile;
+}
+
+export class UIForFunnyFace extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -31,6 +31,7 @@ export class UIForFunnyFace extends Component<
       talking: false,
       followMouse: false,
       accessoryKeys: [],
+      blinkPeriod: 20,
       profile: {
         width: 1,
         round: 0.5,
@@ -134,7 +135,7 @@ export class UIForFunnyFace extends Component<
 
   render() {
     const { accessoryMap = {} } = this.props;
-    const { talking, followMouse, expressionKey, accessoryKeys, profile } =
+    const { talking, followMouse, expressionKey, accessoryKeys, profile, blinkPeriod } =
       this.state;
 
     return (
@@ -152,6 +153,7 @@ export class UIForFunnyFace extends Component<
             expression={this.expression}
             talking={talking}
             followMouse={followMouse}
+            blinkPeriod={blinkPeriod}
             profile={profile}
             accessories={this.wornAccessories}
           />
@@ -189,6 +191,21 @@ export class UIForFunnyFace extends Component<
             />
             <label>followMouse</label>
           </div>
+
+          <div>
+            <NumberInput
+              label={'blinkPeriod'}
+              value={blinkPeriod}
+              min={0}
+              max={100}
+              step={1}
+              inputHandler={(value) => {
+                this.setState({ blinkPeriod: value });
+              }}
+              labelAfter={true}
+            />
+          </div>
+
         </section>
 
         <section>
