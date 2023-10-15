@@ -82,7 +82,6 @@ export function FunnyFace({
   return (
     <FeatureFrame x={x} y={y} size={size} placement="top left">
       <g>
-        <text>{blinkTime.toString()}</text>
         <Face
           x={-50}
           y={-50}
