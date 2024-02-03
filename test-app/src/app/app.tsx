@@ -5,6 +5,7 @@ import {
   FunnyFace,
   browShapes,
   expressions,
+  ExpressionDesigner,
 } from 'funny-face-lib';
 
 export const App = () => {
@@ -12,6 +13,8 @@ export const App = () => {
     <div>
       <p>test app runs</p>
       <UIForFunnyFace accessoryMap={accessoryMap} />
+
+      <ExpressionDesigner />
 
       <svg>
         <FaceWithExpressionControl x={10} y={10} profile={{ color: 'blue' }} />

@@ -46,9 +46,21 @@ export type LipCoordinates = {
 };
 
 export interface EyeArrangement {
+  /**how open the eye is: 
+   *  - 0 (closed)
+   *  - 0.75 (default)
+   *  - 1 (wide open) 
+   * */
   open?: number;
+  /** angle in degrees of the eyebrow, 0 = horizontal */
   browTilt?: number;
+  /** percentage increase in the Y position of the brow relative to the eye */
   browRaise?: number;
+  /**how big the pupil is:
+   * - 0 (no pupil)
+   * - 1 (default)
+   * - 2 (pupil fills iris)
+   */
   dilation?: number;
 }
 
