@@ -82,10 +82,30 @@ const ASLEEP: FacialExpression = {
   },
 };
 
+const SUSPICIOUS: FacialExpression = {
+  leftEye: {
+    browRaise: 15,
+    open: 0.5,
+    dilation: 0.8,
+    browTilt: 10
+  },
+  rightEye: {
+    browTilt: 11,
+    open: 0.45,
+    dilation: 0.8,
+    browRaise: -10
+  },
+  mouth: {
+    smile: -0.2,
+    pucker: 0.3,
+    open: 0
+  }
+}
+
 const NEUTRAL: FacialExpression = {
   leftEye: {},
   rightEye: {},
   mouth: {},
 };
 
-export const expressions = { AFRAID, ANGRY, NEUTRAL, ODD, HAPPY, ASLEEP };
+export const expressions = { AFRAID, ANGRY, NEUTRAL, ODD, HAPPY, ASLEEP, SUSPICIOUS };
