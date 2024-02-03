@@ -31,7 +31,7 @@ const Chin = ({
         width={width}
         height={height}
         stroke={'black'}
-        fill={profile.color}
+        fill={profile.color ?? 'lightgray'}
         rx={10}
         ry={20}
       />
