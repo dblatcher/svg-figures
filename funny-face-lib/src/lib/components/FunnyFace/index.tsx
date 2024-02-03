@@ -95,8 +95,8 @@ export function FunnyFace({
           chinLevel={chinLevel}
           transitionTime={transitionTime}
         />
-        {accessories.map((accessory) => (
-          <HeadAccessory
+        {accessories.map((accessory, index) => (
+          <HeadAccessory key={index}
             accessory={accessory}
             faceProfile={profile}
             chinLevel={chinLevel}
