@@ -1,3 +1,0 @@
-# Svg figures
-
-TBC
