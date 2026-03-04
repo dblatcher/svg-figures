@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react';
 import type { FeatureProps } from './FeatureProps';
 
 interface Props extends FeatureProps {
@@ -11,7 +10,7 @@ const FeatureFrame = ({
   size,
   children,
   placement = 'center',
-}: Props): ReactNode => {
+}: Props) => {
   let px = x,
     py = y;
   switch (placement) {

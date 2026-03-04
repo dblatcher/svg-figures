@@ -59,7 +59,7 @@ export const Face = ({
   chinLevel,
   transitionTime = 0.5,
 }: Props) => {
-  const [direction, setDirection] = useState<[number, number]>([0, 0]);
+  const [trackedEyeDirection, setTrackedDirection] = useState<[number, number]>([0, 0]);
   const [dilation, setDilation] = useState<number>(1);
   const [browTilt, setBrowTilt] = useState<number>(0);
   const [browRaise, setBrowRaise] = useState<number>(0);
@@ -88,7 +88,7 @@ export const Face = ({
       noseTop + height / 2
     );
 
-    setDirection(distance < size ? [0, 0] : relativeDisplacement);
+    setTrackedDirection(distance < size ? [0, 0] : relativeDisplacement);
     setDilation(calculateDilation(distance));
     setBrowTilt(calculateEyebrowTilt(distance));
     setBrowRaise(calculateEyebrowRise(distance));
@@ -100,12 +100,6 @@ export const Face = ({
       window.removeEventListener('mousemove', trackMouse);
     };
   });
-
-  useEffect(() => {
-    if (!followMouse) {
-      setDirection([0, 0]);
-    }
-  }, [followMouse]);
 
   const {
     eyeDistance = 40,
@@ -120,6 +114,8 @@ export const Face = ({
     noseHeight = 10,
     noseWidth = 10,
   } = profile;
+
+  const direction: [number, number] = followMouse ? trackedEyeDirection : [0, 0]
   const eyeX = clamp(eyeDistance, 75, 25) / 2;
   const eyePosLeft = !expression
     ? { dilation, browTilt, browRaise }
@@ -170,7 +166,7 @@ export const Face = ({
         color={eyeColor}
         pos={eyePosLeft}
         direction={direction}
-        transitionTime={transitionTime/2}
+        transitionTime={transitionTime / 2}
       />
       <Eye
         ident={ident + '-eye-right'}
@@ -180,7 +176,7 @@ export const Face = ({
         color={eyeColor}
         pos={eyePosRight}
         direction={direction}
-        transitionTime={transitionTime/2}
+        transitionTime={transitionTime / 2}
       />
       <EyeBrow
         x={-eyeX}
