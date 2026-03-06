@@ -5,11 +5,11 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/svg-figures.js",
-  "module": "./dist/svg-figures.js",
+  "main": "./dist/funny-face.js",
+  "module": "./dist/funny-face.js",
   "exports": {
     ".": {
-      "import": "./dist/svg-figures.js"
+      "import": "./dist/funny-face.js"
     }
   },
   "scripts": {

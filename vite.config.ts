@@ -12,7 +12,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'lib/main.ts'),
       name: 'SvgFigures',
       // the proper extensions will be added
-      fileName: 'svg-figures',
+      fileName: 'funny-face',
       formats: ['es']
     },
     rollupOptions: {
