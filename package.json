@@ -1,6 +1,6 @@
 {
-  "name": "svg-figures",
-  "version": "0.1.1",
+  "name": "@dblatcher/funny-face",
+  "version": "0.3.0",
   "type": "module",
   "files": [
     "dist"
