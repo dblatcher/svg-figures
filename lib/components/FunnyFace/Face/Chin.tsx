@@ -1,18 +1,15 @@
 import type { FaceProfile } from '../../../types';
 import FeatureFrame from './FeatureFrame';
-import type { FeatureProps } from './FeatureProps';
 
-interface Props extends FeatureProps {
+type Props = {
   width: number;
   height: number;
   shift: number;
   profile: FaceProfile;
+  transitionTime?: number | undefined;
 }
 
 const Chin = ({
-  x,
-  y,
-  size,
   width,
   height,
   shift,
@@ -20,14 +17,13 @@ const Chin = ({
   profile,
 }: Props) => {
   return (
-    <FeatureFrame x={x} y={y} size={size}>
+    <FeatureFrame x={0} y={50 - height / 2} size={100} placement='center'>
       <rect
         style={{
           transition: `transform ${transitionTime}s`,
           transform: `translateY(${shift}px)`,
         }}
         x={-(width / 2)}
-        y2={-50}
         width={width}
         height={height}
         stroke={'black'}

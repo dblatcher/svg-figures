@@ -214,10 +214,8 @@ export const Face = ({
 
       <Chin
         width={chinWidth}
+        
         height={20}
-        x={0}
-        y={40}
-        size={100}
         shift={chinLevel}
         profile={profile}
         transitionTime={transitionTime}
