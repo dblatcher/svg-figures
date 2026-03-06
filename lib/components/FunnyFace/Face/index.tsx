@@ -212,14 +212,15 @@ export const Face = ({
         <Teeth maskUrl={getMaskUrl(mouthIdent)} toothList={profile?.teeth} />
       </Mouth>
 
-      <Chin
-        width={chinWidth}
-        
-        height={20}
-        shift={chinLevel}
-        profile={profile}
-        transitionTime={transitionTime}
-      />
+      {chinWidth > 0 && (
+        <Chin
+          width={chinWidth}
+          height={20}
+          shift={chinLevel}
+          profile={profile}
+          transitionTime={transitionTime}
+        />
+      )}
     </FeatureFrame>
   );
 };
