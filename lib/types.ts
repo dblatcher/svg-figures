@@ -13,6 +13,7 @@ export interface FaceProfile {
   teeth?: ToothShape[];
   noseHeight?: number;
   noseWidth?: number;
+  chinWidth?: number;
 }
 
 export type BrowShape = Readonly<[number, number][]>;
@@ -25,7 +26,8 @@ export type ProfileNumberProperty =
   | 'lipWidth'
   | 'mouthNoseDistance'
   | 'noseHeight'
-  | 'noseWidth';
+  | 'noseWidth'
+  | 'chinWidth';
 export type ProfileColorProperty =
   | 'eyeColor'
   | 'color'

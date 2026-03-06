@@ -42,6 +42,7 @@ export class UIForFunnyFace extends Component<Props, State> {
         mouthNoseDistance: 15,
         noseHeight: 20,
         noseWidth: 20,
+        chinWidth: 30,
         color: profileColorProperyData[0].default,
         eyeColor: profileColorProperyData[1].default,
         lipColor: profileColorProperyData[2].default,
@@ -96,6 +97,7 @@ export class UIForFunnyFace extends Component<Props, State> {
         case 'mouthNoseDistance':
         case 'noseHeight':
         case 'noseWidth':
+        case 'chinWidth':
           if (typeof value === 'number') {
             profile[property] = value;
           }

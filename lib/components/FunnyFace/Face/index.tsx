@@ -113,6 +113,7 @@ export const Face = ({
     color = 'lightgray',
     noseHeight = 10,
     noseWidth = 10,
+    chinWidth = 30,
   } = profile;
 
   const direction: [number, number] = followMouse ? trackedEyeDirection : [0, 0]
@@ -212,7 +213,7 @@ export const Face = ({
       </Mouth>
 
       <Chin
-        width={30}
+        width={chinWidth}
         height={20}
         x={0}
         y={40}
