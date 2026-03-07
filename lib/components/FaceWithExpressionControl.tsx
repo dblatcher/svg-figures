@@ -24,8 +24,8 @@ export class FaceWithExpressionControl extends Component<
   constructor(props: Props) {
     super(props);
     this.state = {
-      expresion: expressions.ODD,
-      expressionLabel: 'odd',
+      expresion: expressions.NEUTRAL,
+      expressionLabel: 'neutral',
     };
     this.changeExpression = this.changeExpression.bind(this);
   }
@@ -39,19 +39,20 @@ export class FaceWithExpressionControl extends Component<
   }
 
   render() {
-    const { x, y, size = 40, profile, followMouse, talking } = this.props;
+    const { x, y, size = 80, profile, followMouse, talking } = this.props;
     const { expresion, expressionLabel } = this.state;
 
     return (
       <g onClick={this.changeExpression}>
         <FunnyFace
-          x={x - 10}
+          x={x}
           y={y}
           size={size}
           expression={expresion}
           profile={profile}
           followMouse={followMouse}
           talking={talking}
+          sizeIncludesEars
         />
         <text x={x} y={y} fill={'red'}>
           {expressionLabel}

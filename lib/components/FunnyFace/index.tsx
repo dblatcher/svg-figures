@@ -26,6 +26,7 @@ interface Props {
   transitionTime?: number;
   /** how long between each blink, in units of 100ms. Set to zero to prevent blinking  Defaults to 20 (blink every two seconds) */
   blinkPeriod?: number;
+  sizeIncludesEars?: boolean;
 }
 
 export function FunnyFace({
@@ -40,6 +41,7 @@ export function FunnyFace({
   accessories = [],
   children,
   blinkPeriod = 20,
+  sizeIncludesEars = false,
 }: Props) {
   const [talkingMouth, setTalkingMouth] = useState<MouthArrangement>({});
   const [blinkTime, setBlinkTime] = useState(randomInt(blinkPeriod));
@@ -95,6 +97,7 @@ export function FunnyFace({
           mouthArrangement={arrangement}
           chinLevel={chinLevel}
           transitionTime={transitionTime}
+          sizeIncludesEars={sizeIncludesEars}
         />
         {accessories.map((accessory, index) => (
           <HeadAccessory key={index}

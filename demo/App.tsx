@@ -13,18 +13,18 @@ export const App = () => {
   return (
     <div>
       <p>test app runs</p>
+      <svg style={{background:'pink'}}>
+        <FaceWithExpressionControl x={0} y={20} profile={{ color: 'blue' }} />
+        <FaceWithExpressionControl
+          x={100}
+          y={20}
+          profile={{ color: 'green' }}
+        />
+      </svg>
       <UIForFunnyFace accessoryMap={accessoryMap} />
 
       <ExpressionDesigner />
 
-      <svg>
-        <FaceWithExpressionControl x={10} y={10} profile={{ color: 'blue' }} />
-        <FaceWithExpressionControl
-          x={100}
-          y={10}
-          profile={{ color: 'green' }}
-        />
-      </svg>
 
       <svg>
         <FunnyFace

@@ -19,6 +19,7 @@ interface State {
   expressionKey: string;
   talking: boolean;
   followMouse: boolean;
+  sizeIncludesEars: boolean;
   accessoryKeys: string[];
   blinkPeriod: number;
   profile: FaceProfile;
@@ -33,6 +34,7 @@ export class UIForFunnyFace extends Component<Props, State> {
       followMouse: false,
       accessoryKeys: [],
       blinkPeriod: 20,
+      sizeIncludesEars: false,
       profile: {
         width: 1,
         round: 0.5,
@@ -123,6 +125,9 @@ export class UIForFunnyFace extends Component<Props, State> {
   toggleTalking: ChangeEventHandler = () => {
     this.setState({ talking: !this.state.talking });
   };
+  toggleSizeIncludesEars: ChangeEventHandler = () => {
+    this.setState({ sizeIncludesEars: !this.state.sizeIncludesEars });
+  };
   toggleFollowMouse: ChangeEventHandler = () => {
     this.setState({ followMouse: !this.state.followMouse });
   };
@@ -140,7 +145,7 @@ export class UIForFunnyFace extends Component<Props, State> {
 
   render() {
     const { accessoryMap = {} } = this.props;
-    const { talking, followMouse, expressionKey, accessoryKeys, profile, blinkPeriod } =
+    const { talking, followMouse, sizeIncludesEars, expressionKey, accessoryKeys, profile, blinkPeriod } =
       this.state;
 
     return (
@@ -161,6 +166,7 @@ export class UIForFunnyFace extends Component<Props, State> {
             blinkPeriod={blinkPeriod}
             profile={profile}
             accessories={this.wornAccessories}
+            sizeIncludesEars={sizeIncludesEars}
           />
         </SvgFrame>
 
@@ -195,6 +201,14 @@ export class UIForFunnyFace extends Component<Props, State> {
               onChange={this.toggleFollowMouse}
             />
             <label>followMouse</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              checked={sizeIncludesEars}
+              onChange={this.toggleSizeIncludesEars}
+            />
+            <label>sizeIncludesEars</label>
           </div>
 
           <div>

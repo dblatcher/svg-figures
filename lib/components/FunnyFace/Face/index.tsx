@@ -14,11 +14,13 @@ import FeatureFrame from './FeatureFrame';
 import Mouth from './Mouth';
 import Nose from './Nose';
 import Teeth from './Teeth';
+import { Ear } from './Ear';
 
 interface Props {
   x: number;
   y: number;
   size?: number;
+  sizeIncludesEars?: boolean;
   followMouse?: boolean;
   ident: string;
   expression?: FacialExpression;
@@ -47,6 +49,8 @@ function calculateEyebrowRise(distance: number) {
   return clamp((200 - distance) / 8, 20);
 }
 
+const EAR_WIDTH = 10
+
 export const Face = ({
   x,
   y,
@@ -58,6 +62,7 @@ export const Face = ({
   mouthArrangement,
   chinLevel,
   transitionTime = 0.5,
+  sizeIncludesEars,
 }: Props) => {
   const [trackedEyeDirection, setTrackedDirection] = useState<[number, number]>([0, 0]);
   const [dilation, setDilation] = useState<number>(1);
@@ -128,6 +133,8 @@ export const Face = ({
 
   const mouthY = clamp(mouthNoseDistance + noseHeight, 45, 5);
   const mouthIdent = ident + '-mouth';
+  const faceWidth = sizeIncludesEars ? 100 - 2 * EAR_WIDTH : 100;
+
 
   return (
     <FeatureFrame
@@ -138,9 +145,9 @@ export const Face = ({
       transitionTime={transitionTime}
     >
       <rect
-        x={-50 * width}
+        x={-(faceWidth / 2) * width}
         y={-50}
-        width={100 * width}
+        width={faceWidth * width}
         height={100}
         stroke={'black'}
         fill={color}
@@ -151,6 +158,23 @@ export const Face = ({
           transition: `height ${transitionTime}s`,
         }}
       />
+
+      <Ear
+        width={EAR_WIDTH}
+        height={EAR_WIDTH * 2.5}
+        side='left'
+        color={color}
+        fromCenter={faceWidth * width / 2}
+        />
+
+      <Ear
+        width={EAR_WIDTH}
+        height={EAR_WIDTH * 2.5}
+        side='right'
+        color={color}
+        fromCenter={faceWidth * width / 2}
+      />
+
 
       <Nose
         noseRef={noseRef}
