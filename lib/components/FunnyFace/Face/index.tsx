@@ -114,6 +114,7 @@ export const Face = ({
     noseHeight = 10,
     noseWidth = 10,
     chinWidth = 30,
+    chinHeight = 20,
   } = profile;
 
   const direction: [number, number] = followMouse ? trackedEyeDirection : [0, 0]
@@ -215,7 +216,7 @@ export const Face = ({
       {chinWidth > 0 && (
         <Chin
           width={chinWidth}
-          height={20}
+          height={chinHeight}
           shift={chinLevel}
           profile={profile}
           transitionTime={transitionTime}

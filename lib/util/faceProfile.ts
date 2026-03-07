@@ -15,6 +15,7 @@ export const profileNumberProperyData: {
   { property: 'noseHeight', min: 5, max: 30, step: 1 },
   { property: 'noseWidth', min: 5, max: 30, step: 1 },
   { property: 'chinWidth', min: 0, max: 60, step: 1 },
+  { property: 'chinHeight', min: 0, max: 30, step: 1 },
 ];
 
 export const profileColorProperyData: {
