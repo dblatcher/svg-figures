@@ -159,22 +159,22 @@ export const Face = ({
         }}
       />
 
-      <Ear
-        width={earWidth}
-        height={earHeight}
-        side='left'
-        color={color}
-        fromCenter={faceWidth * width / 2}
-      />
-
-      <Ear
-        width={earWidth}
-        height={earHeight}
-        side='right'
-        color={color}
-        fromCenter={faceWidth * width / 2}
-      />
-
+      {earWidth > 0 && earHeight > 0 && <>
+        <Ear
+          width={earWidth}
+          height={earHeight}
+          side='left'
+          color={color}
+          fromCenter={faceWidth * width / 2}
+        />
+        <Ear
+          width={earWidth}
+          height={earHeight}
+          side='right'
+          color={color}
+          fromCenter={faceWidth * width / 2}
+        />
+      </>}
 
       <Nose
         noseRef={noseRef}

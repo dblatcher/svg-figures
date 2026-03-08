@@ -26,7 +26,7 @@ export const Ear = ({ width, height, side, fromCenter, color }: Props) => {
                 transformOrigin: 'center',
                 transform: side === 'left' ? "scale(-1, 1)" : undefined
             }}
-            d="M0 20 Q100 0 100 50 L100 70 Q50 100 -50 100"
+            d="M0 20 Q100 0 100 50 L100 70 Q50 100 -20 100"
         />
     </FeatureFrame>
 }
