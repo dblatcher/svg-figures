@@ -15,6 +15,7 @@ import Mouth from './Mouth';
 import Nose from './Nose';
 import Teeth from './Teeth';
 import { Ear } from './Ear';
+import { earShapes } from '../../../defaults/earShapes';
 
 interface Props {
   x: number;
@@ -110,7 +111,8 @@ export const Face = ({
     mouthNoseDistance = 20,
     mouthWidth = 40,
     browColor,
-    browShape = [],
+    browShape = "",
+    earShape = earShapes.NORMAL,
     round = 0.5,
     width = 1,
     color = 'lightgray',
@@ -164,6 +166,7 @@ export const Face = ({
           width={earWidth}
           height={earHeight}
           side='left'
+          shape={earShape}
           color={color}
           fromCenter={faceWidth * width / 2}
         />
@@ -171,6 +174,7 @@ export const Face = ({
           width={earWidth}
           height={earHeight}
           side='right'
+          shape={earShape}
           color={color}
           fromCenter={faceWidth * width / 2}
         />

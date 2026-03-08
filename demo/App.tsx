@@ -1,4 +1,5 @@
 
+import { earShapes } from '../lib/defaults/earShapes';
 import {
   UIForFunnyFace,
   FaceWithExpressionControl,
@@ -53,6 +54,7 @@ export const App = () => {
             color: 'peachpuff',
             lipColor: 'red',
             browShape: browShapes.WIDE,
+            earShape: earShapes.CURVED,
             width: 0.7,
             round: 0.1,
             lipWidth: 6,

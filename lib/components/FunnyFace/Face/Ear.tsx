@@ -1,3 +1,4 @@
+import type { PathShape } from "../../../types"
 import FeatureFrame from "./FeatureFrame"
 
 interface Props {
@@ -5,10 +6,11 @@ interface Props {
     height: number
     fromCenter: number
     color: string
-    side: 'left' | 'right'
+    side: 'left' | 'right',
+    shape: PathShape,
 }
 
-export const Ear = ({ width, height, side, fromCenter, color }: Props) => {
+export const Ear = ({ width, height, side, fromCenter, color, shape }: Props) => {
 
     const x2 = side === 'left' ? -fromCenter - width : fromCenter;
 
@@ -26,7 +28,7 @@ export const Ear = ({ width, height, side, fromCenter, color }: Props) => {
                 transformOrigin: 'center',
                 transform: side === 'left' ? "scale(-1, 1)" : undefined
             }}
-            d="M0 20 Q100 0 100 50 L100 70 Q50 100 -20 100"
+            d={shape}
         />
     </FeatureFrame>
 }

@@ -1,4 +1,4 @@
-import type { BrowShape, EyeArrangement } from '../../../types';
+import type { PathShape, EyeArrangement } from '../../../types';
 import type { FeatureProps } from './FeatureProps';
 import FeatureFrame from './FeatureFrame';
 
@@ -6,7 +6,7 @@ interface Props extends FeatureProps {
   color?: string;
   pos?: EyeArrangement;
   right?: boolean;
-  browShape: BrowShape;
+  browShape: PathShape;
 }
 
 export const EyeBrow = ({

@@ -2,7 +2,8 @@ export interface FaceProfile {
   width?: number;
   round?: number;
   color?: string;
-  browShape?: BrowShape;
+  browShape?: PathShape;
+  earShape?: PathShape;
   eyeColor?: string;
   eyeDistance?: number;
   mouthWidth?: number;
@@ -19,7 +20,7 @@ export interface FaceProfile {
   earWidth?: number;
 }
 
-export type BrowShape = Readonly<string>;
+export type PathShape = Readonly<string>;
 export type ToothShape = Readonly<[number, number][]>;
 export type ProfileNumberProperty =
   | 'width'
