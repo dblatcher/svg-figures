@@ -60,9 +60,9 @@ export function FunnyFace({
   // TO DO - better mouth arrangements for laugh
   const laugh = useCallback(() => {
     setMovingMouth({
-      open: Math.random() > .5 ? 0 : 1,
+      open: Date.now() % 1000 > 500 ? 0.2 : 1,
       pucker: 0,
-      smile: 1,
+      smile: .8,
     });
   }, [])
 
