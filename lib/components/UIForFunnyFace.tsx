@@ -214,14 +214,16 @@ export class UIForFunnyFace extends Component<Props, State> {
           <div>
             {Object.keys(accessoryMap).map((key) => (
               <div key={key}>
-                <input
-                  type="checkbox"
-                  checked={accessoryKeys.includes(key)}
-                  onChange={() => {
-                    this.toggleAccessory(key);
-                  }}
-                />
-                <label>{key}</label>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={accessoryKeys.includes(key)}
+                    onChange={() => {
+                      this.toggleAccessory(key);
+                    }}
+                  />
+                  <span>{key}</span>
+                </label>
               </div>
             ))}
           </div>

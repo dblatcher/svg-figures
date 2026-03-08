@@ -34,8 +34,8 @@ export const NumberInput: FunctionComponent<{
   const width = type === 'range' ? '5rem' : '3rem';
 
   return (
-    <>
-      {label && !labelAfter && <label>{label}</label>}
+    <label>
+      {label && !labelAfter && <span>{label}</span>}
       <input
         type={type}
         style={{ width }}
@@ -47,8 +47,8 @@ export const NumberInput: FunctionComponent<{
           props.inputHandler(eventToNumber(event.nativeEvent));
         }}
       />
-      {label && labelAfter && <label>{label}</label>}
-    </>
+      {label && labelAfter && <span>{label}</span>}
+    </label>
   );
 };
 
