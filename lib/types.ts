@@ -15,6 +15,8 @@ export interface FaceProfile {
   noseWidth?: number;
   chinHeight?: number;
   chinWidth?: number;
+  earHeight?: number;
+  earWidth?: number;
 }
 
 export type BrowShape = Readonly<[number, number][]>;
@@ -29,7 +31,10 @@ export type ProfileNumberProperty =
   | 'noseHeight'
   | 'noseWidth'
   | 'chinHeight'
-  | 'chinWidth';
+  | 'chinWidth'
+  | 'earHeight'
+  | 'earWidth';
+
 export type ProfileColorProperty =
   | 'eyeColor'
   | 'color'

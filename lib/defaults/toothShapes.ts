@@ -1,6 +1,6 @@
 import type { ToothShape } from '../types';
 
-export const toothShapes: Record<string, ToothShape> = {
+export const toothShapes = {
   POINTY: [
     [0, 0],
     [0.1, 1],
@@ -27,4 +27,4 @@ export const toothShapes: Record<string, ToothShape> = {
     [1, 0],
   ],
   MISSING: [],
-};
+} satisfies Record<string, ToothShape>;

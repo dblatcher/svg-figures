@@ -49,8 +49,6 @@ function calculateEyebrowRise(distance: number) {
   return clamp((200 - distance) / 8, 20);
 }
 
-const EAR_WIDTH = 10
-
 export const Face = ({
   x,
   y,
@@ -120,6 +118,8 @@ export const Face = ({
     noseWidth = 10,
     chinWidth = 30,
     chinHeight = 20,
+    earWidth = 10,
+    earHeight = 20,
   } = profile;
 
   const direction: [number, number] = followMouse ? trackedEyeDirection : [0, 0]
@@ -133,7 +133,7 @@ export const Face = ({
 
   const mouthY = clamp(mouthNoseDistance + noseHeight, 45, 5);
   const mouthIdent = ident + '-mouth';
-  const faceWidth = sizeIncludesEars ? 100 - 2 * EAR_WIDTH : 100;
+  const faceWidth = sizeIncludesEars ? 100 - 2 * earWidth : 100;
 
 
   return (
@@ -160,16 +160,16 @@ export const Face = ({
       />
 
       <Ear
-        width={EAR_WIDTH}
-        height={EAR_WIDTH * 2.5}
+        width={earWidth}
+        height={earHeight}
         side='left'
         color={color}
         fromCenter={faceWidth * width / 2}
-        />
+      />
 
       <Ear
-        width={EAR_WIDTH}
-        height={EAR_WIDTH * 2.5}
+        width={earWidth}
+        height={earHeight}
         side='right'
         color={color}
         fromCenter={faceWidth * width / 2}

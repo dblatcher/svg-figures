@@ -46,6 +46,8 @@ export class UIForFunnyFace extends Component<Props, State> {
         noseWidth: 20,
         chinWidth: 30,
         chinHeight: 20,
+        earWidth: 10,
+        earHeight: 40,
         color: profileColorProperyData[0].default,
         eyeColor: profileColorProperyData[1].default,
         lipColor: profileColorProperyData[2].default,
@@ -102,6 +104,8 @@ export class UIForFunnyFace extends Component<Props, State> {
         case 'noseWidth':
         case 'chinHeight':
         case 'chinWidth':
+        case 'earHeight':
+        case 'earWidth':
           if (typeof value === 'number') {
             profile[property] = value;
           }
@@ -267,7 +271,9 @@ export class UIForFunnyFace extends Component<Props, State> {
               </div>
             );
           })}
-
+        </section>
+        <section>
+          <h3>Profile 2</h3>
           {profileColorProperyData.map((data) => {
             const { property, default: defaultValue } = data;
             return (
@@ -298,6 +304,11 @@ export class UIForFunnyFace extends Component<Props, State> {
               </button>
             ))}
           </div>
+        </section>
+        <section>
+          <textarea id="profile-output"
+            style={{ minHeight: '100%' }}
+            value={JSON.stringify(profile, undefined, 1)} />
         </section>
       </div>
     );
