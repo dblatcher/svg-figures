@@ -18,6 +18,7 @@ interface Props {
 interface State {
   expressionKey: string;
   talking: boolean;
+  laughing: boolean;
   followMouse: boolean;
   sizeIncludesEars: boolean;
   accessoryKeys: string[];
@@ -31,6 +32,7 @@ export class UIForFunnyFace extends Component<Props, State> {
     this.state = {
       expressionKey: 'NEUTRAL',
       talking: false,
+      laughing: false,
       followMouse: false,
       accessoryKeys: [],
       blinkPeriod: 20,
@@ -56,6 +58,7 @@ export class UIForFunnyFace extends Component<Props, State> {
     };
     this.changeExpressionKey = this.changeExpressionKey.bind(this);
     this.toggleTalking = this.toggleTalking.bind(this);
+    this.toggleLaughing = this.toggleLaughing.bind(this);
     this.toggleFollowMouse = this.toggleFollowMouse.bind(this);
     this.toggleAccessory = this.toggleAccessory.bind(this);
     this.editProfile = this.editProfile.bind(this);
@@ -129,6 +132,9 @@ export class UIForFunnyFace extends Component<Props, State> {
   toggleTalking: ChangeEventHandler = () => {
     this.setState({ talking: !this.state.talking });
   };
+  toggleLaughing: ChangeEventHandler = () => {
+    this.setState({ laughing: !this.state.laughing });
+  };
   toggleSizeIncludesEars: ChangeEventHandler = () => {
     this.setState({ sizeIncludesEars: !this.state.sizeIncludesEars });
   };
@@ -149,7 +155,7 @@ export class UIForFunnyFace extends Component<Props, State> {
 
   render() {
     const { accessoryMap = {} } = this.props;
-    const { talking, followMouse, sizeIncludesEars, expressionKey, accessoryKeys, profile, blinkPeriod } =
+    const { talking, laughing, followMouse, sizeIncludesEars, expressionKey, accessoryKeys, profile, blinkPeriod } =
       this.state;
 
     return (
@@ -166,6 +172,7 @@ export class UIForFunnyFace extends Component<Props, State> {
             size={80}
             expression={this.expression}
             talking={talking}
+            laughing={laughing}
             followMouse={followMouse}
             blinkPeriod={blinkPeriod}
             profile={profile}
@@ -197,6 +204,14 @@ export class UIForFunnyFace extends Component<Props, State> {
               onChange={this.toggleTalking}
             />
             <label>talking</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              checked={laughing}
+              onChange={this.toggleLaughing}
+            />
+            <label>laughing</label>
           </div>
           <div>
             <input

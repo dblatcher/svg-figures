@@ -30,6 +30,8 @@ export const App = () => {
         <FunnyFace
           x={0}
           y={0}
+          sizeIncludesEars
+          laughing
           blinkPeriod={5}
           size={100}
           profile={{
@@ -38,7 +40,7 @@ export const App = () => {
             eyeDistance: 30,
             mouthWidth: 40,
             mouthNoseDistance: 10,
-            color: 'lightgreen',
+            color: 'lime',
           }}
           followMouse
         />

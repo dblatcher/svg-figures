@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type {
   Accessory,
   FaceProfile,
@@ -19,6 +19,7 @@ interface Props {
   size: number;
   expression?: FacialExpression;
   talking?: boolean;
+  laughing?: boolean;
   followMouse?: boolean;
   children?: ReactNode;
   profile?: FaceProfile;
@@ -35,6 +36,7 @@ export function FunnyFace({
   size,
   expression,
   talking,
+  laughing,
   followMouse,
   transitionTime = 0.5,
   profile = {},
@@ -43,29 +45,38 @@ export function FunnyFace({
   blinkPeriod = 20,
   sizeIncludesEars = false,
 }: Props) {
-  const [talkingMouth, setTalkingMouth] = useState<MouthArrangement>({});
+  const [movingMouth, setMovingMouth] = useState<MouthArrangement>({});
   const [blinkTime, setBlinkTime] = useState(randomInt(blinkPeriod));
   const blinking = blinkPeriod !== 0 && blinkTime <= 1;
 
-  const talk = () => {
-    setTalkingMouth({
+  const talk = useCallback(() => {
+    setMovingMouth({
       open: Math.random(),
       pucker: Math.random(),
       smile: Math.random() - 0.5,
     });
-  };
-  const savedTalk = useRef(talk);
-  const delay = talking ? 300 : 0;
+  }, []);
+
+  // TO DO - better mouth arrangements for laugh
+  const laugh = useCallback(() => {
+    setMovingMouth({
+      open: Math.random() > .5 ? 0 : 1,
+      pucker: 0,
+      smile: 1,
+    });
+  }, [])
+
   // Set up the interval.
   useEffect(() => {
+    const delay = (talking || laughing) ? 200 : 0;
     // Don't schedule if no delay is specified.
     // Note: 0 is a valid value for delay.
     if (!delay && delay !== 0) {
       return;
     }
-    const id = setInterval(() => savedTalk.current(), delay);
+    const id = setInterval(talking ? talk : laugh, delay);
     return () => clearInterval(id);
-  }, [delay]);
+  }, [talking, talk, laughing, laugh]);
 
   const blinkCountdown = useCallback(() => {
     const newBlinkTime = blinkTime <= 0 ? blinkPeriod : blinkTime - 1
@@ -77,8 +88,8 @@ export function FunnyFace({
     return () => clearInterval(id);
   }, [blinkCountdown])
 
-  const arrangement: MouthArrangement = talking
-    ? talkingMouth
+  const arrangement: MouthArrangement = (talking || laughing)
+    ? movingMouth
     : expression?.mouth || {};
   const chinLevel = getChinLevel(arrangement, profile);
 

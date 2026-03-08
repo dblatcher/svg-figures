@@ -12,6 +12,7 @@ interface Props {
   profile?: FaceProfile;
   followMouse?: boolean;
   talking?: boolean;
+  laughing?: boolean;
 }
 
 export class FaceWithExpressionControl extends Component<
@@ -39,7 +40,7 @@ export class FaceWithExpressionControl extends Component<
   }
 
   render() {
-    const { x, y, size = 80, profile, followMouse, talking } = this.props;
+    const { x, y, size = 80, profile, followMouse, talking, laughing } = this.props;
     const { expresion, expressionLabel } = this.state;
 
     return (
@@ -52,6 +53,7 @@ export class FaceWithExpressionControl extends Component<
           profile={profile}
           followMouse={followMouse}
           talking={talking}
+          laughing={laughing}
           sizeIncludesEars
         />
         <text x={x} y={y} fill={'red'}>
