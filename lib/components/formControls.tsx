@@ -74,3 +74,39 @@ export const StringInput: FunctionComponent<{
     </>
   );
 };
+
+export const RadioGroup = ({
+  value,
+  options,
+  label,
+  onChange,
+}: {
+  value?: string;
+  label: string;
+  options: Record<string, string>;
+  onChange: { (selected: string): void }
+}) => {
+
+  return <fieldset>
+    <legend>
+      {label}
+    </legend>
+    {Object.entries(options).map(([key, optionValue]) => (
+      <label key={key} style={{
+        display: 'inline-flex',
+        gap: 2,
+        alignItems: 'center',
+        marginRight: 10
+      }}>
+        <span>{key}</span>
+        <input type="radio"
+          name={label}
+          value={optionValue}
+          checked={value === optionValue}
+          onChange={event => onChange(event.target.value)}
+        />
+      </label>
+    ))}
+  </fieldset>
+
+}

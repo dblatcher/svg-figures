@@ -9,7 +9,7 @@ import {
 } from '../util/faceProfile';
 import { FunnyFace } from './FunnyFace';
 import { SvgFrame } from './SvgFrame';
-import { NumberInput, StringInput } from './formControls';
+import { NumberInput, RadioGroup, StringInput } from './formControls';
 
 interface Props {
   accessoryMap?: { [index: string]: Accessory };
@@ -54,6 +54,7 @@ export class UIForFunnyFace extends Component<Props, State> {
         eyeColor: profileColorProperyData[1].default,
         lipColor: profileColorProperyData[2].default,
         browColor: profileColorProperyData[3].default,
+        browShape: browShapes.THIN,
       },
     };
     this.changeExpressionKey = this.changeExpressionKey.bind(this);
@@ -84,44 +85,10 @@ export class UIForFunnyFace extends Component<Props, State> {
     this.setState({ expressionKey: event.target?.value });
   };
 
-  editProfile = (property: keyof FaceProfile, value: unknown) => {
-    console.log(property, value);
-    this.setState((state) => {
-      const { profile } = state;
-      switch (property) {
-        case 'eyeColor':
-        case 'lipColor':
-        case 'color':
-        case 'browColor':
-          if (typeof value === 'string') {
-            profile[property] = value;
-          }
-          break;
-        case 'width':
-        case 'round':
-        case 'eyeDistance':
-        case 'lipWidth':
-        case 'mouthWidth':
-        case 'mouthNoseDistance':
-        case 'noseHeight':
-        case 'noseWidth':
-        case 'chinHeight':
-        case 'chinWidth':
-        case 'earHeight':
-        case 'earWidth':
-          if (typeof value === 'number') {
-            profile[property] = value;
-          }
-          break;
-        case 'browShape':
-          if (typeof value === 'string') {
-            profile[property] = value;
-          }
-          break;
-      }
-
-      return { profile };
-    });
+  editProfile = (change: Partial<FaceProfile>) => {
+    this.setState((state) => (
+      { profile: { ...state.profile, ...change } }
+    ));
   };
 
   toggleTalking: ChangeEventHandler = () => {
@@ -274,7 +241,7 @@ export class UIForFunnyFace extends Component<Props, State> {
                   max={max}
                   step={step}
                   inputHandler={(value) => {
-                    this.editProfile(property, value);
+                    this.editProfile({ [property]: value });
                   }}
                   labelAfter={true}
                 />
@@ -294,26 +261,17 @@ export class UIForFunnyFace extends Component<Props, State> {
                   type="color"
                   labelAfter={true}
                   inputHandler={(value) => {
-                    this.editProfile(property, value);
+                    this.editProfile({ [property]: value });
                   }}
                 />
               </div>
             );
           })}
 
-          <div>
-            <label>Eyebrows:</label>
-            {Object.entries(browShapes).map(([shapeKey, shape]) => (
-              <button
-                key={shapeKey}
-                onClick={() => {
-                  this.editProfile('browShape', shape);
-                }}
-              >
-                {shapeKey}
-              </button>
-            ))}
-          </div>
+          <RadioGroup label='Eybrows'
+            options={browShapes}
+            value={profile.browShape}
+            onChange={(browShape => this.editProfile({ browShape }))} />
         </section>
         <section>
           <textarea id="profile-output"
