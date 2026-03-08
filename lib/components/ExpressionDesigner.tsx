@@ -137,7 +137,9 @@ export const ExpressionDesigner = () => {
       <section>
         <textarea
           style={{height:'100%'}}
-          value={JSON.stringify(expression, undefined, 1)} rows={20}
+          value={JSON.stringify(expression, undefined, 1)} 
+          onChange={()=>{}}
+          rows={20}
         />
       </section>
 

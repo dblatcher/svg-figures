@@ -9,16 +9,6 @@ interface Props extends FeatureProps {
   browShape: BrowShape;
 }
 
-function drawBrow(s: number, browShape: BrowShape) {  
-  const commands: string[] = browShape.map((coord, index) => {
-    const code = index > 0 ? 'L' : 'M';
-    const [x, y] = coord;
-    return `${code} ${x * s} ${y * s}`;
-  });
-
-  return commands.join(' ');
-}
-
 export const EyeBrow = ({
   x,
   y,
@@ -44,7 +34,7 @@ export const EyeBrow = ({
         <path style={{
           transformOrigin: 'centre',
           transform: right ? 'scaleX(-1)' : undefined
-        }} d={drawBrow(75, browShape)} />
+        }} d={browShape} />
       </g>
     </FeatureFrame>
   );

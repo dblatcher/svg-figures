@@ -1,19 +1,9 @@
 import type { BrowShape } from '../types';
 
-const NONE: BrowShape = [];
-const THIN: BrowShape = [
-  [-0.5, 0.0],
-  [0.4, 0.0],
-  [0.5, 0.2],
-  [-0.5, 0.0],
-];
-const WIDE: BrowShape = [
-  [-0.8, -0.2],
-  [0.4, 0.0],
-  [0.5, 0.2],
-  [-0.0, 0.05],
-  [-0.5, 0.1],
-];
+const NONE: BrowShape = "";
+const THIN: BrowShape = "M -37.5 0 L 30 0 L 37.5 15 L -37.5 0";
+const WIDE: BrowShape = "M -60 -15 L 30 0 L 37.5 15 L 0 3.75 L -37.5 7.5"
+
 
 export const browShapes = {
   NONE,

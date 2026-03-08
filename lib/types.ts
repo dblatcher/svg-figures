@@ -19,7 +19,7 @@ export interface FaceProfile {
   earWidth?: number;
 }
 
-export type BrowShape = Readonly<[number, number][]>;
+export type BrowShape = Readonly<string>;
 export type ToothShape = Readonly<[number, number][]>;
 export type ProfileNumberProperty =
   | 'width'

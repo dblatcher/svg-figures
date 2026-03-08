@@ -114,12 +114,7 @@ export class UIForFunnyFace extends Component<Props, State> {
           }
           break;
         case 'browShape':
-          if (
-            Array.isArray(value) &&
-            value.every(
-              (member) => Array.isArray(member) && member.length === 2
-            )
-          ) {
+          if (typeof value === 'string') {
             profile[property] = value;
           }
           break;
@@ -323,7 +318,9 @@ export class UIForFunnyFace extends Component<Props, State> {
         <section>
           <textarea id="profile-output"
             style={{ minHeight: '100%' }}
-            value={JSON.stringify(profile, undefined, 1)} />
+            value={JSON.stringify(profile, undefined, 1)}
+            onChange={() => { }}
+          />
         </section>
       </div>
     );
