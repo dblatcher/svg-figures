@@ -2,6 +2,7 @@ import type { Accessory } from '../types';
 import monocle from '../assets/monocle.png';
 import moustache from '../assets/moustache.png';
 import hat from '../assets/non-burning-hat.png';
+import jewel from '../assets/jewel.png';
 
 export const accessoryMap: Record<string, Accessory> = {
   HAT: {
@@ -37,5 +38,19 @@ export const accessoryMap: Record<string, Accessory> = {
     y: -10,
     width: 32,
     place: 'chin',
+  },
+  RIGHT_EARRING: {
+    src: jewel,
+    x: 5,
+    y: 0,
+    width: 20,
+    place: 'right-ear',
+  },
+  LEFT_EARRING: {
+    src: jewel,
+    x: -5,
+    y: 0,
+    width: 20,
+    place: 'left-ear',
   },
 };

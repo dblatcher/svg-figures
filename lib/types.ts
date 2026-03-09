@@ -92,5 +92,5 @@ export interface Accessory {
   y: number;
   width: number;
   priority?: number;
-  place?: 'left-eye' | 'right-eye' | 'nose' | 'chin';
+  place?: 'left-eye' | 'right-eye' | 'nose' | 'chin' | 'right-ear' | 'left-ear';
 }

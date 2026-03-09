@@ -116,6 +116,7 @@ export function FunnyFace({
             faceProfile={profile}
             chinLevel={chinLevel}
             transitionTime={transitionTime}
+            sizeIncludesEars={sizeIncludesEars}
           />
         ))}
         <FeatureFrame x={-50} y={-50} size={100} placement="top left">

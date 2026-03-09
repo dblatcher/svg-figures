@@ -7,6 +7,7 @@ interface Props {
   faceProfile: FaceProfile;
   chinLevel: number;
   transitionTime: number;
+  sizeIncludesEars: boolean;
 }
 
 interface CenteredImageProps {
@@ -42,9 +43,11 @@ const CenteredImage = ({
 const getPosition = (
   accessory: Accessory,
   faceProfile: FaceProfile,
-  chinLevel: number
+  chinLevel: number,
+  sizeIncludesEars: boolean,
 ): { x: number; y: number } => {
   const { x, y, place } = accessory;
+  const { width = 1, earWidth = 10, earHeight = 20 } = faceProfile
   const eyeDistance = clamp(faceProfile.eyeDistance || 0, 75, 25) / 2;
 
   switch (place) {
@@ -68,6 +71,18 @@ const getPosition = (
         x,
         y: y + 50 + chinLevel,
       };
+    case 'right-ear': {
+      return {
+        x: x + (width * 50) - (earWidth * (sizeIncludesEars ? 1 : 0)),
+        y: y - 10 + earHeight / 2,
+      }
+    }
+    case 'left-ear': {
+      return {
+        x: x - (width * 50) + (earWidth * (sizeIncludesEars ? 1 : 0)),
+        y: y - 10 + earHeight / 2,
+      }
+    }
     default:
       return { x, y };
   }
@@ -78,9 +93,10 @@ export const HeadAccessory = ({
   faceProfile,
   chinLevel,
   transitionTime,
+  sizeIncludesEars,
 }: Props) => {
   const { src, width, place } = accessory;
-  const position = getPosition(accessory, faceProfile, chinLevel);
+  const position = getPosition(accessory, faceProfile, chinLevel, sizeIncludesEars);
 
   return (
     <CenteredImage
