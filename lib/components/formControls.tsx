@@ -1,4 +1,4 @@
-import type { FunctionComponent } from 'react';
+import type { CSSProperties, FunctionComponent } from 'react';
 
 function eventToNumber(event: Event, defaultValue = 0): number {
   if (!event.target) {
@@ -75,6 +75,14 @@ export const StringInput: FunctionComponent<{
   );
 };
 
+
+const labelStyle: CSSProperties = {
+  display: 'inline-flex',
+  gap: 2,
+  alignItems: 'center',
+  marginRight: 10
+}
+
 export const RadioGroup = ({
   value,
   options,
@@ -92,12 +100,7 @@ export const RadioGroup = ({
       {label}
     </legend>
     {Object.entries(options).map(([key, optionValue]) => (
-      <label key={key} style={{
-        display: 'inline-flex',
-        gap: 2,
-        alignItems: 'center',
-        marginRight: 10
-      }}>
+      <label key={key} style={labelStyle}>
         <span>{key}</span>
         <input type="radio"
           name={label}
@@ -109,4 +112,24 @@ export const RadioGroup = ({
     ))}
   </fieldset>
 
+}
+
+export const Checkbox = ({
+  value,
+  toggle,
+  label
+}: {
+  label: string;
+  value?: boolean
+  toggle: { (): void }
+}) => {
+
+  return <label style={{ ...labelStyle, display: 'flex' }}>
+    <input
+      type="checkbox"
+      checked={value}
+      onChange={toggle}
+    />
+    <span>{label}</span>
+  </label>
 }

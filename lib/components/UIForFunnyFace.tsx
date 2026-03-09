@@ -9,7 +9,7 @@ import {
 } from '../util/faceProfile';
 import { FunnyFace } from './FunnyFace';
 import { SvgFrame } from './SvgFrame';
-import { NumberInput, RadioGroup, StringInput } from './formControls';
+import { Checkbox, NumberInput, RadioGroup, StringInput } from './formControls';
 import { earShapes } from '../defaults/earShapes';
 
 interface Props {
@@ -92,16 +92,16 @@ export class UIForFunnyFace extends Component<Props, State> {
     ));
   };
 
-  toggleTalking: ChangeEventHandler = () => {
+  toggleTalking = () => {
     this.setState({ talking: !this.state.talking });
   };
-  toggleLaughing: ChangeEventHandler = () => {
+  toggleLaughing = () => {
     this.setState({ laughing: !this.state.laughing });
   };
-  toggleSizeIncludesEars: ChangeEventHandler = () => {
+  toggleSizeIncludesEars = () => {
     this.setState({ sizeIncludesEars: !this.state.sizeIncludesEars });
   };
-  toggleFollowMouse: ChangeEventHandler = () => {
+  toggleFollowMouse = () => {
     this.setState({ followMouse: !this.state.followMouse });
   };
 
@@ -160,38 +160,10 @@ export class UIForFunnyFace extends Component<Props, State> {
             </select>
           </div>
 
-          <div>
-            <input
-              type="checkbox"
-              checked={talking}
-              onChange={this.toggleTalking}
-            />
-            <label>talking</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              checked={laughing}
-              onChange={this.toggleLaughing}
-            />
-            <label>laughing</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              checked={followMouse}
-              onChange={this.toggleFollowMouse}
-            />
-            <label>followMouse</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              checked={sizeIncludesEars}
-              onChange={this.toggleSizeIncludesEars}
-            />
-            <label>sizeIncludesEars</label>
-          </div>
+          <Checkbox value={talking} label='talking' toggle={() => this.toggleTalking()} />
+          <Checkbox value={laughing} label='laughing' toggle={() => this.toggleLaughing()} />
+          <Checkbox value={followMouse} label='followMouse' toggle={() => this.toggleFollowMouse()} />
+          <Checkbox value={sizeIncludesEars} label='sizeIncludesEars' toggle={() => this.toggleSizeIncludesEars()} />
 
           <div>
             <NumberInput
@@ -213,18 +185,10 @@ export class UIForFunnyFace extends Component<Props, State> {
           <h3>Accessories</h3>
           <div>
             {Object.keys(accessoryMap).map((key) => (
-              <div key={key}>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={accessoryKeys.includes(key)}
-                    onChange={() => {
-                      this.toggleAccessory(key);
-                    }}
-                  />
-                  <span>{key}</span>
-                </label>
-              </div>
+              <Checkbox key={key}
+                value={accessoryKeys.includes(key)}
+                label={key}
+                toggle={() => this.toggleAccessory(key)} />
             ))}
           </div>
         </section>
