@@ -97,15 +97,18 @@ export const HeadAccessory = ({
 }: Props) => {
   const { src, place, adjustWidth } = accessory;
   const position = getPosition(accessory, faceProfile, chinLevel, sizeIncludesEars);
+  const { earWidth = 10, width = 1 } = faceProfile
 
-  const width = adjustWidth ? accessory.width * (faceProfile.width ?? 1) : accessory.width
+  const accessoryWidth = adjustWidth
+    ? (accessory.width * width) - (sizeIncludesEars ? earWidth * 2 : 0)
+    : accessory.width
 
   return (
     <CenteredImage
       src={src}
       x={position.x}
       y={position.y}
-      width={width}
+      width={accessoryWidth}
       transitionTime={place === 'chin' ? transitionTime : undefined}
     />
   );
