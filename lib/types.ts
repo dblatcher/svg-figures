@@ -1,3 +1,5 @@
+import { browShapes } from "./defaults";
+
 export interface FaceProfile {
   width?: number;
   round?: number;

@@ -1,3 +1,4 @@
+import { PROFILE_DEFAULTS } from '../../../defaults';
 import type { FaceProfile } from '../../../types';
 import FeatureFrame from './FeatureFrame';
 
@@ -27,7 +28,7 @@ const Chin = ({
         width={width}
         height={height}
         stroke={'black'}
-        fill={profile.color ?? 'lightgray'}
+        fill={profile.color ?? PROFILE_DEFAULTS.color}
         rx={10}
         ry={20}
       />

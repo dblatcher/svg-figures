@@ -3,6 +3,7 @@ import type { LipCoordinates, MouthArrangement, Position } from '../../../types'
 import { getMaskId } from '../../../util/unique-id';
 import FeatureFrame from './FeatureFrame';
 import type { FeatureProps } from './FeatureProps';
+import { PROFILE_DEFAULTS } from '../../../defaults';
 
 const posCoor = (pos: Position) => `${pos.x},${pos.y}`;
 
@@ -33,8 +34,8 @@ const Mouth = ({
   size,
   arrangement = {},
   transitionTime = 0.5,
-  lipColor = 'pink',
-  lipWidth = 3,
+  lipColor = PROFILE_DEFAULTS.lipColor,
+  lipWidth = PROFILE_DEFAULTS.lipWidth,
   ident = '',
   children,
   lips,

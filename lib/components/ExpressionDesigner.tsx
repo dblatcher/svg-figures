@@ -105,9 +105,6 @@ export const ExpressionDesigner = () => {
           x={20}
           y={50}
           size={80}
-          profile={{
-            browShape: browShapes.THIN,
-          }}
           expression={expression}
           talking={false}
           followMouse={true}

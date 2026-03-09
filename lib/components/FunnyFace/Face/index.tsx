@@ -1,21 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
-import { clamp, getDistanceAndDirection } from '../../../util/calcuations';
-import type {
-  FaceProfile,
-  MouthArrangement,
-  FacialExpression,
+import {
+  type FaceProfile,
+  type FacialExpression,
+  type MouthArrangement,
 } from '../../../types';
-import { getMaskUrl } from '../../../util/unique-id';
+import { clamp, getDistanceAndDirection } from '../../../util/calcuations';
 import { getLipCoordinates } from '../../../util/face-calculations';
+import { getMaskUrl } from '../../../util/unique-id';
 import Chin from './Chin';
+import { Ear } from './Ear';
 import Eye from './Eye';
 import EyeBrow from './Eyebrow';
 import FeatureFrame from './FeatureFrame';
 import Mouth from './Mouth';
 import Nose from './Nose';
 import Teeth from './Teeth';
-import { Ear } from './Ear';
-import { earShapes } from '../../../defaults/earShapes';
+import { PROFILE_DEFAULTS } from '../../../defaults';
 
 interface Props {
   x: number;
@@ -106,23 +106,23 @@ export const Face = ({
   });
 
   const {
-    eyeDistance = 40,
+    eyeDistance,
     eyeColor,
-    mouthNoseDistance = 20,
-    mouthWidth = 40,
+    mouthNoseDistance,
+    mouthWidth,
     browColor,
-    browShape = "",
-    earShape = earShapes.NORMAL,
-    round = 0.5,
-    width = 1,
-    color = 'lightgray',
-    noseHeight = 10,
-    noseWidth = 10,
-    chinWidth = 30,
-    chinHeight = 20,
-    earWidth = 10,
-    earHeight = 20,
-  } = profile;
+    browShape,
+    earShape,
+    round,
+    width,
+    color,
+    noseHeight,
+    noseWidth,
+    chinWidth,
+    chinHeight,
+    earWidth,
+    earHeight,
+  } = {...PROFILE_DEFAULTS, ...profile};
 
   const direction: [number, number] = followMouse ? trackedEyeDirection : [0, 0]
   const eyeX = clamp(eyeDistance, 75, 25) / 2;

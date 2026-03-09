@@ -1,6 +1,7 @@
 import type { PathShape, EyeArrangement } from '../../../types';
 import type { FeatureProps } from './FeatureProps';
 import FeatureFrame from './FeatureFrame';
+import { PROFILE_DEFAULTS } from '../../../defaults';
 
 interface Props extends FeatureProps {
   color?: string;
@@ -14,7 +15,7 @@ export const EyeBrow = ({
   y,
   transitionTime = 0.5,
   size,
-  color = 'black',
+  color = PROFILE_DEFAULTS.browColor,
   right,
   pos = {},
   browShape,

@@ -2,7 +2,7 @@ import { Component } from 'react';
 import type { ChangeEventHandler, } from 'react';
 import { browShapes } from '../defaults/browShapes';
 import { expressions } from '../defaults/expressions';
-import type { Accessory, FaceProfile, FacialExpression } from '../types';
+import {  type Accessory, type FaceProfile, type FacialExpression } from '../types';
 import {
   profileColorProperyData,
   profileNumberProperyData,
@@ -11,6 +11,7 @@ import { FunnyFace } from './FunnyFace';
 import { SvgFrame } from './SvgFrame';
 import { Checkbox, NumberInput, RadioGroup, StringInput } from './formControls';
 import { earShapes } from '../defaults/earShapes';
+import { PROFILE_DEFAULTS } from '../defaults';
 
 interface Props {
   accessoryMap?: { [index: string]: Accessory };
@@ -39,22 +40,8 @@ export class UIForFunnyFace extends Component<Props, State> {
       blinkPeriod: 20,
       sizeIncludesEars: false,
       profile: {
-        width: 1,
-        round: 0.5,
-        eyeDistance: 40,
-        mouthWidth: 50,
-        lipWidth: 3,
-        mouthNoseDistance: 15,
-        noseHeight: 20,
-        noseWidth: 20,
-        chinWidth: 30,
-        chinHeight: 20,
-        earWidth: 10,
-        earHeight: 40,
-        color: profileColorProperyData[0].default,
-        eyeColor: profileColorProperyData[1].default,
-        lipColor: profileColorProperyData[2].default,
-        browColor: profileColorProperyData[3].default,
+        ...PROFILE_DEFAULTS,
+        teeth: undefined,
         browShape: browShapes.THIN,
       },
     };

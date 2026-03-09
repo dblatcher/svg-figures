@@ -5,7 +5,7 @@ import FeatureFrame from './FeatureFrame';
 import type { FeatureProps } from './FeatureProps';
 
 interface Props extends FeatureProps {
-  color?: string;
+  color: string;
   direction?: [number, number];
   ident: string;
   pos?: EyeArrangement;
@@ -17,7 +17,7 @@ export const Eye = ({
   transitionTime = 0.5,
   size,
   direction = [0, 0],
-  color = 'blue',
+  color,
   ident,
   pos = {},
 }: Props) => {

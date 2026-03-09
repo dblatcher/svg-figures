@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react';
 import { clamp } from '../../util/calcuations';
-import type { Accessory, FaceProfile } from '../../types';
+import { type Accessory, type FaceProfile } from '../../types';
+import { PROFILE_DEFAULTS } from '../../defaults';
 
 interface Props {
   accessory: Accessory;
@@ -47,7 +48,11 @@ const getPosition = (
   sizeIncludesEars: boolean,
 ): { x: number; y: number } => {
   const { x, y, place } = accessory;
-  const { width = 1, earWidth = 10, earHeight = 20 } = faceProfile
+  const {
+    width = PROFILE_DEFAULTS.width,
+    earWidth = PROFILE_DEFAULTS.earWidth,
+    earHeight = PROFILE_DEFAULTS.earHeight,
+  } = faceProfile
   const eyeDistance = clamp(faceProfile.eyeDistance || 0, 75, 25) / 2;
 
   switch (place) {
@@ -97,7 +102,7 @@ export const HeadAccessory = ({
 }: Props) => {
   const { src, place, adjustWidth } = accessory;
   const position = getPosition(accessory, faceProfile, chinLevel, sizeIncludesEars);
-  const { earWidth = 10, width = 1 } = faceProfile
+  const { earWidth = PROFILE_DEFAULTS.earWidth, width = PROFILE_DEFAULTS.width } = faceProfile
 
   const accessoryWidth = adjustWidth
     ? (accessory.width * width) - (sizeIncludesEars ? earWidth * 2 : 0)
