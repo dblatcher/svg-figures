@@ -1,4 +1,3 @@
-import { PROFILE_DEFAULTS } from '../defaults';
 import { type ProfileColorProperty, type ProfileNumberProperty } from '../types';
 
 export const profileNumberProperyData: {
@@ -23,10 +22,9 @@ export const profileNumberProperyData: {
 
 export const profileColorProperyData: {
   property: ProfileColorProperty;
-  default: string;
 }[] = [
-    { property: 'color', default: PROFILE_DEFAULTS.color },
-    { property: 'eyeColor', default: PROFILE_DEFAULTS.eyeColor },
-    { property: 'lipColor', default: PROFILE_DEFAULTS.lipColor },
-    { property: 'browColor', default: PROFILE_DEFAULTS.browColor },
+    { property: 'color' },
+    { property: 'eyeColor', },
+    { property: 'lipColor', },
+    { property: 'browColor', },
   ];

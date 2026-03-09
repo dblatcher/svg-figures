@@ -1,9 +1,8 @@
 import { useState } from "react";
+import type { EyeArrangement, FacialExpression, MouthArrangement } from "../types";
+import { NumberInput } from "./formControls";
 import { FunnyFace } from "./FunnyFace";
 import { SvgFrame } from "./SvgFrame";
-import type { EyeArrangement, FacialExpression, MouthArrangement } from "../types";
-import { browShapes } from "../defaults";
-import { NumberInput } from "./formControls";
 
 
 const EyeControls = (

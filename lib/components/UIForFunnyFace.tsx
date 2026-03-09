@@ -2,7 +2,7 @@ import { Component } from 'react';
 import type { ChangeEventHandler, } from 'react';
 import { browShapes } from '../defaults/browShapes';
 import { expressions } from '../defaults/expressions';
-import {  type Accessory, type FaceProfile, type FacialExpression } from '../types';
+import { type Accessory, type FaceProfile, type FacialExpression } from '../types';
 import {
   profileColorProperyData,
   profileNumberProperyData,
@@ -26,6 +26,16 @@ interface State {
   accessoryKeys: string[];
   blinkPeriod: number;
   profile: FaceProfile;
+}
+
+const excludeDefaults = (profile: FaceProfile): FaceProfile => {
+  const newProfile: FaceProfile = {}
+  Object.entries(profile).forEach(([key, value]) => {
+    if (PROFILE_DEFAULTS[key as keyof FaceProfile] !== value) {
+      newProfile[key as keyof FaceProfile] = value
+    }
+  })
+  return newProfile
 }
 
 export class UIForFunnyFace extends Component<Props, State> {
@@ -206,12 +216,12 @@ export class UIForFunnyFace extends Component<Props, State> {
         <section>
           <h3>Profile 2</h3>
           {profileColorProperyData.map((data) => {
-            const { property, default: defaultValue } = data;
+            const { property } = data;
             return (
               <div key={property}>
                 <StringInput
                   label={`${profile[property]} ${property}`}
-                  value={profile[property] || defaultValue}
+                  value={profile[property] || PROFILE_DEFAULTS[property]}
                   type="color"
                   labelAfter={true}
                   inputHandler={(value) => {
@@ -234,7 +244,7 @@ export class UIForFunnyFace extends Component<Props, State> {
         <section>
           <textarea id="profile-output"
             style={{ minHeight: '100%' }}
-            value={JSON.stringify(profile, undefined, 1)}
+            value={JSON.stringify(excludeDefaults(profile), undefined, 1)}
             onChange={() => { }}
           />
         </section>
