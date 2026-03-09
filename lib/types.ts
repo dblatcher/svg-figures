@@ -91,6 +91,7 @@ export interface Accessory {
   x: number;
   y: number;
   width: number;
+  adjustWidth?: boolean;
   priority?: number;
   place?: 'left-eye' | 'right-eye' | 'nose' | 'chin' | 'right-ear' | 'left-ear';
 }

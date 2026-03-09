@@ -3,6 +3,7 @@ import monocle from '../assets/monocle.png';
 import moustache from '../assets/moustache.png';
 import hat from '../assets/non-burning-hat.png';
 import jewel from '../assets/jewel.png';
+import redHair from '../assets/red-hair.png';
 
 export const accessoryMap: Record<string, Accessory> = {
   HAT: {
@@ -10,6 +11,13 @@ export const accessoryMap: Record<string, Accessory> = {
     x: 0,
     y: -60,
     width: 80,
+  },
+  RED_HAIR: {
+    src: redHair,
+    adjustWidth: true,
+    x: 0,
+    y: -30,
+    width: 120,
   },
   MONOCLE: {
     src: monocle,
