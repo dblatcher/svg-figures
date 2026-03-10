@@ -21,7 +21,7 @@ export const PROFILE_DEFAULTS: Required<FaceProfile> = {
   chinWidth: 30,
   chinHeight: 20,
   earWidth: 10,
-  earHeight: 40,
+  earHeight: 30,
   color: '#999999',
   eyeColor: '#009999',
   lipColor: '#900000',
