@@ -14,8 +14,8 @@ export const profileNumberProperyData: {
     { property: 'mouthNoseDistance', min: 5, max: 40, step: 1 },
     { property: 'noseHeight', min: 5, max: 30, step: 1 },
     { property: 'noseWidth', min: 5, max: 30, step: 1 },
-    { property: 'chinWidth', min: 0, max: 60, step: 1 },
-    { property: 'chinHeight', min: 0, max: 30, step: 1 },
+    { property: 'chinWidth', min: 0, max: 80, step: 1 },
+    { property: 'chinHeight', min: 0, max: 15, step: 1 },
     { property: 'earWidth', min: 0, max: 20, step: 1 },
     { property: 'earHeight', min: 0, max: 60, step: 1 },
   ];

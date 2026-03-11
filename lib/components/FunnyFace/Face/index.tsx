@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { PROFILE_DEFAULTS } from '../../../defaults';
 import {
   type FaceProfile,
   type FacialExpression,
@@ -7,15 +8,14 @@ import {
 import { clamp, getDistanceAndDirection } from '../../../util/calcuations';
 import { getLipCoordinates } from '../../../util/face-calculations';
 import { getMaskUrl } from '../../../util/unique-id';
-import Chin from './Chin';
 import { Ear } from './Ear';
 import Eye from './Eye';
 import EyeBrow from './Eyebrow';
 import FeatureFrame from './FeatureFrame';
+import { HeadShape } from './HeadShape';
 import Mouth from './Mouth';
 import Nose from './Nose';
 import Teeth from './Teeth';
-import { PROFILE_DEFAULTS } from '../../../defaults';
 
 interface Props {
   x: number;
@@ -122,7 +122,7 @@ export const Face = ({
     chinHeight,
     earWidth,
     earHeight,
-  } = {...PROFILE_DEFAULTS, ...profile};
+  } = { ...PROFILE_DEFAULTS, ...profile };
 
   const direction: [number, number] = followMouse ? trackedEyeDirection : [0, 0]
   const eyeX = clamp(eyeDistance, 75, 25) / 2;
@@ -146,19 +146,14 @@ export const Face = ({
       placement="top left"
       transitionTime={transitionTime}
     >
-      <rect
-        x={-(faceWidth / 2) * width}
-        y={-50}
-        width={faceWidth * width}
-        height={100}
-        stroke={'black'}
-        fill={color}
-        rx={100 * (round / 2)}
-        ry={100 * (round / 2)}
-        style={{
-          height: 100 + chinLevel,
-          transition: `height ${transitionTime}s`,
-        }}
+      <HeadShape
+        headWidth={faceWidth * width}
+        color={color}
+        transitionTime={transitionTime}
+        round={round}
+        chinLevel={chinLevel}
+        chinWidth={chinWidth}
+        chinHeight={chinHeight}
       />
 
       {earWidth > 0 && earHeight > 0 && <>
@@ -240,16 +235,6 @@ export const Face = ({
       >
         <Teeth maskUrl={getMaskUrl(mouthIdent)} toothList={profile?.teeth} />
       </Mouth>
-
-      {chinWidth > 0 && (
-        <Chin
-          width={chinWidth}
-          height={chinHeight}
-          shift={chinLevel}
-          profile={profile}
-          transitionTime={transitionTime}
-        />
-      )}
     </FeatureFrame>
   );
 };
