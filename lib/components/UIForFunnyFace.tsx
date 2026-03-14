@@ -122,24 +122,31 @@ export class UIForFunnyFace extends Component<Props, State> {
       <div
         style={{ border: '1px dotted black', margin: '1em', display: 'flex' }}
       >
-        <SvgFrame
-          style={{ width: '200px', border: '1px solid black' }}
-          viewBox="0 0 120 150"
-        >
-          <FunnyFace
-            x={20}
-            y={50}
-            size={80}
-            expression={this.expression}
-            talking={talking}
-            laughing={laughing}
-            followMouse={followMouse}
-            blinkPeriod={blinkPeriod}
-            profile={profile}
-            accessories={this.wornAccessories}
-            sizeIncludesEars={sizeIncludesEars}
+        <section style={{ display: 'flex', flexDirection: 'column' }}>
+          <SvgFrame
+            style={{ width: '200px', border: '1px solid black', flexBasis:275 }}
+            viewBox="0 0 120 150"
+          >
+            <FunnyFace
+              x={20}
+              y={50}
+              size={80}
+              expression={this.expression}
+              talking={talking}
+              laughing={laughing}
+              followMouse={followMouse}
+              blinkPeriod={blinkPeriod}
+              profile={profile}
+              accessories={this.wornAccessories}
+              sizeIncludesEars={sizeIncludesEars}
+            />
+          </SvgFrame>
+          <textarea id="profile-output"
+            style={{ minHeight: '4em' }}
+            value={JSON.stringify(excludeDefaults(profile), undefined, 1)}
+            onChange={() => { }}
           />
-        </SvgFrame>
+        </section>
 
         <section>
           <h3>Face</h3>
@@ -244,13 +251,6 @@ export class UIForFunnyFace extends Component<Props, State> {
             options={noseShapes}
             value={profile.noseShape}
             onChange={(noseShape => this.editProfile({ noseShape }))} />
-        </section>
-        <section>
-          <textarea id="profile-output"
-            style={{ minHeight: '100%' }}
-            value={JSON.stringify(excludeDefaults(profile), undefined, 1)}
-            onChange={() => { }}
-          />
         </section>
       </div>
     );
