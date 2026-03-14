@@ -11,7 +11,7 @@ import { FunnyFace } from './FunnyFace';
 import { SvgFrame } from './SvgFrame';
 import { Checkbox, NumberInput, RadioGroup, StringInput } from './formControls';
 import { earShapes } from '../defaults/earShapes';
-import { PROFILE_DEFAULTS } from '../defaults';
+import { noseShapes, PROFILE_DEFAULTS } from '../defaults';
 
 interface Props {
   accessoryMap?: { [index: string]: Accessory };
@@ -240,6 +240,10 @@ export class UIForFunnyFace extends Component<Props, State> {
             options={earShapes}
             value={profile.earShape}
             onChange={(earShape => this.editProfile({ earShape }))} />
+          <RadioGroup label='Nose'
+            options={noseShapes}
+            value={profile.noseShape}
+            onChange={(noseShape => this.editProfile({ noseShape }))} />
         </section>
         <section>
           <textarea id="profile-output"

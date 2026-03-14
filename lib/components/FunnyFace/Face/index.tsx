@@ -113,6 +113,7 @@ export const Face = ({
     browColor,
     browShape,
     earShape,
+    noseShape,
     round,
     width,
     color,
@@ -179,6 +180,7 @@ export const Face = ({
         noseRef={noseRef}
         width={noseWidth}
         height={noseHeight}
+        shape={noseShape}
         x={0}
         y={0}
         size={100}

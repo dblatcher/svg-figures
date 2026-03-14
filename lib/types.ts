@@ -4,6 +4,7 @@ export interface FaceProfile {
   color?: string;
   browShape?: PathShape;
   earShape?: PathShape;
+  noseShape?: PathShape;
   eyeColor?: string;
   eyeDistance?: number;
   mouthWidth?: number;

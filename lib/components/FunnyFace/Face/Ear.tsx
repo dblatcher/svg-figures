@@ -16,10 +16,11 @@ export const Ear = ({ width, height, side, fromCenter, color, shape }: Props) =>
 
     return <FeatureFrame
         aspectRatio={height / width}
+        size={width}
         placement="center"
-        y={-10 -height / 2}
+        y={-10 - height / 2}
         x={x2}
-        size={width}>
+    >
         <path
             fill={color}
             stroke="black"

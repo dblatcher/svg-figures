@@ -1,12 +1,14 @@
 import { earShapes } from '.';
 import type { FaceProfile } from '../types';
 import { browShapes } from './browShapes';
+import { noseShapes } from './noseShapes';
 
 export * from './accessory';
 export * from './browShapes';
 export * from './earShapes';
 export * from './expressions';
 export * from './toothShapes';
+export * from './noseShapes';
 
 
 export const PROFILE_DEFAULTS: Required<FaceProfile> = {
@@ -28,5 +30,6 @@ export const PROFILE_DEFAULTS: Required<FaceProfile> = {
   browColor: '#000000',
   browShape: browShapes.THIN,
   earShape: earShapes.NORMAL,
+  noseShape: noseShapes.NORMAL,
   teeth: [],
 }
